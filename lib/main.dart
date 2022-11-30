@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:gfive/screens/login_screens/verification_screen.dart';
+import 'package:gfive/screens/profileScreen/profile_screen.dart';
 import 'package:gfive/screens/splashScreen/splash_screen.dart';
 import 'package:gfive/utils/app_dependencies.dart';
 import 'package:gfive/utils/app_routers.dart';
@@ -34,7 +36,7 @@ class _MyAppState extends State<MyApp> {
             theme: ThemeData(
               primarySwatch: Colors.blue,
             ),
-            home: const SplashScreen(),
+            home: ProfileScreen(),
             onGenerateRoute: _router.getRoute,
             navigatorObservers: [_router.routeObserver]
         );
