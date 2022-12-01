@@ -91,6 +91,11 @@ flutter:
     - family: Vietnam
       fonts:
         - asset: assets/fonts/be_vietnam_regular.ttf
+
+    - family: Inter
+      fonts:
+        - asset: assets/fonts/Inter-Regular.ttf
+
   #   - family: Schyler
   #     fonts:
   #       - asset: fonts/Schyler-Regular.ttf

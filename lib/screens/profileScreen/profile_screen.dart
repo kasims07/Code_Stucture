@@ -4,7 +4,9 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gfive/utils/app_styles.dart';
 
 import '../../constants/asset_path.dart';
+import '../../widgets/custom_bottom_button.dart';
 import '../../widgets/custom_textformfield.dart';
+
 
 class ProfileScreen extends StatelessWidget {
   TextEditingController namecontroller = TextEditingController();
@@ -41,23 +43,38 @@ class ProfileScreen extends StatelessWidget {
                   children: [
                     CustomTextformfield(
                       controller: namecontroller,
-                      icon: SvgPicture.asset(
-                          ImageAssetPath.profileIcon,height: 20.01.h,width: 16.w,
+                      icon: Container(
+                       padding: EdgeInsets.all(12.h),
+                        child: SvgPicture.asset(
+                            ImageAssetPath.profileIcon,
+                        ),
                       ),
                        hintText: 'Enter your name',
                       labelText: 'Full Name',
                       type: TextInputType.text,
+
                     ),
                     SizedBox(height: 15),
                     CustomTextformfield(
                       controller: emailcontroller,
-                      icon: SvgPicture.asset(
-                          ImageAssetPath.emailIcon,height: 18.h,width: 20.w,
+                      icon: Container(
+                        padding: EdgeInsets.all(12.h),
+                        child: SvgPicture.asset(
+                          ImageAssetPath.emailIcon,
+                        ),
                       ),
                       hintText: 'Enter your email ',
                       labelText: 'Email',
                       type: TextInputType.emailAddress,
+
                     ),
+                    SizedBox(height: 380),
+                    CustomBottomButton(
+                      text:'SUBMIT',
+                      onPress: (){}
+                    ),
+                   SizedBox(height: 16),
+                   Text('Skip', style: AppStyles.interstyle),
                   ],
                 ),
                 ),

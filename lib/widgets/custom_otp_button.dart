@@ -25,7 +25,7 @@ class CustomOtpButton extends StatelessWidget {
           color: AppStyles.red
         ),
         child: Center(
-          child: Text('${text!}', style:AppStyles.termstyle.copyWith(fontWeight: FontWeight.w700,color: AppStyles.white)),
+          child: Text('${text!}', style:AppStyles.buttonstyle),
         ),
       ),
     );
