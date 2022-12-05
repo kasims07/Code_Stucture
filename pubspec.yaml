@@ -96,6 +96,10 @@ flutter:
       fonts:
         - asset: assets/fonts/Inter-Regular.ttf
 
+    - family: OpenSans
+      fonts:
+        - asset: assets/fonts/OpenSans-Regular.ttf
+
   #   - family: Schyler
   #     fonts:
   #       - asset: fonts/Schyler-Regular.ttf

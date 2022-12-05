@@ -11,7 +11,9 @@ class ImageAssetPath {
   static const String carpet = 'assets/images/Carpet.png';
   static const String metress = 'assets/images/metress.png';
   static const String marblepolish = 'assets/images/marble_polish.png';
-
+  static const String sPhoto1 = 'assets/images/sphoto1.png';
+  static const String sPhoto2 = 'assets/images/sphoto2.png';
+  static const String sPhoto3 = 'assets/images/sphoto3.png';
 
   //SVG icons
   static const String profileIcon = 'assets/icons/icProfile.svg';
@@ -20,4 +22,6 @@ class ImageAssetPath {
   static const String searchIcon = 'assets/icons/icSearch.svg';
   static const String backIcon = 'assets/icons/icBack.svg';
   static const String downarrowIcon = 'assets/icons/icDownArrow.svg';
+  static const String includedIcon = 'assets/icons/icIncluded.svg';
+
 }

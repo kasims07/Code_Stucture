@@ -15,6 +15,11 @@ class AppStyles{
   static const darkgradient = Color(0xffE8E8E8);
   static const fontcolorgrey = Color(0xffA0A5BA);
   static const divider = Color(0xffF0F4F9);
+  static const yellow = Color(0xffF5E3A3);
+  static const darkyellow = Color(0xffF6B22C);
+  static const bfontcolor= Color(0xffFCBA11) ;
+  static const backgroundcolor = Color(0xffF9F9FB);
+
 
 
 
@@ -32,5 +37,6 @@ static TextStyle searchstyle = TextStyle(fontSize: 14.sp, fontWeight: FontWeight
 static TextStyle categorystyle = TextStyle(fontSize: 13.sp, fontWeight: FontWeight.w600, fontFamily: 'Vietname', color: AppStyles.fontblack);
 static TextStyle detailsstyle = TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w400, fontFamily: 'Vietnam', color: AppStyles.fontcolorgrey);
 static TextStyle detfontstyle = TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w400, fontFamily: 'Vietnam', color: AppStyles.black);
-
+static TextStyle bookingstyle = TextStyle(fontSize: 12.sp, fontWeight: FontWeight. w500, fontFamily: 'Vietnam',color:AppStyles.grey);
+static TextStyle opensansstyle = TextStyle(fontSize: 18.sp, fontWeight: FontWeight.w700, fontFamily: 'OpenSans', color: AppStyles.red);
 }

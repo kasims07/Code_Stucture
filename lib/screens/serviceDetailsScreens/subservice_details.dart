@@ -5,7 +5,9 @@ import 'package:gfive/utils/app_styles.dart';
 import 'package:rxdart/rxdart.dart';
 
 import '../../constants/asset_path.dart';
+import '../../widgets/custom_photo_cotainer.dart';
 import '../../widgets/custom_price_container.dart';
+import '../../widgets/custom_row.dart';
 
 class SubserviceDetails extends StatelessWidget {
 
@@ -13,6 +15,7 @@ class SubserviceDetails extends StatelessWidget {
 
   List<String> pricelist = ['100', '200', '300','400','500'];
   List<String> namelist = ['1BHK', '2BHK', '3BHK', '4BHK', '5BHK'];
+  List<String> sphotolist = ['${ImageAssetPath.sPhoto1}','${ImageAssetPath.sPhoto2}','${ImageAssetPath.sPhoto3}' ];
 
 
 
@@ -63,25 +66,54 @@ class SubserviceDetails extends StatelessWidget {
                     Divider(color:AppStyles.divider,thickness: 1),
                     SizedBox(height: 15),
                     Text('Service Price List',textAlign:TextAlign.left, style:AppStyles.detfontstyle.copyWith(fontWeight: FontWeight.w600)),
-                     Expanded(
-                       child: GridView.builder(
-                         shrinkWrap: true,
-                           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                             crossAxisCount: 3,
-                             crossAxisSpacing: 14.0,
-                             mainAxisSpacing: 14.0
-                           ),
-                           itemCount: pricelist.length,
-                           itemBuilder: (context, index){
-                             return CustomPriceContainer(
+                     GridView.builder(
+                       shrinkWrap: true,
+                         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                           crossAxisCount: 3,
+                           crossAxisSpacing: 14.0,
+                           mainAxisSpacing: 14.0
+                         ),
+                         itemCount: pricelist.length,
+                         itemBuilder: (context, index){
+                           return CustomPriceContainer(
 
-                               price: pricelist[index],
-                               name: namelist[index],
+                             price: pricelist[index],
+                             name: namelist[index],
 
-                             );
-                           }
-                       ),
-                     )
+                           );
+                         }
+                     ),
+
+                    SizedBox(height: 15),
+                    Container(
+                      height : 191.h,
+                        width: 350.w,
+                      decoration: BoxDecoration(
+                          color: AppStyles.yellow,
+                        borderRadius: BorderRadius.circular(5),
+                      ),
+                       child:Padding(padding: EdgeInsets.only(top: 21, right: 21, left: 18, bottom: 21),
+                       child:Column(
+                         crossAxisAlignment: CrossAxisAlignment.start,
+                         children: [
+                         Text('Included', style: AppStyles.homelogostyle),
+                           SizedBox(height: 15),
+                           CustomRow(text: 'Bathroom Deep Cleaning'),
+
+                           SizedBox(height: 10),
+                           CustomRow(text: 'Kitchen Deep Cleaning With Chimney'),
+                           SizedBox(height: 10),
+                           CustomRow(text: 'Appliances Not Included'),
+                           SizedBox(height: 10),
+                           CustomRow(text: 'Floor Wiping And Mopping Of Entire House'),
+
+                       ],))
+                    ),
+                    SizedBox(height: 15),
+                    Text('Service Photos', style: AppStyles.homelogostyle.copyWith(fontSize: 14.sp),),
+                    SizedBox(height: 15),
+
+
                   ],),
                   )
                 )
