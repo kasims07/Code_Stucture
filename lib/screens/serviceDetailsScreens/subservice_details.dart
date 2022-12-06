@@ -5,6 +5,9 @@ import 'package:gfive/utils/app_styles.dart';
 import 'package:rxdart/rxdart.dart';
 
 import '../../constants/asset_path.dart';
+import '../../widgets/custom_backicon_button.dart';
+import '../../widgets/custom_bottom_button.dart';
+import '../../widgets/custom_otp_button.dart';
 import '../../widgets/custom_photo_cotainer.dart';
 import '../../widgets/custom_price_container.dart';
 import '../../widgets/custom_row.dart';
@@ -15,7 +18,7 @@ class SubserviceDetails extends StatelessWidget {
 
   List<String> pricelist = ['100', '200', '300','400','500'];
   List<String> namelist = ['1BHK', '2BHK', '3BHK', '4BHK', '5BHK'];
-  List<String> sphotolist = ['${ImageAssetPath.sPhoto1}','${ImageAssetPath.sPhoto2}','${ImageAssetPath.sPhoto3}' ];
+  List<String> sphotolist = ['${ImageAssetPath.sPhoto1}','${ImageAssetPath.sPhoto2}','${ImageAssetPath.sPhoto3}', '${ImageAssetPath.sPhoto4}' ];
 
 
 
@@ -29,16 +32,13 @@ class SubserviceDetails extends StatelessWidget {
           color: AppStyles.black,
           child:
             SingleChildScrollView(
-              child: Padding(padding: EdgeInsets.only(top:63),
+              child: Padding(padding: EdgeInsets.only(top:23),
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+
                 children: [
-                  Align(
-                    alignment: Alignment.topLeft,
-                    child: IconButton(
-                        onPressed: (){},
-                        icon: SvgPicture.asset(ImageAssetPath.backIcon, width:12.62.w )
-                    ),
+                  CustomBackIconButton(
+
+                         onPress: (){},
                   ),
                   Text('Unfurnished Appartment Classic\nCleaning', textAlign: TextAlign.center, style:AppStyles.profilestyle),
                 SizedBox(height: 15),
@@ -65,7 +65,7 @@ class SubserviceDetails extends StatelessWidget {
                     SizedBox(height: 15),
                     Divider(color:AppStyles.divider,thickness: 1),
                     SizedBox(height: 15),
-                    Text('Service Price List',textAlign:TextAlign.left, style:AppStyles.detfontstyle.copyWith(fontWeight: FontWeight.w600)),
+                    Text(textAlign: TextAlign.left,'Service Price List', style:AppStyles.detfontstyle.copyWith(fontWeight: FontWeight.w600)),
                      GridView.builder(
                        shrinkWrap: true,
                          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
@@ -112,8 +112,22 @@ class SubserviceDetails extends StatelessWidget {
                     SizedBox(height: 15),
                     Text('Service Photos', style: AppStyles.homelogostyle.copyWith(fontSize: 14.sp),),
                     SizedBox(height: 15),
-
-
+                    Container(
+                      height: 79,
+                      child: ListView.builder(
+                        shrinkWrap: true,
+                          itemCount: 4,
+                          scrollDirection: Axis.horizontal,
+                          itemBuilder:(BuildContext context, int index)
+                          {
+                            return CustomPhotoContainer(imagepath: sphotolist[index]);
+                          }
+                      ),
+                    ),
+                    SizedBox(height: 20.h),
+                    CustomBottomButton(
+                      text : 'BOOK SERVICE', onPress: null,
+                    )
                   ],),
                   )
                 )

@@ -16,7 +16,7 @@ class CustomBookingContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding:EdgeInsets.only(top: 21, right: 20, left: 20, bottom: 21),
+      padding:EdgeInsets.only(bottom: 10),
       child: Container(
         height: 165.h ,
         width: 350.w,

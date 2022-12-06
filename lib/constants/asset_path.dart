@@ -14,6 +14,9 @@ class ImageAssetPath {
   static const String sPhoto1 = 'assets/images/sphoto1.png';
   static const String sPhoto2 = 'assets/images/sphoto2.png';
   static const String sPhoto3 = 'assets/images/sphoto3.png';
+  static const String sPhoto4 = 'assets/images/sphoto4.png';
+  static const String notification = 'assets/images/notification.png';
+  static const String accountImage = 'assets/images/account_image.png';
 
   //SVG icons
   static const String profileIcon = 'assets/icons/icProfile.svg';
@@ -23,5 +26,8 @@ class ImageAssetPath {
   static const String backIcon = 'assets/icons/icBack.svg';
   static const String downarrowIcon = 'assets/icons/icDownArrow.svg';
   static const String includedIcon = 'assets/icons/icIncluded.svg';
-
+  static const String bookLocation = 'assets/icons/icLocationicon.svg';
+  static const String calenderIcon = 'assets/icons/icCalender.svg';
+  static const String crossIcon = 'assets/icons/icCross.svg';
+  //static const String notification = 'assets/icons/icNotification.svg';
 }

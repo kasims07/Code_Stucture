@@ -23,6 +23,7 @@ class BookMainScreen extends StatelessWidget {
         ),
               Expanded(
                 child: Container(
+                  padding: EdgeInsets.all(20),
                   height: 915.h,
                   width: 390.w,
                   decoration: BoxDecoration(

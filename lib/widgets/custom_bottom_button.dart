@@ -18,7 +18,7 @@ class CustomBottomButton extends StatelessWidget {
         height : 55.h,
         width:350.w,
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(15),
+          borderRadius: BorderRadius.circular(10),
           color: AppStyles.red
         ),
         child:Center(

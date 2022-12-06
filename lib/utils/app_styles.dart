@@ -20,6 +20,8 @@ class AppStyles{
   static const bfontcolor= Color(0xffFCBA11) ;
   static const backgroundcolor = Color(0xffF9F9FB);
 
+  static const bordercolor = Color(0xffF1F1F1);
+
 
 
 
@@ -39,4 +41,7 @@ static TextStyle detailsstyle = TextStyle(fontSize: 14.sp, fontWeight: FontWeigh
 static TextStyle detfontstyle = TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w400, fontFamily: 'Vietnam', color: AppStyles.black);
 static TextStyle bookingstyle = TextStyle(fontSize: 12.sp, fontWeight: FontWeight. w500, fontFamily: 'Vietnam',color:AppStyles.grey);
 static TextStyle opensansstyle = TextStyle(fontSize: 18.sp, fontWeight: FontWeight.w700, fontFamily: 'OpenSans', color: AppStyles.red);
+static TextStyle fontblackstyle = TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w600, fontFamily: 'Vietnam', color: AppStyles.black);
+  static TextStyle sfstyle = TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w500, fontFamily: 'sfpro', color: AppStyles.black);
+  static TextStyle redfontstyle = TextStyle(fontSize: 20.sp, fontWeight: FontWeight.w700, fontFamily: 'Vietnam', color: AppStyles.red);
 }
