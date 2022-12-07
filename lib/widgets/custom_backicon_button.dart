@@ -12,9 +12,9 @@ class CustomBackIconButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Align(
         alignment: Alignment.topLeft,
-        child: IconButton(
-        onPressed: onPress(),
-    icon: SvgPicture.asset(ImageAssetPath.backIcon, height: 100.h, width: 100.h,)
+        child: InkWell(
+        onTap: onPress(),
+    child: SvgPicture.asset(ImageAssetPath.backIcon, height: 100.h, width: 100.h,)
     ),
     );
   }

@@ -1,6 +1,8 @@
 import 'package:country_picker/country_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:gfive/app_screens/app_screens.dart';
+import 'package:gfive/screens/otpScreen/verification_screen.dart';
 import 'package:gfive/utils/app_styles.dart';
 
 import '../../constants/asset_path.dart';
@@ -160,7 +162,9 @@ class _LoginScreenState extends State<LoginScreen> {
                             ),SizedBox(height: 12),
                             CustomOtpButton(
                               text: 'GET OTP',
-                              onPress: () {},
+                              onPress: () {
+                              Navigator.pushNamed(context, AppScreens.otpVerification);
+                               },
                             )
                           ],
                         ),

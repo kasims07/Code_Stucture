@@ -30,4 +30,24 @@ class ImageAssetPath {
   static const String calenderIcon = 'assets/icons/icCalender.svg';
   static const String crossIcon = 'assets/icons/icCross.svg';
   //static const String notification = 'assets/icons/icNotification.svg';
+  static const String editProfile = 'assets/icons/icEditprofile.svg';
+  static const String accountback = 'assets/icons/icAccountback.svg';
+  static const String manageIcon = 'assets/icons/icManageicon.svg';
+  static const String rateIcon = 'assets/icons/icRateicon.svg';
+  static const String shareIcon = 'assets/icons/icShareicon.svg';
+  static const String termsIcon = 'assets/icons/icTerms.svg';
+  static const String privacyIcon = 'assets/icons/icPrivacy.svg';
+  static const String aboutUs = 'assets/icons/icAboutus.svg';
+  static const String contactus = 'assets/icons/icContactus.svg';
+  static const String login = 'assets/icons/icLogin.svg';
+  static const String noteIcon = 'assets/icons/icNoteicon.svg';
+  static const String rednoteIcon = 'assets/icons/icRednoteicon.svg';
+  static const String homeIcon = 'assets/icons/icHomeicon.svg';
+  static const String redhome = 'assets/icons/icRedhome.svg';
+  static const String booking = 'assets/icons/icBooking.svg';
+  static const String redbooking = 'assets/icons/icRedbooking.svg';
+  static const String account = 'assets/icons/icAccount.svg';
+  static const String redAccount = 'assets/icons/icRedaccount.svg';
+  static const String cameraIcon = 'assets/icons/icCamera.svg';
+  static const String numberIcon = 'assets/icons/icNumbericon.svg';
 }

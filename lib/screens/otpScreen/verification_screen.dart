@@ -1,12 +1,27 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:gfive/app_screens/app_screens.dart';
 
 import '../../constants/asset_path.dart';
 import '../../utils/app_styles.dart';
 import '../../widgets/custom_otp_button.dart';
+import 'bloc/otp_verification_bloc.dart';
 
 class VerificationScreen extends StatelessWidget {
+
   const VerificationScreen({Key? key}) : super(key: key);
+
+  static Widget create(){
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider<OtpVerificationBloc>(
+          create: (_) => OtpVerificationBloc(),
+        ),
+      ],
+      child: const VerificationScreen(),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -83,7 +98,9 @@ class VerificationScreen extends StatelessWidget {
                 ))),
                 CustomOtpButton(
                   text: 'VERIFY',
-                  onPress: () {},
+                  onPress: () {
+                    Navigator.pushNamed(context, AppScreens.profileScreen);
+                  },
                 )
 
     ]),

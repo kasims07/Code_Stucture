@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gfive/utils/app_styles.dart';
@@ -7,10 +8,23 @@ import '../../constants/asset_path.dart';
 import '../../widgets/custom_backicon_button.dart';
 import '../../widgets/custom_clickable_container.dart';
 import '../../widgets/custom_dotted_divider.dart';
+import 'bloc/booking_service_details_bloc.dart';
 
 class BookServiceScreen extends StatelessWidget {
   //String sdate;
   const BookServiceScreen({Key? key}) : super(key: key);
+
+
+  static Widget create(){
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider<BookingServiceDetailsBloc>(
+          create: (_) => BookingServiceDetailsBloc(),
+        ),
+      ],
+      child: const BookServiceScreen(),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +39,9 @@ class BookServiceScreen extends StatelessWidget {
             child: Column(
               children: [
                 CustomBackIconButton(
-                  onPress :(){}
+                  onPress :(){
+                    Navigator.pop(context);
+                  }
                 ),
                 SizedBox(height: 23.45.h),
                 Text('#215415121515', style:AppStyles.buttonstyle.copyWith(fontSize: 16.sp)),

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gfive/utils/app_styles.dart';
 
+import '../../app_screens/app_screens.dart';
 import '../../widgets/custom_booking_container.dart';
 
 class BookMainScreen extends StatelessWidget {
@@ -37,14 +38,19 @@ class BookMainScreen extends StatelessWidget {
                   child: ListView.builder(
                       itemCount: 3,
                       itemBuilder: (BuildContext context,  int index)
-                     { return CustomBookingContainer(
-                       bookingid: '#215415121515',
-                       bdate: '24 January 2022',
-                       btime: '03:00 pm',
-                       btype: 'Unfurnished Apartment\nclassic',
-                       apttype: '1BHK',
-                       bstatus: 'Upcoming',
-                       aptprice: '2099',
+                     { return InkWell(
+                       onTap: (){
+                         Navigator.pushNamed(context, AppScreens.bookingDetail);
+                       },
+                       child: CustomBookingContainer(
+                         bookingid: '#215415121515',
+                         bdate: '24 January 2022',
+                         btime: '03:00 pm',
+                         btype: 'Unfurnished Apartment\nclassic',
+                         apttype: '1BHK',
+                         bstatus: 'Upcoming',
+                         aptprice: '2099',
+                       ),
                      );
                      }
 

@@ -21,8 +21,8 @@ class AppStyles{
   static const backgroundcolor = Color(0xffF9F9FB);
 
   static const bordercolor = Color(0xffF1F1F1);
-
-
+  static const navyblue = Color(0xff1D242C);
+  static const bottomnavigationcolor = Color(0xff71859E);
 
 
   //Textstyles
@@ -44,4 +44,6 @@ static TextStyle opensansstyle = TextStyle(fontSize: 18.sp, fontWeight: FontWeig
 static TextStyle fontblackstyle = TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w600, fontFamily: 'Vietnam', color: AppStyles.black);
   static TextStyle sfstyle = TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w500, fontFamily: 'sfpro', color: AppStyles.black);
   static TextStyle redfontstyle = TextStyle(fontSize: 20.sp, fontWeight: FontWeight.w700, fontFamily: 'Vietnam', color: AppStyles.red);
+  static TextStyle acfontstyle = TextStyle(fontSize: 15.sp, fontWeight: FontWeight.w400, fontFamily: 'Vietnam', color: AppStyles.navyblue);
+  static TextStyle logoutfontstyle = TextStyle(fontSize: 15.sp, fontWeight: FontWeight.w400, fontFamily: 'Vietnam', color: AppStyles.red);
 }

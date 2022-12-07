@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:gfive/app_screens/app_screens.dart';
 import 'package:gfive/utils/app_styles.dart';
 
 import '../../constants/asset_path.dart';
 import '../../widgets/custom_bottom_button.dart';
 import '../../widgets/custom_textformfield.dart';
+import 'bloc/profile_screen_bloc.dart';
 
 
 class ProfileScreen extends StatelessWidget {
@@ -13,6 +16,17 @@ class ProfileScreen extends StatelessWidget {
   TextEditingController emailcontroller = TextEditingController();
 
   ProfileScreen({Key? key}) : super(key: key);
+
+  static Widget create(){
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider<ProfileScreenBloc>(
+          create: (_) => ProfileScreenBloc(),
+        ),
+      ],
+      child:  ProfileScreen(),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -71,7 +85,9 @@ class ProfileScreen extends StatelessWidget {
                     SizedBox(height: 380),
                     CustomBottomButton(
                       text:'SUBMIT',
-                      onPress: (){}
+                      onPress: (){
+                        Navigator.pushNamed(context, AppScreens.dashboardScreen);
+                      }
                     ),
                    SizedBox(height: 16),
                    Text('Skip', style: AppStyles.interstyle),
