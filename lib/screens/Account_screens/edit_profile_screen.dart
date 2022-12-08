@@ -6,6 +6,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:gfive/utils/app_styles.dart';
 
 import '../../constants/asset_path.dart';
+import '../../widgets/custom_bottom_button.dart';
 import '../../widgets/custom_phone_textfield.dart';
 import '../../widgets/custom_textformfield.dart';
 
@@ -24,14 +25,16 @@ class EditProfileScreen extends StatelessWidget {
           //height: 844.h,
           width: 390.w,
           color: AppStyles.black,
-          child: Column(children: [
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
             SizedBox(height: 49.h),
             Row(children: [
               IconButton(
-                onPressed: (){},
-                icon: SvgPicture.asset(ImageAssetPath.backIcon, height: 100.h, width: 100.h,)
+                  onPressed: (){},
+                  icon: SvgPicture.asset(ImageAssetPath.backIcon, height: 100.h, width: 100.h,)
               ),
-                  Text('Edit Profile',textAlign: TextAlign.center, style: AppStyles.profilestyle),
+              Text('Edit Profile',textAlign: TextAlign.center, style: AppStyles.profilestyle),
             ],),
             SizedBox(height: 24.h),
             Container(
@@ -100,7 +103,11 @@ class EditProfileScreen extends StatelessWidget {
             labelText: 'Email',
           ),
 
-
+               SizedBox(height : 297.h),
+                CustomBottomButton(
+                  onPress: (){},
+                  text: 'UPDATE',
+                ),
 
               ],),
               )
