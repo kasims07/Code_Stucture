@@ -10,16 +10,15 @@ class NotificationsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SafeArea(child: Scaffold(
-      body: SingleChildScrollView(
-        child: Container(
-          //height:844.h ,
-          width: 390.w,
-          color: AppStyles.black,
-          child: Column(children: [
-            Padding(padding: EdgeInsets.only(top:49.sp , right:136.sp , left:136.sp , bottom:24.sp),
-            child: Text('Notifications', style:AppStyles.profilestyle),),
-            Container(
-                height:915.h ,
+      body: Container(
+        //height:844.h ,
+        width: 390.w,
+        color: AppStyles.black,
+        child: Column(children: [
+          Padding(padding: EdgeInsets.only(top:49.sp, bottom:24.sp),
+          child: Text('Notifications', style:AppStyles.profilestyle),),
+          Expanded(
+            child: Container(
                 width: 390.w,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.only(
@@ -38,9 +37,9 @@ class NotificationsScreen extends StatelessWidget {
                   })
 
 
-            )
-          ],),
-        ),
+            ),
+          )
+        ],),
       ),
     )
     );

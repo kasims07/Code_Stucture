@@ -17,8 +17,6 @@ class HomeScreen extends StatelessWidget {
     return SafeArea(child: Scaffold(
       body: SingleChildScrollView(
         child: Container(
-          height: 920.h,
-          width: 390.w,
           color: AppStyles.black,
           child:
             SingleChildScrollView(
@@ -41,7 +39,6 @@ class HomeScreen extends StatelessWidget {
                   Padding(padding: EdgeInsets.only(top: 19, right: 20, left: 20, bottom: 0),
                   child:
                     Container(
-                      height: 48,
                       width: 350,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(5),
@@ -58,7 +55,6 @@ class HomeScreen extends StatelessWidget {
                           counterText: '',
                           hintText: 'Search',
                           hintStyle: AppStyles.searchstyle,
-                          labelText: 'Search services',
                           labelStyle: AppStyles.searchstyle,
                           focusedBorder: InputBorder.none,
                           errorBorder: InputBorder.none,
@@ -85,7 +81,6 @@ class HomeScreen extends StatelessWidget {
                   ),
                   SizedBox(height: 20),
                   Container(
-                  height:681.h ,
                     width:390.w,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.only(
@@ -181,6 +176,7 @@ class HomeScreen extends StatelessWidget {
                             topPadding: 24.h,
                             botPadding: 16.h,
                           ),
+                          SizedBox(height: 15.w),
                          ],)
                       ],),
                     ),

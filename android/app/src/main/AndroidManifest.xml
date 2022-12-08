@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.app.gfiveapp.gfive">
+    package="com.app.GFiveapp">
    <application
         android:label="gfive"
         android:name="${applicationName}"

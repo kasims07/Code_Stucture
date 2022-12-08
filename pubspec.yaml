@@ -46,9 +46,17 @@ dependencies:
   get_it: ^7.2.0
   flutter_screenutil: ^5.6.0
   country_picker: ^2.0.16
+  pinput: ^2.2.16
+  firebase_auth: ^4.1.5
+  firebase_core: ^2.3.0
+  pretty_dio_logger: ^1.1.1
+  fluttertoast: ^8.0.6
+  mime: ^1.0.2
+  connectivity: ^3.0.3
 
 
 dev_dependencies:
+  device_preview: ^1.1.0
   flutter_test:
     sdk: flutter
 

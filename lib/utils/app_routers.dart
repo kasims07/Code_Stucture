@@ -15,9 +15,12 @@ class AppRouter {
   Route<dynamic> getRoute(RouteSettings settings) {
     switch (settings.name) {
       case AppScreens.otpVerification:
+        final arguments = settings.arguments as Map<String, dynamic>;
         return _buildRoute(
           settings,
-          VerificationScreen.create(),
+          VerificationScreen.create(
+            arguments['mobileNum'],
+          ),
         );
       case AppScreens.profileScreen:
         return _buildRoute(

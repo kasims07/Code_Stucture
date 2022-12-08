@@ -1,0 +1,1 @@
+enum ApiStatus { success, error }

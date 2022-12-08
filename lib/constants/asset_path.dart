@@ -17,6 +17,7 @@ class ImageAssetPath {
   static const String sPhoto4 = 'assets/images/sphoto4.png';
   static const String notification = 'assets/images/notification.png';
   static const String accountImage = 'assets/images/account_image.png';
+  static const String icCross = 'assets/icons/ic_cross.png';
 
   //SVG icons
   static const String profileIcon = 'assets/icons/icProfile.svg';

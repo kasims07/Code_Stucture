@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gfive/screens/homeScreen/home_screen.dart';
 import 'package:gfive/utils/stream_builder.dart';
 
@@ -35,6 +36,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
         child: Scaffold(
           bottomNavigationBar: DashboardBottombar(),
           body: Container(
+
             child: StreamBuilder<int>(
               stream: StreamUtil.bottombar,
               builder: (context, snapshot) {
