@@ -3,6 +3,10 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:gfive/screens/Account_screens/add_address.dart';
+import 'package:gfive/screens/Account_screens/edit_profile_screen.dart';
+import 'package:gfive/screens/Account_screens/manage_address.dart';
+import 'package:gfive/screens/login_screens/login_screen.dart';
 import 'package:gfive/screens/splashScreen/splash_screen.dart';
 import 'package:gfive/utils/app_dependencies.dart';
 import 'package:gfive/utils/app_routers.dart';
@@ -61,7 +65,7 @@ class _MyAppState extends State<MyApp> {
             theme: ThemeData(
               primarySwatch: Colors.blue,
             ),
-            home:SplashScreen(),
+            home:AddAddress(),
             onGenerateRoute: _router.getRoute,
             navigatorObservers: [_router.routeObserver]
         );

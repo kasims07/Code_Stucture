@@ -51,4 +51,9 @@ class ImageAssetPath {
   static const String redAccount = 'assets/icons/icRedaccount.svg';
   static const String cameraIcon = 'assets/icons/icCamera.svg';
   static const String numberIcon = 'assets/icons/icNumbericon.svg';
+  static const String addIcon = 'assets/icons/icAdd.svg';
+  static const String editIcon = 'assets/icons/icEdit.svg';
+  static const String trashIcon = 'assets/icons/icTrash.svg';
+  static const String tickIcon = 'assets/icons/icTickIcon.svg';
+  static const String greyTick = 'assets/icons/icGreyTick.svg';
 }
