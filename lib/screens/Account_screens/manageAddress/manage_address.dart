@@ -1,15 +1,29 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:gfive/app_screens/app_screens.dart';
 import 'package:gfive/constants/asset_path.dart';
 import 'package:gfive/utils/app_styles.dart';
 
-import '../../widgets/custom_account_backbutton.dart';
-import '../../widgets/custom_address_container.dart';
+import '../../../widgets/custom_account_backbutton.dart';
+import '../../../widgets/custom_address_container.dart';
+import 'bloc/manage_address_bloc.dart';
 
 
 class ManageAddress extends StatelessWidget {
   const ManageAddress({Key? key}) : super(key: key);
+
+  static Widget create(){
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider<ManageAddressBloc>(
+          create: (_) => ManageAddressBloc(),
+        ),
+      ],
+      child: ManageAddress(),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -27,11 +41,16 @@ class ManageAddress extends StatelessWidget {
             children: [
             CustomAccountBackbutton(),
              Text('Manage Address', style: AppStyles.profilestyle,),
-            Row(children: [
-               SvgPicture.asset(ImageAssetPath.addIcon, height: 16.67.h,width: 16.67.w),
-              SizedBox(width: 6.67.h),
-              Text('Add', style:AppStyles.buttonstyle.copyWith(fontWeight: FontWeight.w400)),
-            ],)
+            InkWell(
+              onTap: (){
+                Navigator.pushNamed(context, AppScreens.addAddress);
+              },
+              child: Row(children: [
+                 SvgPicture.asset(ImageAssetPath.addIcon, height: 16.67.h,width: 16.67.w),
+                SizedBox(width: 6.67.h),
+                Text('Add', style:AppStyles.buttonstyle.copyWith(fontWeight: FontWeight.w400)),
+              ],),
+            )
           ],)
           ),
           Container(

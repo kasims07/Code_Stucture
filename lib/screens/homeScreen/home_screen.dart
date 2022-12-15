@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:gfive/app_screens/app_screens.dart';
 import 'package:gfive/utils/app_styles.dart';
 
 import '../../constants/asset_path.dart';
@@ -92,26 +93,31 @@ class HomeScreen extends StatelessWidget {
                     ),
                     child: Padding(padding: EdgeInsets.only(top: 20, right: 20, left: 20),
                       child: Column(children: [
-                        Container(
-                          height: 163.h,
-                          width: 350.w,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                            border: Border.all(color: AppStyles.grey.withOpacity(0.16)),
+                        InkWell(
+                          onTap: (){
+                            Navigator.pushNamed(context, AppScreens.serviceDetails);
+                          },
+                          child: Container(
+                            height: 163.h,
+                            width: 350.w,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              border: Border.all(color: AppStyles.grey.withOpacity(0.16)),
 
-                          ),
-                          child: Stack(
-                            children: [
-                              Positioned(
-                                  top:18,
-                              left:-10,
-                                  child: Image.asset(ImageAssetPath.homeLogo, height: 150.h, width: 372.w)),
-                              Positioned(
-                                  top: 15,
-                                  right:30,
+                            ),
+                            child: Stack(
+                              children: [
+                                Positioned(
+                                    top:18,
+                                left:-10,
+                                    child: Image.asset(ImageAssetPath.homeLogo, height: 150.h, width: 372.w)),
+                                Positioned(
+                                    top: 15,
+                                    right:30,
 
-                                  child: Text('Full Home\nDeep Cleaning',style: AppStyles.homelogostyle ,))
-                            ],
+                                    child: Text('Full Home\nDeep Cleaning',style: AppStyles.homelogostyle ,))
+                              ],
+                            ),
                           ),
                         ),
                         SizedBox(height: 15),

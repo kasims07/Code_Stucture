@@ -1,14 +1,17 @@
 import 'package:country_picker/country_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gfive/utils/app_styles.dart';
 
-import '../../constants/asset_path.dart';
-import '../../widgets/custom_bottom_button.dart';
-import '../../widgets/custom_phone_textfield.dart';
-import '../../widgets/custom_textformfield.dart';
+import '../../../constants/asset_path.dart';
+import '../../../widgets/custom_account_backbutton.dart';
+import '../../../widgets/custom_bottom_button.dart';
+import '../../../widgets/custom_phone_textfield.dart';
+import '../../../widgets/custom_textformfield.dart';
+import 'bloc/edit_profile_bloc.dart';
 
 class EditProfileScreen extends StatelessWidget {
   TextEditingController namecontroller = TextEditingController();
@@ -16,6 +19,17 @@ class EditProfileScreen extends StatelessWidget {
   TextEditingController numbercontroller = TextEditingController();
 
   EditProfileScreen({Key? key}) : super(key: key);
+
+  static Widget create(){
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider<EditProfileBloc>(
+          create: (_) => EditProfileBloc(),
+        ),
+      ],
+      child: EditProfileScreen(),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -28,12 +42,10 @@ class EditProfileScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-            SizedBox(height: 49.h),
+            SizedBox(height: 20.h),
             Row(children: [
-              IconButton(
-                  onPressed: (){},
-                  icon: SvgPicture.asset(ImageAssetPath.backIcon, height: 100.h, width: 100.h,)
-              ),
+              CustomAccountBackbutton(),
+              SizedBox(width: 93.63),
               Text('Edit Profile',textAlign: TextAlign.center, style: AppStyles.profilestyle),
             ],),
             SizedBox(height: 24.h),
@@ -103,7 +115,7 @@ class EditProfileScreen extends StatelessWidget {
             labelText: 'Email',
           ),
 
-               SizedBox(height : 297.h),
+               SizedBox(height : 284.h),
                 CustomBottomButton(
                   onPress: (){},
                   text: 'UPDATE',

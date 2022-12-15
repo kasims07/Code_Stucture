@@ -108,7 +108,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                           top: 38, right: 124, left: 120),
                                       child: InkWell(
                                         onTap: () {
-                                          showCountryPicker(
+                                         /* showCountryPicker(
                                             context: context,
                                             //countryFilter: <String>['IN', 'IT'],
                                             favorite: <String>['IN'],
@@ -145,7 +145,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                                         BorderRadius.circular(25.0)),
                                               ),
                                             ),
-                                          );
+                                          );*/
                                         },
                                         child: StreamBuilder<String>(
                                           stream: StreamUtil.countrycode,
@@ -158,7 +158,15 @@ class _LoginScreenState extends State<LoginScreen> {
                                                       Border.all(color: AppStyles.grey),
                                                   borderRadius: BorderRadius.circular(50),
                                                   color: AppStyles.white),
-                                              child: Center(child: Text('+${snapshot.data}', style: AppStyles.fontblackstyle.copyWith(fontSize: 20.sp),)),
+                                              child: Center(child: Row(
+                                                crossAxisAlignment: CrossAxisAlignment.center,
+                                                mainAxisAlignment: MainAxisAlignment.center,
+                                                children: [
+                                                  Image.asset(ImageAssetPath.icIndia),
+                                                  SizedBox(width: 10.w,),
+                                                  Text('+91', style: AppStyles.fontblackstyle.copyWith(fontSize: 20.sp),),
+                                                ],
+                                              )),
                                             );
                                           }
                                         ),

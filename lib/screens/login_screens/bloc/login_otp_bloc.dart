@@ -23,7 +23,7 @@ class LoginOtpBloc extends Bloc<LoginOtpEvent, LoginOtpState> {
 
     await FirebaseAuth.instance.verifyPhoneNumber(
       //phoneNumber: '+91 ${event.phone}',
-      phoneNumber: '+${StreamUtil.countrycode.value} ${event.phone}',
+      phoneNumber: '+91 ${event.phone}',
       timeout: const Duration(seconds: 60),
       verificationCompleted: (AuthCredential authCredential) {
         print('Your account is successfully verified');
@@ -36,11 +36,12 @@ class LoginOtpBloc extends Bloc<LoginOtpEvent, LoginOtpState> {
       codeSent: await (String verificationId, int? forceResendingToken) async{
         StreamUtil.verificationIDSubject.add(verificationId);
         print('SEND_ID $verificationId');
+        final user = await FirebaseAuth.instance.currentUser;
+        final idToken = await user!.getIdToken();
+        final token = idToken.toString();
+        print('TOKEN IS ====> ${token}');
       },);
-    final user = await FirebaseAuth.instance.currentUser;
-    final idToken = await user!.getIdToken();
-    final token = idToken.toString();
-    print('TOKEN IS ====> ${token}');
+
 
     emit(LoginOtpState(
         isCompleted: true,

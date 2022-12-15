@@ -171,14 +171,6 @@ class _VerificationScreenState extends State<VerificationScreen> {
                                                 validator: (value) {
                                                   return null;
                                                 },
-                                                onClipboardFound:
-                                                    (value) {
-                                                  debugPrint(
-                                                      'onClipboardFound: $value');
-                                                  pinController
-                                                      .setText(
-                                                      value);
-                                                },
                                                 hapticFeedbackType:
                                                 HapticFeedbackType
                                                     .lightImpact,

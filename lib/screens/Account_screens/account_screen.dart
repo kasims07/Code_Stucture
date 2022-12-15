@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gfive/utils/app_styles.dart';
 
+import '../../app_screens/app_screens.dart';
 import '../../constants/asset_path.dart';
 import '../../widgets/custom_account_row.dart';
 
@@ -21,9 +22,9 @@ class AccountScreen extends StatelessWidget {
              children: [Column(
                crossAxisAlignment: CrossAxisAlignment.center,
                children: [
-                 SizedBox(height: 49),
+                 SizedBox(height: 20),
                  Text('Account', style: AppStyles.profilestyle),
-                 SizedBox(height: 103),
+                 SizedBox(height: 93),
 
                  Container(
                  height: 246.h,
@@ -42,27 +43,37 @@ class AccountScreen extends StatelessWidget {
                        Text('Jeson Roy', style: AppStyles.verifystyle),
                        SizedBox(height: 42),
 
-                       CustomAccountRow(
-                         text :'Edit Profile',
-                         icon: ImageAssetPath.editProfile,
-                         height: 14.26.h,
-                         width: 14.27.w,
-                         betwidth: 12.36,
+                       InkWell(
+                         onTap: (){
+                           Navigator.pushNamed(context, AppScreens.editProfile);
+                         },
+                         child: CustomAccountRow(
+                           text :'Edit Profile',
+                           icon: ImageAssetPath.editProfile,
+                           height: 14.26.h,
+                           width: 14.27.w,
+                           betwidth: 12.36,
+                         ),
                        ),
                        SizedBox(height: 31),
-                       CustomAccountRow(
-                         text :'Manage Address',
-                         icon: ImageAssetPath.manageIcon,
-                         height: 16.25.h,
-                         width: 16.25.w,
-                         betwidth: 11.66,
+                       InkWell(
+                         onTap: (){
+                           Navigator.pushNamed(context, AppScreens.manageAddress);
+                         },
+                         child: CustomAccountRow(
+                           text :'Manage Address',
+                           icon: ImageAssetPath.manageIcon,
+                           height: 16.25.h,
+                           width: 16.25.w,
+                           betwidth: 11.66,
+                         ),
                        ),
                      ],
 
                    )
                    ),
                  Container(
-                   height: 370.h,
+                   height: 385.h,
                    width: 390.w,
 
                    decoration: BoxDecoration(
@@ -87,39 +98,59 @@ class AccountScreen extends StatelessWidget {
                      betwidth: 11.67,
                    ),
                      SizedBox(height: 30),
-                     CustomAccountRow(
-                       text: 'Terms & Conditions',
-                       icon: ImageAssetPath.termsIcon,
-                       height: 16.67.h,
-                       width: 14.17.w,
-                       betwidth: 12.92,
+                     InkWell(
+                       onTap: (){
+                         Navigator.pushNamed(context, AppScreens.termsAndConditions);
+                       },
+                       child: CustomAccountRow(
+                         text: 'Terms & Conditions',
+                         icon: ImageAssetPath.termsIcon,
+                         height: 16.67.h,
+                         width: 14.17.w,
+                         betwidth: 12.92,
+                       ),
                      ),
                      SizedBox(height: 30),
-                     CustomAccountRow(
-                       text: 'Privacy Policy',
-                       icon: ImageAssetPath.privacyIcon,
-                       height: 16.75.h,
-                       width: 14.07.w,
-                       betwidth: 12.97,
+                     InkWell(
+                       onTap: (){
+                         Navigator.pushNamed(context, AppScreens.privacyPolicy);
+                       },
+                       child: CustomAccountRow(
+                         text: 'Privacy Policy',
+                         icon: ImageAssetPath.privacyIcon,
+                         height: 16.75.h,
+                         width: 14.07.w,
+                         betwidth: 12.97,
+                       ),
                      ),
                      SizedBox(height: 30),
-                     CustomAccountRow(
-                       text: 'About Us',
-                       icon: ImageAssetPath.aboutUs,
-                       height: 16.h,
-                       width: 16.w,
-                       betwidth: 12,
+                     InkWell(
+                       onTap: (){
+                         Navigator.pushNamed(context, AppScreens.aboutUs);
+                       },
+                       child: CustomAccountRow(
+                         text: 'About Us',
+                         icon: ImageAssetPath.aboutUs,
+                         height: 16.h,
+                         width: 16.w,
+                         betwidth: 12,
+                       ),
                      ),
                      SizedBox(height: 30),
-                     CustomAccountRow(
-                       text: 'Contact Us',
-                       icon: ImageAssetPath.contactus ,
-                       height: 14.17.h,
-                       width: 16.67.w,
-                       betwidth: 11.67,
+                     InkWell(
+                       onTap: (){
+                         Navigator.pushNamed(context, AppScreens.contactUs);
+                       },
+                       child: CustomAccountRow(
+                         text: 'Contact Us',
+                         icon: ImageAssetPath.contactus ,
+                         height: 14.17.h,
+                         width: 16.67.w,
+                         betwidth: 11.67,
+                       ),
                      ),
-                     SizedBox(height: 30),
-                   Padding(padding: EdgeInsets.only(right:20.65 , left: 21.67.sp),
+                     SizedBox(height: 28),
+                   Padding(padding: EdgeInsets.only(right:20.65 , left: 20.sp),
                        child: Row(
                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                          children: [
@@ -139,7 +170,7 @@ class AccountScreen extends StatelessWidget {
                  )
                  ]),
                  Positioned(
-                     top: 110,
+                     top: 75,
                      right: 125,
                      child: Container(
                        decoration: BoxDecoration(

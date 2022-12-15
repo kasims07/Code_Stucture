@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:gfive/screens/bookingServiceDetails/book_service_screen.dart';
 import 'package:gfive/utils/app_styles.dart';
 
 import '../../app_screens/app_screens.dart';
@@ -35,8 +36,9 @@ class BookMainScreen extends StatelessWidget {
                 child: ListView.builder(
                     itemCount: 10,
                     itemBuilder: (BuildContext context,  int index)
-                   { return InkWell(
+                   { return GestureDetector(
                      onTap: (){
+                       print('Hellow');
                        Navigator.pushNamed(context, AppScreens.bookingDetail);
                      },
                      child: CustomBookingContainer(

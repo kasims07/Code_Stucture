@@ -8,16 +8,16 @@ class CustomAddressTextfield extends StatelessWidget {
   TextEditingController controller;
   TextInputType type;
   String hintText;
-  String labelText;
-  int maxline;
-  int maxlength;
+  // String labelText;
+  //int maxline;
+  //int maxlength;
 
   // Widget icon;
   // final String? format;
   // final List<TextInputFormatter>? inputFormatters;
 
 
-  CustomAddressTextfield({Key? key, required this.controller,required this.type, required this.hintText, required this.labelText, this.maxline=5, this.maxlength= 10}) : super(key: key);
+  CustomAddressTextfield({Key? key, required this.controller,required this.type, required this.hintText}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -33,23 +33,32 @@ class CustomAddressTextfield extends StatelessWidget {
             )
           // border: Border.all(color: )
         ),
-        child: Padding(padding: EdgeInsets.symmetric(horizontal: 1.h).copyWith(top: 0.5.h, bottom: 0.5.h),
-            child:TextFormField(
+        child: Padding(
+          //padding: EdgeInsets.symmetric(horizontal: 0.5.h).copyWith(top: 0.5.h, bottom: 0.5.h),
+          padding: EdgeInsets.only(top: 10.h, bottom: 12.h, left: 10.w),
+
+          child: Center(
+            child: TextFormField(
+              //textAlign: TextAlign.center,
+              //textAlignVertical: TextAlignVertical.center,
               controller: controller,
               keyboardType: type,
               minLines: 1,
-              maxLines: maxline,
-              maxLength: maxlength,
+              maxLines: 5,
+              // maxLength: maxlength,
               textInputAction: TextInputAction.next,
 
               // inputFormatters: format == 'normal'? [FilteringTextInputFormatter.allow(RegExp(r"[a-zA-Z]+|\s"),)
               // ] : inputFormatters, style: AppStyles.verifystyle.copyWith(fontSize: 14.sp, fontWeight: FontWeight.w400),
               decoration: InputDecoration(
+                isCollapsed: true,
+                alignLabelWithHint: true,
 
-                isDense: true,
+                counterText:'',
+                //isDense: true,
                 hintText: hintText,
                 hintStyle: AppStyles.termstyle,
-                labelText: labelText,
+                // labelText: labelText,
                 labelStyle: AppStyles.termstyle,
 
                 focusedBorder: InputBorder.none,
@@ -59,9 +68,11 @@ class CustomAddressTextfield extends StatelessWidget {
                 focusedErrorBorder: InputBorder.none,
                 border: InputBorder.none,
 
+
               ),
 
-            )
+            ),
+          ),
         ),
       );
   }

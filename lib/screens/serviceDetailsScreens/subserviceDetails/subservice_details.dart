@@ -1,16 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gfive/utils/app_styles.dart';
 import 'package:rxdart/rxdart.dart';
 
-import '../../constants/asset_path.dart';
-import '../../widgets/custom_backicon_button.dart';
-import '../../widgets/custom_bottom_button.dart';
-import '../../widgets/custom_otp_button.dart';
-import '../../widgets/custom_photo_cotainer.dart';
-import '../../widgets/custom_price_container.dart';
-import '../../widgets/custom_row.dart';
+import '../../../app_screens/app_screens.dart';
+import '../../../constants/asset_path.dart';
+import '../../../widgets/custom_account_backbutton.dart';
+import '../../../widgets/custom_backicon_button.dart';
+import '../../../widgets/custom_bottom_button.dart';
+import '../../../widgets/custom_otp_button.dart';
+import '../../../widgets/custom_photo_cotainer.dart';
+import '../../../widgets/custom_price_container.dart';
+import '../../../widgets/custom_row.dart';
+import 'bloc/subservice_details_bloc.dart';
 
 class SubserviceDetails extends StatelessWidget {
 
@@ -20,6 +24,16 @@ class SubserviceDetails extends StatelessWidget {
   List<String> namelist = ['1BHK', '2BHK', '3BHK', '4BHK', '5BHK'];
   List<String> sphotolist = ['${ImageAssetPath.sPhoto1}','${ImageAssetPath.sPhoto2}','${ImageAssetPath.sPhoto3}', '${ImageAssetPath.sPhoto4}' ];
 
+   static Widget create(){
+     return MultiBlocProvider(
+       providers: [
+         BlocProvider<SubserviceDetailsBloc>(
+           create: (_) => SubserviceDetailsBloc(),
+         ),
+       ],
+       child: SubserviceDetails(),
+     );
+   }
 
 
   @override
@@ -32,16 +46,17 @@ class SubserviceDetails extends StatelessWidget {
           color: AppStyles.black,
           child:
             SingleChildScrollView(
-              child: Padding(padding: EdgeInsets.only(top:23),
+              child: Padding(padding: EdgeInsets.only(top:10),
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
 
                 children: [
-                  CustomBackIconButton(
-
-                         onPress: (){},
-                  ),
+                  CustomAccountBackbutton(),
+                 Row(children: [
+                   SizedBox(width: 65.w),
                   Text('Unfurnished Appartment Classic\nCleaning', textAlign: TextAlign.center, style:AppStyles.profilestyle),
-                SizedBox(height: 15),
+                ]),
+                   SizedBox(height: 15),
                 Container(
                   height: 909.h,
                   width: 390.w,
@@ -53,11 +68,13 @@ class SubserviceDetails extends StatelessWidget {
                     color: AppStyles.white
                   ),
                   child:Padding(padding: EdgeInsets.only(top:19, right: 20, left: 20),
-                  child: Column(children: [
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
                     Text(textAlign: TextAlign.left, 'Maecenas sed diam eget risus varius blandit sit\namet non magna. Integer posuere erat a ante\nvenenatis dapibus posuere velit aliquet.Maecenas\nsed diam eget risus varius blandit sit amet non' , style: AppStyles.detailsstyle,),
                     Row(
                       children: [
-                        Text('   Readmore', style: AppStyles.detfontstyle),
+                        Text(' Readmore', style: AppStyles.detfontstyle),
                         SizedBox(width: 6.67.w),
                         SvgPicture.asset(ImageAssetPath.downarrowIcon,height: 6.h,width:10.67.w ),
                       ],
@@ -92,7 +109,7 @@ class SubserviceDetails extends StatelessWidget {
                           color: AppStyles.yellow,
                         borderRadius: BorderRadius.circular(5),
                       ),
-                       child:Padding(padding: EdgeInsets.only(top: 21, right: 21, left: 18, bottom: 21),
+                       child:Padding(padding: EdgeInsets.only(top: 21, right: 21, left: 18),
                        child:Column(
                          crossAxisAlignment: CrossAxisAlignment.start,
                          children: [
@@ -126,7 +143,10 @@ class SubserviceDetails extends StatelessWidget {
                     ),
                     SizedBox(height: 20.h),
                     CustomBottomButton(
-                      text : 'BOOK SERVICE', onPress: null,
+                      text : 'BOOK SERVICE',
+                      onPress: (){
+                        Navigator.pushNamed(context, AppScreens.loginBookservice);
+                      },
                     )
                   ],),
                   )

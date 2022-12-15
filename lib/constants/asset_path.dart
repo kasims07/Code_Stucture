@@ -17,6 +17,9 @@ class ImageAssetPath {
   static const String sPhoto4 = 'assets/images/sphoto4.png';
   static const String notification = 'assets/images/notification.png';
   static const String accountImage = 'assets/images/account_image.png';
+  static const String dot = 'assets/images/dot.png';
+  static const String congoImage = 'assets/images/congoImage.png';
+  static const String icIndia = 'assets/icons/ic_india.png';
   static const String icCross = 'assets/icons/ic_cross.png';
 
   //SVG icons
@@ -56,4 +59,7 @@ class ImageAssetPath {
   static const String trashIcon = 'assets/icons/icTrash.svg';
   static const String tickIcon = 'assets/icons/icTickIcon.svg';
   static const String greyTick = 'assets/icons/icGreyTick.svg';
+  static const String gfiveIcon = 'assets/icons/icGfiveicon.svg';
+  static const String phoneIcon = 'assets/icons/icPhone.svg';
+  static const String serviceIcon = 'assets/icons/icServiceicon.svg';
 }

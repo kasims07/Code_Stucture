@@ -43,13 +43,14 @@ class ProfileScreen extends StatelessWidget {
              SizedBox(height: 17),
             Text('Enter your personal details for easy to\nbook & fast', textAlign: TextAlign.center, style: AppStyles.termstyle.copyWith(fontSize: 15.sp),),
           SizedBox(height: 26),
-            Align(
-              alignment: Alignment.bottomCenter,
+            Expanded(
               child: Container(
-                height: 686.h,
+                alignment: Alignment.bottomCenter,
+                //height: 686.h,
                 width: 390.w,
                 decoration: BoxDecoration(
-                  color: AppStyles.white, borderRadius: BorderRadius.circular(15),
+                  color: AppStyles.white, 
+                  borderRadius: BorderRadius.only(topRight: Radius.circular(10), topLeft: Radius.circular(10) ),
                 ),
                 child: Padding(padding: EdgeInsets.all(20),
 
@@ -82,7 +83,7 @@ class ProfileScreen extends StatelessWidget {
                       type: TextInputType.emailAddress,
 
                     ),
-                    SizedBox(height: 380),
+                    Spacer(),
                     CustomBottomButton(
                       text:'SUBMIT',
                       onPress: (){
