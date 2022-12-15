@@ -14,6 +14,22 @@
       },
       "oauth_client": [
         {
+          "client_id": "1064925582065-09tt4ac2rtj85a7dfq6rk9odqqq5l477.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.app.gfiveapp",
+            "certificate_hash": "d9a4719a5a452c8715f4cd6effc4e36396f5392c"
+          }
+        },
+        {
+          "client_id": "1064925582065-1has4pk84kutactmdmn5pbqaca4vga07.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.app.gfiveapp",
+            "certificate_hash": "9e2da2518c8f2c14f94b0ea42b7ddc723b6d1a19"
+          }
+        },
+        {
           "client_id": "1064925582065-qk6t9p6be9rr8ij7kap3aodl96cf3adb.apps.googleusercontent.com",
           "client_type": 3
         }
@@ -29,6 +45,13 @@
             {
               "client_id": "1064925582065-qk6t9p6be9rr8ij7kap3aodl96cf3adb.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "1064925582065-vm656ctv78vmbktvkcda3k1ltdi0dfb9.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.app.gfiveapp"
+              }
             }
           ]
         }
