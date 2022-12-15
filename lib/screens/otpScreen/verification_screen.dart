@@ -258,9 +258,14 @@ class _VerificationScreenState extends State<VerificationScreen> {
                                         Text('Didnot recieve code?',
                                             style: AppStyles.termstyle
                                                 .copyWith(fontSize: 15.sp)),
-                                        Text(' Resend',
-                                          style: AppStyles.verifystyle
-                                              .copyWith(fontSize: 15.sp)),
+                                        InkWell(
+                                          onTap: (){
+                                            sendOTP();
+                                          },
+                                          child: Text(' Resend',
+                                            style: AppStyles.verifystyle
+                                                .copyWith(fontSize: 15.sp)),
+                                        ),
                                       ],
                                     ),
                                     SizedBox(height: 15),
