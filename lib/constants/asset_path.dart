@@ -21,6 +21,9 @@ class ImageAssetPath {
   static const String congoImage = 'assets/images/congoImage.png';
   static const String icIndia = 'assets/icons/ic_india.png';
   static const String icCross = 'assets/icons/ic_cross.png';
+  static const String dotted = 'assets/images/dotted_background.png';
+
+
 
   //SVG icons
   static const String profileIcon = 'assets/icons/icProfile.svg';

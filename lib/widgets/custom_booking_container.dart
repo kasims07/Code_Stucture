@@ -18,13 +18,13 @@ class CustomBookingContainer extends StatelessWidget {
     return Padding(
       padding:EdgeInsets.only(bottom: 10),
       child: Container(
-        height: 165.h ,
+        height: 175.h ,
         width: 350.w,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(5),
           color:AppStyles.grey.withOpacity(0.05),
         ),
-        child: Padding(padding: EdgeInsets.only(top: 18, right: 13, left: 13, bottom: 18),
+        child: Padding(padding: EdgeInsets.only(top: 18, right: 13, left: 13, bottom: 8),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -40,7 +40,7 @@ class CustomBookingContainer extends StatelessWidget {
            SizedBox(height: 16),
            Expanded(
              child: Container(
-                height: 72.h,
+                height: 90.h,
                 width: 324.w,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(5),

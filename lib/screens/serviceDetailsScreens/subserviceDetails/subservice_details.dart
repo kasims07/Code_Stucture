@@ -79,26 +79,29 @@ class SubserviceDetails extends StatelessWidget {
                         SvgPicture.asset(ImageAssetPath.downarrowIcon,height: 6.h,width:10.67.w ),
                       ],
                     ),
-                    SizedBox(height: 15),
+                    SizedBox(height: 10),
                     Divider(color:AppStyles.divider,thickness: 1),
-                    SizedBox(height: 15),
+                    SizedBox(height: 10),
                     Text(textAlign: TextAlign.left,'Service Price List', style:AppStyles.detfontstyle.copyWith(fontWeight: FontWeight.w600)),
-                     GridView.builder(
-                       shrinkWrap: true,
-                         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                           crossAxisCount: 3,
-                           crossAxisSpacing: 14.0,
-                           mainAxisSpacing: 14.0
-                         ),
-                         itemCount: pricelist.length,
-                         itemBuilder: (context, index){
-                           return CustomPriceContainer(
+                     SizedBox(height: 15.h),
+                      Expanded(
+                       child: GridView.builder(
+                         shrinkWrap: true,
+                           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                             crossAxisCount: 3,
+                             crossAxisSpacing: 14.0,
+                             mainAxisSpacing: 14.0
+                           ),
+                           itemCount: pricelist.length,
+                           itemBuilder: (context, index){
+                             return CustomPriceContainer(
 
-                             price: pricelist[index],
-                             name: namelist[index],
+                               price: pricelist[index],
+                               name: namelist[index],
 
-                           );
-                         }
+                             );
+                           }
+                       ),
                      ),
 
                     SizedBox(height: 15),
@@ -141,7 +144,7 @@ class SubserviceDetails extends StatelessWidget {
                           }
                       ),
                     ),
-                    SizedBox(height: 20.h),
+                    SizedBox(height: 30.h),
                     CustomBottomButton(
                       text : 'BOOK SERVICE',
                       onPress: (){

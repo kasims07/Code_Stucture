@@ -31,13 +31,20 @@ class CustomServiceContainer extends StatelessWidget {
 
           ),
           SizedBox(width: 10.w),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(text, style: AppStyles.detfontstyle),
-              SizedBox(width: 50.w),
-              SvgPicture.asset(ImageAssetPath.serviceIcon, height: 6.h, width : 10.67.w),
-            ],
+          SizedBox(
+            width: 300.w,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Expanded(
+                    flex:5,
+                    child: Text(text, style: AppStyles.detfontstyle)),
+                //SizedBox(width: 50.w),
+                Expanded(
+                    flex:1,
+                    child: SvgPicture.asset(ImageAssetPath.serviceIcon, height: 15.h, width : 15.w)),
+              ],
+            ),
           ),
 
         ],),

@@ -15,13 +15,15 @@ class CustomChangeAddressContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+
+        padding: EdgeInsets.symmetric(horizontal: 13.h,vertical: 14.h),
       height: 130.h,
       width: 390.h,
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(5),
           color: AppStyles.grey.withOpacity(0.05)
       ),
-      child: Padding(padding: EdgeInsets.symmetric(horizontal: 13.h,vertical: 14.h),
+     // child: Padding(padding: EdgeInsets.symmetric(horizontal: 13.h,vertical: 14.h),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -29,9 +31,9 @@ class CustomChangeAddressContainer extends StatelessWidget {
 
               SizedBox(height: 9.h),
               Container(
-                padding: EdgeInsets.only(top: 15.sp, bottom: 14.sp, right: 29.67.sp, left: 12.sp),
+                padding: EdgeInsets.only(top: 13.sp, bottom: 14.sp, right: 17.67.sp, left: 12.sp),
                 height: 72.h,
-                width: 324.h,
+                width: 355.h,
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(5),
                     color: AppStyles.white
@@ -53,7 +55,7 @@ class CustomChangeAddressContainer extends StatelessWidget {
               )
             ],
           )
-      ),
+
 
 
     );

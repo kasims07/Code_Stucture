@@ -95,14 +95,15 @@ class _VerificationScreenState extends State<VerificationScreen> {
             body: SingleChildScrollView(
       child: Stack(children: [
         SizedBox(
-            height: MediaQuery.of(context).size.height,
+            //height: MediaQuery.of(context).size.height,
+          height: 844.h,
             width: MediaQuery.of(context).size.width,
             child: Image.asset(
               ImageAssetPath.loginScreen,
-              fit: BoxFit.cover,
+              fit: BoxFit.fill,
             )),
         Positioned(
-          top:  300.h,
+          top:  310.h,
           right: 0.w,
           left: 0.w,
           child: Column(
@@ -111,7 +112,9 @@ class _VerificationScreenState extends State<VerificationScreen> {
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 20.w),
               child: Container(
+                //height: 384.h,
                   width: 349.w,
+
                   // alignment: Alignment.bottomCenter,
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(15),
@@ -291,32 +294,20 @@ class _VerificationScreenState extends State<VerificationScreen> {
             ),
             Padding(
                 padding:
-                    EdgeInsets.only(top: 41, right: 68, left: 69, bottom: 63),
-                child: Text.rich(TextSpan(
-                    text: 'By creating account you agree to our \n',
-                    style: AppStyles.termstyle,
-                    children: [
-                      TextSpan(
-                          text: 'Terms of Service',
-                          style: AppStyles.termstyle.copyWith(
-                              color: AppStyles.black,
-                              fontWeight: FontWeight.w600,
-                              decoration: TextDecoration.underline),
-                          children: [
-                            TextSpan(
-                                text: ' and ',
-                                style: AppStyles.termstyle,
-                                children: [
-                                  TextSpan(
-                                    text: 'Privacy Policy',
-                                    style: AppStyles.termstyle.copyWith(
-                                        color: AppStyles.black,
-                                        fontWeight: FontWeight.w600,
-                                        decoration: TextDecoration.underline),
-                                  )
-                                ])
-                          ])
-                    ])))
+                    EdgeInsets.only(top: 41, right: 68, left: 69, bottom: 20),
+                child: Column(
+                  children: [
+                    Text('By creating account you agree to our', style:AppStyles.termstyle),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text('Terms of Service', style: AppStyles.verifystyle.copyWith(fontSize: 14.sp, fontWeight: FontWeight.w400, decoration: TextDecoration.underline),),
+                        Text(' and ', style:AppStyles.termstyle ),
+                        Text('Privacy Policy', style: AppStyles.verifystyle.copyWith(fontSize: 14.sp, fontWeight: FontWeight.w400, decoration: TextDecoration.underline),),
+                      ],)
+                  ],
+                )
+            )
           ]),
         )
       ]),

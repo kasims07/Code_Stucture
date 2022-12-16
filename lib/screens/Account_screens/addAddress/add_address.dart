@@ -58,8 +58,10 @@ class AddAddress extends StatelessWidget {
               height: 671.h,
               width: 390.w,
               decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(15.0),
-
+                   borderRadius: BorderRadius.only(
+                     topRight: Radius.circular(15),
+                     topLeft: Radius.circular(15)
+                   ),
                   color: AppStyles.white,
               ),
               child: Column(
@@ -68,12 +70,14 @@ class AddAddress extends StatelessWidget {
                     controller:addresscontroller ,
                     type: TextInputType.streetAddress,
                     hintText: 'Address',
+                    labelText: 'Address',
                   ),
                   SizedBox(height: 15),
                   CustomAddressTextfield(
                     controller:housenocontroller ,
                     type: TextInputType.streetAddress,
                     hintText: 'House/Flat No',
+                    labelText: 'House/Flat No',
                   ),
                   SizedBox(height: 15),
                   CustomAddressTextfield(
@@ -81,18 +85,21 @@ class AddAddress extends StatelessWidget {
                     type: TextInputType.text,
                    // maxline: 5,
                     hintText: 'State',
+                    labelText: 'State',
                   ),
                   SizedBox(height: 15),
                   CustomAddressTextfield(
                     controller:citycontroller ,
                     type: TextInputType.text,
                     hintText: 'City',
+                    labelText: 'City',
                   ),
                   SizedBox(height: 15),
                   CustomAddressTextfield(
                     controller:zipcodecontroller ,
                     type: TextInputType.text,
                     hintText: 'Zip Code/Postal Code',
+                    labelText: 'Zip Code/Postal Code',
                   ),
                   SizedBox(height: 15.h),
                   Container(

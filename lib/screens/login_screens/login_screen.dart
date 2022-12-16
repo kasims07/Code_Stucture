@@ -33,10 +33,10 @@ class _LoginScreenState extends State<LoginScreen> {
                   width: 390.w,
                   child: Image.asset(
                     ImageAssetPath.loginScreen,
-                    fit: BoxFit.cover,
+                    fit: BoxFit.fill,
                   )),
               Positioned(
-                top: 280.h,
+                top: 320.h,
                 right: 0.w,
                 left: 0.w,
                 child: Padding(
@@ -46,6 +46,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Container(
+                        height: 384.h,
                         width: 349.w,
                         alignment: Alignment.bottomCenter,
                         decoration: BoxDecoration(
@@ -63,26 +64,16 @@ class _LoginScreenState extends State<LoginScreen> {
                                 children: [
                                   Text(
                                     'Welcome to',
-                                    style: TextStyle(
-                                        fontSize: 18.42.sp,
-                                        fontWeight: FontWeight.w600,
-                                        fontFamily: 'Vietnam'),
+                                    style: AppStyles.homelogostyle.copyWith(fontSize: 18.42.sp)
                                   ),
                                   Row(
                                     children: [
                                       Text(
                                         '    G FIVE',
-                                        style: TextStyle(
-                                            fontSize: 22.sp,
-                                            fontWeight: FontWeight.w800,
-                                            fontFamily: 'Vietnam',
-                                            color: AppStyles.red),
+                                        style: AppStyles.redstyle.copyWith(fontSize: 22.sp, fontWeight:FontWeight.w800)
                                       ),
-                                      Text(' Home Services',
-                                          style: TextStyle(
-                                              fontSize: 22.sp,
-                                              fontWeight: FontWeight.w800,
-                                              fontFamily: 'Vietnam'))
+                                      Text(' HOME SERVICES',
+                                          style: AppStyles.verifystyle.copyWith(fontSize: 22.sp, fontWeight:FontWeight.w800 ))
                                     ],
                                   )
                                 ],
@@ -91,11 +82,13 @@ class _LoginScreenState extends State<LoginScreen> {
                             SizedBox(height: 10),
                             Text('Start your bookservice using your\nmobile number',
                                 textAlign: TextAlign.center,
-                                style: AppStyles.hintstyle),
+                                style: AppStyles.termstyle),
+                            SizedBox(height: 15.h),
                             Container(
+                             // height: 226.h,
                               width: 349.w,
                               decoration: BoxDecoration(
-                                color: AppStyles.lightgrey.withOpacity(0.5),
+                                color: AppStyles.lightgrey,
                                 borderRadius: const BorderRadius.only(
                                   bottomRight: Radius.circular(15),
                                   bottomLeft: Radius.circular(15),
@@ -105,7 +98,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 children: [
                                   Padding(
                                       padding: EdgeInsets.only(
-                                          top: 38, right: 124, left: 120),
+                                          top: 28, right: 124, left: 120),
                                       child: InkWell(
                                         onTap: () {
                                          /* showCountryPicker(
@@ -155,7 +148,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                               width: 105.w,
                                               decoration: BoxDecoration(
                                                   border:
-                                                      Border.all(color: AppStyles.grey),
+                                                      Border.all(color : AppStyles.grey.withOpacity(0.15)),
                                                   borderRadius: BorderRadius.circular(50),
                                                   color: AppStyles.white),
                                               child: Center(child: Row(
@@ -163,8 +156,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                                 mainAxisAlignment: MainAxisAlignment.center,
                                                 children: [
                                                   Image.asset(ImageAssetPath.icIndia),
-                                                  SizedBox(width: 10.w,),
-                                                  Text('+91', style: AppStyles.fontblackstyle.copyWith(fontSize: 20.sp),),
+                                                  SizedBox(width: 5.w,),
+                                                  Text('+91', style: AppStyles.verifystyle.copyWith(fontSize: 24.sp)),
                                                 ],
                                               )),
                                             );
@@ -173,7 +166,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                       )),
                                   Padding(
                                     padding: const EdgeInsets.only(
-                                        top: 10, right: 69, left: 69),
+                                        top: 5, right: 69, left: 69),
                                     child: TextFormField(
                                       controller: _numcontroller,
                                       keyboardType: TextInputType.number,
@@ -188,10 +181,12 @@ class _LoginScreenState extends State<LoginScreen> {
                                         counterText: '',
                                         border: InputBorder.none,
                                         hintText: 'Enter Mobile Number',
-                                        hintStyle: AppStyles.hintstyle,
-                                      ),
+                                        hintStyle: AppStyles.hintstyle.copyWith(fontWeight: FontWeight.w700),
+                                       ),
+                                    style: AppStyles.homelogostyle.copyWith(fontSize: 20, fontWeight: FontWeight.w400),
                                     ),
                                   ),
+                                  SizedBox(height: 20),
                                   CustomOtpButton(
                                     text: 'GET OTP',
                                     onPress: () {
@@ -210,33 +205,21 @@ class _LoginScreenState extends State<LoginScreen> {
                       Padding(
                           padding: EdgeInsets.only(
                               top: 41, bottom: 63),
-                          child: Text.rich(TextSpan(
-                              text: 'By creating account you agree to our \n',
-                              style: AppStyles.termstyle,
-                              children: [
-                                TextSpan(
-                                    text: 'Terms of Service',
-                                    style: AppStyles.termstyle.copyWith(
-                                        color: AppStyles.black,
-                                        fontWeight: FontWeight.w600,
-                                        decoration: TextDecoration.underline),
+                          child:
+                              Column(
+                                children: [
+                                  Text('By creating account you agree to our', style:AppStyles.termstyle),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
-                                      TextSpan(
-                                          text: ' and ',
-                                          style: AppStyles.termstyle,
-                                          children: [
-                                            TextSpan(
-                                              text: 'Privacy Policy',
-                                              style: AppStyles.termstyle.copyWith(
-                                                  color: AppStyles.black,
-                                                  fontWeight: FontWeight.w600,
-                                                  decoration:
-                                                      TextDecoration.underline),
-                                            )
-                                          ])
-                                    ])
-                              ])))
-                    ],
+                                    Text('Terms of Service', style: AppStyles.verifystyle.copyWith(fontSize: 14.sp, fontWeight: FontWeight.w400, decoration: TextDecoration.underline),),
+                                    Text(' and ', style:AppStyles.termstyle ),
+                                    Text('Privacy Policy', style: AppStyles.verifystyle.copyWith(fontSize: 14.sp, fontWeight: FontWeight.w400, decoration: TextDecoration.underline),),
+                                  ],)
+                                ],
+                              )
+                      )
+                      ],
                   ),
                 ),
               ),

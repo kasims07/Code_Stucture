@@ -1,4 +1,4 @@
-package com.app.gfiveapp.gfive
+package com.app.gfiveapp
 
 import io.flutter.embedding.android.FlutterActivity
 

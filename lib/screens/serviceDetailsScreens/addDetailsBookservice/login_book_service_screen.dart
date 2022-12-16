@@ -10,6 +10,7 @@ import '../../../constants/asset_path.dart';
 import '../../../widgets/custom_account_backbutton.dart';
 import '../../../widgets/custom_bottom_button.dart';
 import '../../../widgets/custom_dialog_bottom_button.dart';
+import '../../../widgets/custom_numberfield.dart';
 import '../../../widgets/custom_phone_textfield.dart';
 import '../../../widgets/custom_textformfield.dart';
 import '../../../widgets/custom_time_container.dart';
@@ -69,6 +70,17 @@ class LoginBookServiceScreen extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text('1BHK', style: AppStyles.redstyle),
+                        Padding(
+                          padding: const EdgeInsets.all(6.0),
+                          child: Container(
+                            height: 8.h,
+                            width: 8.w,
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: AppStyles.white
+                            ),
+                          ),
+                        ),
                         Text('₹ 2099', style: AppStyles.buttonstyle.copyWith(
                             fontSize: 16.sp),)
                       ]),
@@ -84,8 +96,7 @@ class LoginBookServiceScreen extends StatelessWidget {
                           color: AppStyles.white
                       ),
                       child: Padding(
-                          padding: EdgeInsets.symmetric(
-                              horizontal: 20, vertical: 21),
+                          padding: EdgeInsets.only(top: 21, right: 20, bottom: 15, left: 20),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
@@ -104,14 +115,14 @@ class LoginBookServiceScreen extends StatelessWidget {
                                 labelText: 'Full Name',
                                 type: TextInputType.text,
                               ),
-                              /*SizedBox(height: 15),
-                              CustomPhoneField(
+                              SizedBox(height: 10.h),
+                              CustomNumberfield(
                                 controller: numbercontroller,
                                 type: TextInputType.number,
-                                hintText: 'Mobile Number',
-                                labelText: 'Mobile Number',
-                              ),*/
-                              SizedBox(height: 10.h),
+                                hintText: 'Number',
+                                labelText: 'Number'
+                              ),
+                              SizedBox(height: 20.h),
                               Text('Your Address', style: AppStyles
                                   .homelogostyle.copyWith(fontSize: 15.sp),),
                               SizedBox(height: 10.h),
@@ -162,7 +173,9 @@ class LoginBookServiceScreen extends StatelessWidget {
                                   Row(mainAxisAlignment: MainAxisAlignment
                                       .spaceBetween,
                                     children: [
-                                      Column(children: [
+                                      Column(
+                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        children: [
                                         Text('Date',
                                           style: AppStyles.termstyle.copyWith(
                                               fontSize: 12.sp),),
@@ -183,8 +196,9 @@ class LoginBookServiceScreen extends StatelessWidget {
                                   shrinkWrap: true,
                                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                                       crossAxisCount: 4,
-                                      crossAxisSpacing: 15.0,
-                                      mainAxisSpacing: 14.0
+                                      crossAxisSpacing: 10.0,
+                                      mainAxisSpacing: 10.0,
+                                      childAspectRatio: 1.45
                                   ),
                                   itemCount: timelist.length,
                                   itemBuilder: (context, index) {
@@ -197,7 +211,7 @@ class LoginBookServiceScreen extends StatelessWidget {
                                     );
                                   }
                               ),
-                              SizedBox(height: 5.h),
+                              SizedBox(height: 62.h),
                               CustomBottomButton(
                                 onPress: () {
                                   congratulatepopup(context: context);

@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.app.gfiveapp">
    <application
-        android:label="gfive"
+        android:label="G-Five"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

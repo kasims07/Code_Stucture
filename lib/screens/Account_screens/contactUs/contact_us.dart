@@ -108,10 +108,10 @@ class ContactUs extends StatelessWidget {
               Text('Please fill in the below if you have any enquiries. We endeavour to get back to you within 24 hours.',textAlign: TextAlign.center, style: AppStyles.detailsstyle.copyWith(color: AppStyles.bottomnavigationcolor),),
             SizedBox(height: 20),
               CustomAddressTextfield(
-                controller: subjectcontroller, type: TextInputType.text, hintText: 'Subject',),
+                controller: subjectcontroller, type: TextInputType.text, hintText: 'Subject',labelText: 'Subject',),
               SizedBox(height: 10),
               CustomAddressTextfield(
-                controller: emailcontroller, type: TextInputType.emailAddress, hintText: 'Email',),
+                controller: emailcontroller, type: TextInputType.emailAddress, hintText: 'Email',labelText : 'Email'),
               SizedBox(height: 10),
 
             Container(

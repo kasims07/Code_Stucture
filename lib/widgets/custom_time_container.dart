@@ -18,7 +18,7 @@ class _CustomTimeContainerState extends State<CustomTimeContainer> {
     return InkWell(
       onTap: (){
         setState(() {
-          widget.isSelected! ==true ? widget.isSelected = false : widget.isSelected = true;
+          widget.isSelected ==true ? widget.isSelected = false : widget.isSelected = true;
         });
       },
       child: Container(

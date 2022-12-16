@@ -31,9 +31,11 @@ class ProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SafeArea(child: Scaffold(
-      body: SingleChildScrollView(
+backgroundColor: AppStyles.white,
+      body:
+      SingleChildScrollView(
         child: Container(
-          height: 844.h,
+          height: 750.h,
           width: 464.w,
           color: AppStyles.black,
           child: 
@@ -47,10 +49,11 @@ class ProfileScreen extends StatelessWidget {
               child: Container(
                 alignment: Alignment.bottomCenter,
                 //height: 686.h,
-                width: 390.w,
+               // width: 390.w,
                 decoration: BoxDecoration(
                   color: AppStyles.white, 
                   borderRadius: BorderRadius.only(topRight: Radius.circular(10), topLeft: Radius.circular(10) ),
+                  border: Border.all(color: AppStyles.white)
                 ),
                 child: Padding(padding: EdgeInsets.all(20),
 
@@ -83,15 +86,8 @@ class ProfileScreen extends StatelessWidget {
                       type: TextInputType.emailAddress,
 
                     ),
-                    Spacer(),
-                    CustomBottomButton(
-                      text:'SUBMIT',
-                      onPress: (){
-                        Navigator.pushNamed(context, AppScreens.dashboardScreen);
-                      }
-                    ),
-                   SizedBox(height: 16),
-                   Text('Skip', style: AppStyles.interstyle),
+
+
                   ],
                 ),
                 ),
@@ -105,6 +101,30 @@ class ProfileScreen extends StatelessWidget {
             
           ),
       ),
+      bottomNavigationBar:
+      Container(
+        height: 100,
+       decoration: BoxDecoration(
+         color: AppStyles.white,
+         border: Border.all(
+           color: Colors.transparent
+         )
+       ),
+        child: Column(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              CustomBottomButton(
+                  text:'SUBMIT',
+                  onPress: (){
+                    Navigator.pushNamed(context, AppScreens.dashboardScreen);
+                  }
+              ),
+              SizedBox(height: 16),
+              Text('Skip', style: AppStyles.interstyle),
+              SizedBox(height: 10),
+            ]),
+      ),
+
       ),
 
     );

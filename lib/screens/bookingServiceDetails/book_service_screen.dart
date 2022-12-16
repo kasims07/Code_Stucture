@@ -7,6 +7,8 @@ import 'package:gfive/utils/app_styles.dart';
 import '../../constants/asset_path.dart';
 import '../../widgets/custom_account_backbutton.dart';
 import '../../widgets/custom_backicon_button.dart';
+import '../../widgets/custom_bottom_button.dart';
+import '../../widgets/custom_cancelservice_container.dart';
 import '../../widgets/custom_clickable_container.dart';
 import '../../widgets/custom_dialog_bottom_button.dart';
 import '../../widgets/custom_dotted_divider.dart';
@@ -36,153 +38,171 @@ class BookServiceScreen extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
         body: SingleChildScrollView(
-          child: Container(
-            //height: 844.h,
-            width: 390.w,
-            color: AppStyles.bfontcolor,
-            child:
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                CustomAccountBackbutton(),
-                Row(mainAxisAlignment: MainAxisAlignment.center,
+          child: Stack(
+            children:[
+              Container(
+                //height: 844.h,
+                width: 390.w,
+                color: AppStyles.yellow,
+          ),
+          Container(
+            height: 844.h,
+              width: 390.w,
+              color: AppStyles.bfontcolor,
+              child: Image.asset(ImageAssetPath.dotted, fit: BoxFit.fill)),
+
+          Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    SizedBox(height: 100.h),
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
+                    CustomAccountBackbutton(),
+                    Row(mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text('#215415121515', style:AppStyles.buttonstyle.copyWith(fontSize: 16.sp)),
-                        Text('24 January 2022 | 03:00 pm', style: AppStyles.bookingstyle.copyWith(color: AppStyles.white),),
-                      ],
-                    )
-
-                  ],
-                ),
-
-                SizedBox(height: 26.h),
-                Container(
-                  padding: EdgeInsets.all(20.0),
-                  height: 686.h,
-                  width: 390.w,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(15),
-                      color: AppStyles.white
-                  ),
-                  child : Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Container(
-                        //padding: EdgeInsets.only(top: 23.sp),
-
-                        decoration: BoxDecoration(borderRadius: BorderRadius.circular(5),
-                            color: AppStyles.backgroundcolor),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Padding(
-                              padding: EdgeInsets.only(top: 23.sp, left: 16.sp, bottom: 19.sp),
-                              child: Row(children: [
-                                Text('Service Date -Time & Address', style: AppStyles.fontblackstyle),
-                              ],),
-                            ),
-                            MySeparator(height:0.5, color: AppStyles.grey),
-                            Padding(padding: EdgeInsets.only(top: 13.sp, right: 16.sp, left: 16.sp, bottom: 16.sp),
-                              child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,children:[
-                                Column(children: [
-                                  Text('22 Jun, 2022', style: AppStyles.fontblackstyle.copyWith(fontWeight: FontWeight.w700),
-                                  ),
-                                  SizedBox(height: 3),
-                                  Text('Date',style:AppStyles.termstyle),
-                                ]
-                                ),
-                                Column(children: [
-                                  Text('08:00 AM', style: AppStyles.fontblackstyle.copyWith(fontWeight: FontWeight.w700),),
-                                  SizedBox(height: 5),
-                                  Text('Time',style:AppStyles.termstyle),
-                                ],),
-
-                              ]),
-                            ),
-                            MySeparator(height:0.5, color: AppStyles.grey),
-                            Padding(
-                                padding: const EdgeInsets.only(top: 15, left: 16, bottom: 15),
-                                child: Row(children: [
-                                  SvgPicture.asset(ImageAssetPath.bookLocation, height: 43.h, width: 43.w),
-                                  SizedBox(width: 11.w),
-                                  Text('1270 D Street Southfield,\nMI 48235 ', style:AppStyles.sfstyle),
-                                ],)
-                            )
-                          ],),
-                      ),
-                      Padding(padding: EdgeInsets.only(top: 15, bottom: 14),
-                        child: Text('Service Info', style: AppStyles.fontblackstyle),
-                      ),
-                      Container(
-                        //height: 132.h,
-                          width: 350.w,
-                          padding: EdgeInsets.only(top: 23.sp , left: 19.sp , bottom: 14.sp),
-                          decoration: BoxDecoration(borderRadius: BorderRadius.circular(5),
-                              color: AppStyles.backgroundcolor),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text('Full Home Deep Cleaning', style:AppStyles.fontblackstyle.copyWith(fontSize: 16.sp) ),
-                              SizedBox(height: 5.h),
-                              Text('Unfurnished Apartment classic\ncleaning', style: AppStyles.termstyle),
-                              SizedBox(height: 5.h),
-                              Text('1BHK', style:AppStyles.redstyle),
-                            ],)
-                      ),
-                      SizedBox(height: 15.h),
-                      CustomClickableContainer(
-                        text : 'Reschedule Service',
-                        image: ImageAssetPath.calenderIcon,
-                        onPress: (){
-                          //rescheduleDialog( context: context,timelist: timelist);
-                        },
-                      ) ,
-                      SizedBox(height:8.h),
-                      CustomClickableContainer(
-                        text : 'Cancel Service',
-                        image: ImageAssetPath.crossIcon,
-                        onPress: (){
-                          //cancelservicepopup(context: context);
-                        },
-                      ) ,
-                      SizedBox(height: 35),
-                      Row(children: [
+                        SizedBox(height: 100.h),
                         Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            Text('₹ 2099', style: AppStyles.redfontstyle),
-                            SizedBox(height: 11),
-                            Text('Total Amount', style: AppStyles.termstyle),
-                          ],),
-                        SizedBox(width: 10),
-                        InkWell(
-                          onTap: (){
-                            paymentDialog(context: context);
-                          },
-                          child: Container(
-                            height: 55,
-                            width: 234,
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10),
-                                color: AppStyles.black
-                            ),
-                            child: Center(
-                              child: Text('PAY NOW', style: AppStyles.buttonstyle),
-                            ),
-                          ),
+                            Text('#215415121515', style:AppStyles.buttonstyle.copyWith(fontSize: 16.sp)),
+                            Text('24 January 2022 | 03:00 pm', style: AppStyles.bookingstyle.copyWith(color: AppStyles.white),),
+                          ],
                         )
-                      ],)
-                    ],
-                  ),
 
-                )
-              ],),
+                      ],
+                    ),
 
+                    SizedBox(height: 26.h),
+                    Container(
+                      padding: EdgeInsets.all(20.0),
+                      height: 686.h,
+                      width: 390.w,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(15),
+                          color: AppStyles.white
+                      ),
+                      child : Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Container(
+                            //padding: EdgeInsets.only(top: 23.sp),
+
+                            decoration: BoxDecoration(borderRadius: BorderRadius.circular(5),
+                                color: AppStyles.backgroundcolor),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Padding(
+                                  padding: EdgeInsets.only(top: 23.sp, left: 16.sp, bottom: 19.sp),
+                                  child: Row(children: [
+                                    Text('Service Date -Time & Address', style: AppStyles.fontblackstyle),
+                                  ],),
+                                ),
+                                MySeparator(height:0.5, color: AppStyles.grey),
+                                Padding(padding: EdgeInsets.only(top: 13.sp, right: 16.sp, left: 16.sp, bottom: 16.sp),
+                                  child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,children:[
+                                    Column(
+                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        children: [
+                                          Text('22 Jun, 2022', style: AppStyles.fontblackstyle.copyWith(fontWeight: FontWeight.w700),
+                                          ),
+                                          SizedBox(height: 3),
+                                          Text('Date',textAlign:TextAlign.start, style:AppStyles.termstyle),
+                                        ]
+                                    ),
+                                    Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        Text('08:00 AM', style: AppStyles.fontblackstyle.copyWith(fontWeight: FontWeight.w700),),
+                                        SizedBox(height: 5),
+                                        Text('Time',style:AppStyles.termstyle),
+                                      ],),
+
+                                  ]),
+                                ),
+                                MySeparator(height:0.5, color: AppStyles.grey),
+                                Padding(
+                                    padding: const EdgeInsets.only(top: 15, left: 16, bottom: 15),
+                                    child: Row(children: [
+                                      SvgPicture.asset(ImageAssetPath.bookLocation, height: 43.h, width: 43.w),
+                                      SizedBox(width: 11.w),
+                                      Text('1270 D Street Southfield,\nMI 48235 ', style:AppStyles.sfstyle),
+                                    ],)
+                                )
+                              ],),
+                          ),
+                          Padding(padding: EdgeInsets.only(top: 15, bottom: 14),
+                            child: Text('Service Info', style: AppStyles.fontblackstyle),
+                          ),
+                          Container(
+                            //height: 132.h,
+                              width: 350.w,
+                              padding: EdgeInsets.only(top: 23.sp , left: 19.sp , bottom: 14.sp),
+                              decoration: BoxDecoration(borderRadius: BorderRadius.circular(5),
+                                  color: AppStyles.backgroundcolor),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text('Full Home Deep Cleaning', style:AppStyles.fontblackstyle.copyWith(fontSize: 16.sp) ),
+                                  SizedBox(height: 5.h),
+                                  Text('Unfurnished Apartment classic\ncleaning', style: AppStyles.termstyle),
+                                  SizedBox(height: 5.h),
+                                  Text('1BHK', style:AppStyles.redstyle),
+                                ],)
+                          ),
+                          SizedBox(height: 15.h),
+                          CustomClickableContainer(
+                            text : 'Reschedule Service',
+                            image: ImageAssetPath.calenderIcon,
+                            onPress: (){
+                              print('Hellow');
+                              rescheduleDialog(context: context, timelist: timelist);
+                            },
+                          ) ,
+                          SizedBox(height:8.h),
+                          CustomClickableContainer(
+                            text : 'Cancel Service',
+                            image: ImageAssetPath.crossIcon,
+                            onPress: (){
+                              cancelDialog(context: context);
+                            },
+                          ) ,
+                          SizedBox(height: 35),
+                          Row(children: [
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text('₹ 2099', style: AppStyles.redfontstyle),
+                                SizedBox(height: 11),
+                                Text('Total Amount', style: AppStyles.termstyle),
+                              ],),
+                            SizedBox(width: 10),
+                            InkWell(
+                              onTap: (){
+                                paymentDialog(context: context);
+                              },
+                              child: Container(
+                                height: 55,
+                                width: 234,
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(10),
+                                    color: AppStyles.black
+                                ),
+                                child: Center(
+                                  child: Text('PAY NOW', style: AppStyles.buttonstyle),
+                                ),
+                              ),
+                            )
+                          ],)
+                        ],
+                      ),
+
+                    )
+                  ],),
+
+
+              /*SizedBox(
+                  height: 844.h,
+                  child: Image.asset(ImageAssetPath.dotted, fit: BoxFit.fill)),*/
+            ]
           ),
         ),
       ),
@@ -245,10 +265,6 @@ class BookServiceScreen extends StatelessWidget {
                                 title: 'Submit',
                                 onPress: (){},
                               ),
-
-
-
-
                             ]
                         )
                     ),
@@ -281,7 +297,7 @@ class BookServiceScreen extends StatelessWidget {
   }) {
     showGeneralDialog(
       barrierLabel: "Label2",
-      barrierDismissible: false,
+      barrierDismissible: true,
       barrierColor: Colors.black45.withOpacity(0.5),
       transitionDuration: const Duration(milliseconds: 500),
       context: context!,
@@ -289,7 +305,7 @@ class BookServiceScreen extends StatelessWidget {
         return Align(
           alignment: Alignment.bottomCenter,
           child: SizedBox(
-            height: 350.h,
+            height: 467.h,
             child: SizedBox.expand(
               child: ClipRRect(
                 borderRadius: BorderRadius.only(
@@ -302,7 +318,7 @@ class BookServiceScreen extends StatelessWidget {
                     width:390,
                     decoration: BoxDecoration(borderRadius: BorderRadius.circular(5)),
                     child: Padding(
-                        padding: EdgeInsets.symmetric(vertical: 26, horizontal: 20),
+                        padding: EdgeInsets.only(top:26, right: 20, left: 20, bottom: 5),
                         child: Column(
                             crossAxisAlignment: CrossAxisAlignment.center,
                             mainAxisAlignment: MainAxisAlignment.center,
@@ -328,8 +344,11 @@ class BookServiceScreen extends StatelessWidget {
 
                                   Row(mainAxisAlignment: MainAxisAlignment
                                       .spaceBetween,
+
                                     children: [
-                                      Column(children: [
+                                      Column(
+                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        children: [
                                         Text('Date',
                                           style: AppStyles.termstyle.copyWith(
                                               fontSize: 12.sp),),
@@ -345,25 +364,29 @@ class BookServiceScreen extends StatelessWidget {
                                   ),
                                 ),
                               ),
-                              SizedBox(height: 2.h),
-                              GridView.builder(
-                                  shrinkWrap: true,
-                                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                                      crossAxisCount: 4,
-                                      crossAxisSpacing: 15.0,
-                                      mainAxisSpacing: 14.0
-                                  ),
-                                  itemCount: timelist!.length,
-                                  itemBuilder: (context, index) {
-                                    return Padding(
-                                      padding: const EdgeInsets.all(3),
-                                      child: CustomTimeContainer(
-
-                                        time: timelist[index],
-                                      ),
-                                    );
-                                  }
+                              //SizedBox(height: 2.h),
+                              Expanded(
+                                child: GridView.builder(
+                                    shrinkWrap: true,
+                                    gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                                        crossAxisCount: 4,
+                                        crossAxisSpacing: 8.0,
+                                        mainAxisSpacing: 8.0,
+                                        childAspectRatio: 1.45
+                                    ),
+                                    itemCount: timelist!.length,
+                                    itemBuilder: (context, index) {
+                                      return Padding(
+                                        padding: const EdgeInsets.all(3),
+                                        child: CustomTimeContainer(
+                                          //isSelected: false,
+                                          time: timelist[index],
+                                        ),
+                                      );
+                                    }
+                                ),
                               ),
+                              SizedBox(height: 20.h),
                               CustomDialogBottomButton(
                                 title: 'Reschedule',
                                 onPress: (){},
@@ -392,7 +415,7 @@ class BookServiceScreen extends StatelessWidget {
     ).then((value) => {print('Dialogue dismissed')});
   }
 
-/*static void cancelservicepopup({
+  static void cancelDialog({
     BuildContext? context,
     Function? pressLogout,
     Function? pressCancle,
@@ -400,8 +423,6 @@ class BookServiceScreen extends StatelessWidget {
     String? message,
     String? btn1,
     String? btn2,
-    List? timelist,
-
   }) {
     showGeneralDialog(
       barrierLabel: "Label2",
@@ -420,55 +441,69 @@ class BookServiceScreen extends StatelessWidget {
                     topLeft: Radius.circular(10.sp),
                     topRight: Radius.circular(10.sp)),
                 child: Scaffold(
-                  body:
-                  Container(
+                  body: Container(
                     height: 588.h,
-                    width:390,
-                    decoration: BoxDecoration(borderRadius: BorderRadius.circular(5)),
-                    child: Padding(
-                        padding: EdgeInsets.symmetric(vertical: 26, horizontal: 36),
-                        child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                                     Text('Cancel Service', style: AppStyles.homelogostyle.copyWith(fontSize:18.sp ),),
-                              SizedBox(height: 10.h),
-                              Text('Cancel service by giving proper\nreason.', textAlign: TextAlign.center,style: AppStyles.termstyle.copyWith(fontSize: 15.sp),),
-                               SizedBox(height: 13.sp),
-                             *//* RadioContainer(
-                                text: 'We are not at home',
-                                value:'2',
-                                groupvalue: '',
-                              ),
-                              SizedBox(height: 10.h),
-                              RadioContainer(
-                                text: 'Booked by mistake',
-                                value:'2',
-                                groupvalue: '',
-                              ),
-                              SizedBox(height: 10.h),
-                              RadioContainer(
-                                text: 'Other',
-                                value:'3',
-                                groupvalue: '',
-                              ),*//*
-                              CustomDialogBottomButton(
-                                title: 'SUBMIT',
-                                onPress: (){},
-                              ),
+                      width: 390.w,
+                    color: AppStyles.white,
+                    child:
+                    Column(
+                      children: [
+                        SizedBox(height: 26.h),
+                        Text('Cancel Service', style :AppStyles.homelogostyle.copyWith(fontSize: 18.sp)),
+                        SizedBox(height: 10.h),
+                        Text('Cancel service by giving proper reason.', style: AppStyles.termstyle.copyWith(fontSize: 15.sp),),
+                       Padding(padding: EdgeInsets.only(top: 30.sp, right: 36.sp, left: 36.sp),
+                         child: Column(children: [
+                           CustomCancelServiceContainer(
+                             text: 'We are not at home',
+                            // isCancelselected: false,
+                           ),
+                           SizedBox(height: 10.h),
+                           CustomCancelServiceContainer(
+                             text: 'Booked by mistake',
+                            // isCancelselected: false,
+                           ),
+                           SizedBox(height: 10.h),
+                           CustomCancelServiceContainer(
+                             text: 'Other',
+                             //isCancelselected: false,
+                           ),
+                           SizedBox(height: 10.h),
+                           Container(
+                             height: 131.h,
+                             width: 318.w,
+                             decoration: BoxDecoration(
+                               borderRadius: BorderRadius.circular(5),
+                               border: Border.all( color: AppStyles.grey.withOpacity(0.2)),
+                               color: AppStyles.white
+                             ),
+                             child: Padding(
+                               padding: EdgeInsets.symmetric(horizontal:12.sp, vertical: 12.sp),
+                               child: Text('Description', style: AppStyles.termstyle),
+                             ),
+                           )
+                         ],),
+                       ),
+                        SizedBox(height: 100.h),
+                        CustomBottomButton(
+                          onPress: (){},
+                          text: 'Submit',
+                        )
 
+                           
+                         ],
+                       )
 
+                    )
 
+                  )
 
-                            ]
+                        )
                         )
                     ),
-                  ),
-                ),
-              ),
-            ),
-          ),
-        );
+                  );
+
+
       },
       transitionBuilder: (context, anim1, anim2, child) {
         return SlideTransition(
@@ -478,8 +513,7 @@ class BookServiceScreen extends StatelessWidget {
         );
       },
     ).then((value) => {print('Dialogue dismissed')});
-  }*/
-
+  }
 
 
 }

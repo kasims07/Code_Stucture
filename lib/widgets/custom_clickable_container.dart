@@ -6,13 +6,13 @@ import 'package:gfive/utils/app_styles.dart';
 class CustomClickableContainer extends StatelessWidget {
   String image;
   String text;
-  Function onPress;
+  VoidCallback onPress;
   CustomClickableContainer({Key? key, required this.image, required this.onPress, required this.text}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: onPress(),
+      onTap: onPress,
       child: Container(
         height: 58.h,
         width: 350.w,

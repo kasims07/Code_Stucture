@@ -60,7 +60,7 @@ class ServiceDetailsScreen extends StatelessWidget {
                   CustomAccountBackbutton(),
                   Image.asset(ImageAssetPath.homeLogo, height:150.h, width:390.w, fit: BoxFit.fill,),
                   Container(
-                    height: 1032.h,
+                    height: 880.h,
                     width: 390.w,
                     color: AppStyles.white,
                     child:

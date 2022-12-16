@@ -23,7 +23,7 @@ class HomeScreen extends StatelessWidget {
             SingleChildScrollView(
               child: Column(
                 children: [
-                   SizedBox(height: 56),
+                   SizedBox(height: 36),
                    Image.asset(ImageAssetPath.logo),
                   SizedBox(height: 11),
                   Row(
@@ -54,7 +54,7 @@ class HomeScreen extends StatelessWidget {
                         textInputAction: TextInputAction.next,
                         decoration: InputDecoration(
                           counterText: '',
-                          hintText: 'Search',
+                          hintText: 'Search services',
                           hintStyle: AppStyles.searchstyle,
                           labelStyle: AppStyles.searchstyle,
                           focusedBorder: InputBorder.none,
@@ -110,7 +110,7 @@ class HomeScreen extends StatelessWidget {
                                 Positioned(
                                     top:18,
                                 left:-10,
-                                    child: Image.asset(ImageAssetPath.homeLogo, height: 150.h, width: 372.w)),
+                                    child: Image.asset(ImageAssetPath.homeLogo, height: 145.h, width: 372.w)),
                                 Positioned(
                                     top: 15,
                                     right:30,
@@ -177,7 +177,7 @@ class HomeScreen extends StatelessWidget {
                           CustomContainer(
                             text: 'Marble\nPolish',
                             imagePath: ImageAssetPath.marblepolish,
-                            imageHeight: 89.4.h,
+                            imageHeight: 86.4.h,
                             imageWidth: 92.w,
                             topPadding: 24.h,
                             botPadding: 16.h,

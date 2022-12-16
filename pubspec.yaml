@@ -35,7 +35,7 @@ dependencies:
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
-  cupertino_icons: ^1.0.2
+  cupertino_icons: ^1.0.5
   shared_preferences: ^2.0.12
   dio: ^4.0.4
   rxdart: ^0.27.3
@@ -58,8 +58,15 @@ dependencies:
 
 dev_dependencies:
   device_preview: ^1.1.0
+  flutter_launcher_icons: ^0.11.0
   flutter_test:
     sdk: flutter
+
+flutter_icons:
+  android: true
+  ios: true
+  image_path: "assets/icons/icAppIcon.png"
+  min_sdk_android: 21
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
