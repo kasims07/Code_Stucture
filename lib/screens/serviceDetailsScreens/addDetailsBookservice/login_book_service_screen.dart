@@ -119,8 +119,8 @@ class LoginBookServiceScreen extends StatelessWidget {
                               CustomNumberfield(
                                 controller: numbercontroller,
                                 type: TextInputType.number,
-                                hintText: 'Number',
-                                labelText: 'Number'
+                                hintText: 'Mobile Number',
+                                labelText: 'Mobile Number'
                               ),
                               SizedBox(height: 20.h),
                               Text('Your Address', style: AppStyles
@@ -216,7 +216,7 @@ class LoginBookServiceScreen extends StatelessWidget {
                                 onPress: () {
                                   congratulatepopup(context: context);
                                 },
-                                text: 'Request Send',),
+                                text: 'REQUEST SEND',),
                             ],
                           )
                       )
@@ -272,7 +272,7 @@ class LoginBookServiceScreen extends StatelessWidget {
                               Text('You have successfully booked your\nservice', textAlign:TextAlign.center, style: AppStyles.termstyle),
                                SizedBox(height: 20.h),
                             CustomDialogBottomButton(
-                              title:'GO to Home',
+                              title:'GO TO HOME',
                               onPress: (){
                                 Navigator.pushNamed(context, AppScreens.dashboardScreen);
                               },

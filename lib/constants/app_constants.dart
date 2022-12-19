@@ -4,11 +4,8 @@
 class AppConstants {
   AppConstants._();
 
-  static const String TOKEN = 'authToken';
-  static const String ISLOGIN = 'isLogin';
-  static const String USERNAME = 'userName';
-  static const String USERPHONE = 'phone';
-
+static const TOKEN = 'token';
+static const login = 'login';
 
 }
 class CommonMessage {

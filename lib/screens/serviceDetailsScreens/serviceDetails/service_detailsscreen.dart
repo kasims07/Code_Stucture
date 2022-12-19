@@ -60,7 +60,7 @@ class ServiceDetailsScreen extends StatelessWidget {
                   CustomAccountBackbutton(),
                   Image.asset(ImageAssetPath.homeLogo, height:150.h, width:390.w, fit: BoxFit.fill,),
                   Container(
-                    height: 880.h,
+                    height: 1032.h,
                     width: 390.w,
                     color: AppStyles.white,
                     child:
@@ -83,15 +83,16 @@ class ServiceDetailsScreen extends StatelessWidget {
                               border: Border.all(color: AppStyles.grey.withOpacity(0.16)),
                             ),
                             child: Padding(
-                                padding: EdgeInsets.only(top: 23.sp, right: 16.sp, left: 16.sp, bottom: 19.sp),
+                                padding: EdgeInsets.only(top: 23.sp, right: 16.sp, left: 16.sp, bottom: 6.sp),
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text('Types of Sub Services', style: AppStyles.homelogostyle.copyWith(fontSize: 14.sp),),
+                                  SizedBox(height: 19.h),
                                   Expanded(
                                     child: ListView.builder(
                                       shrinkWrap: true,
-                                      physics: NeverScrollableScrollPhysics(),
+                                      physics: PageScrollPhysics(),
                                       itemCount: servicelist.length,
                                       itemBuilder: (buildcontext, index){
                                         return InkWell(
@@ -101,6 +102,9 @@ class ServiceDetailsScreen extends StatelessWidget {
                                             child: CustomServiceContainer(text: servicelist[index],));
                                       }),
                                   ),
+                            ]),
+                            ),
+                          ),
                                   SizedBox(height: 15.h),
                                   Text('All Service Photos', style: AppStyles.homelogostyle.copyWith(fontSize: 14.sp),),
                                   SizedBox(height: 15.h),
@@ -123,15 +127,13 @@ class ServiceDetailsScreen extends StatelessWidget {
 
                           )
                         ]
-                  ),
+                  )
                     ),
                   )
-                ],
-              )
+
+
               ),
             ),
-          )
-      ,
-    ));
+          );
   }
 }

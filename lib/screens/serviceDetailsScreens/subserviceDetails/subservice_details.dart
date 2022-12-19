@@ -58,7 +58,7 @@ class SubserviceDetails extends StatelessWidget {
                 ]),
                    SizedBox(height: 15),
                 Container(
-                  height: 909.h,
+                  height: 890.h,
                   width: 390.w,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.only(
@@ -84,52 +84,56 @@ class SubserviceDetails extends StatelessWidget {
                     SizedBox(height: 10),
                     Text(textAlign: TextAlign.left,'Service Price List', style:AppStyles.detfontstyle.copyWith(fontWeight: FontWeight.w600)),
                      SizedBox(height: 15.h),
-                      Expanded(
-                       child: GridView.builder(
-                         shrinkWrap: true,
-                           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                             crossAxisCount: 3,
-                             crossAxisSpacing: 14.0,
-                             mainAxisSpacing: 14.0
-                           ),
-                           itemCount: pricelist.length,
-                           itemBuilder: (context, index){
-                             return CustomPriceContainer(
+                      Flexible(
+                        child: GridView.builder(
+                          shrinkWrap: true,
+                            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                              crossAxisCount: 3,
+                              crossAxisSpacing: 14.0,
+                              mainAxisSpacing: 14.0,
 
-                               price: pricelist[index],
-                               name: namelist[index],
+                            ),
+                            itemCount: pricelist.length,
+                            itemBuilder: (context, index){
+                              return CustomPriceContainer(
 
-                             );
-                           }
-                       ),
-                     ),
+                                price: pricelist[index],
+                                name: namelist[index],
 
-                    SizedBox(height: 15),
-                    Container(
-                      height : 191.h,
-                        width: 350.w,
-                      decoration: BoxDecoration(
-                          color: AppStyles.yellow,
-                        borderRadius: BorderRadius.circular(5),
+                              );
+                            }
+                        ),
                       ),
-                       child:Padding(padding: EdgeInsets.only(top: 21, right: 21, left: 18),
-                       child:Column(
-                         crossAxisAlignment: CrossAxisAlignment.start,
-                         children: [
-                         Text('Included', style: AppStyles.homelogostyle),
-                           SizedBox(height: 15),
-                           CustomRow(text: 'Bathroom Deep Cleaning'),
 
-                           SizedBox(height: 10),
-                           CustomRow(text: 'Kitchen Deep Cleaning With Chimney'),
-                           SizedBox(height: 10),
-                           CustomRow(text: 'Appliances Not Included'),
-                           SizedBox(height: 10),
-                           CustomRow(text: 'Floor Wiping And Mopping Of Entire House'),
 
-                       ],))
+                    Padding(
+                      padding: const EdgeInsets.only(top: 15, bottom: 15),
+                      child: Container(
+                        height : 191.h,
+                          width: 350.w,
+                        decoration: BoxDecoration(
+                            color: AppStyles.yellow,
+                          borderRadius: BorderRadius.circular(5),
+                        ),
+                         child:Padding(padding: EdgeInsets.only(top:21 , right: 21, left: 18),
+                         child:Column(
+                           crossAxisAlignment: CrossAxisAlignment.start,
+                           children: [
+                           Text('Included', style: AppStyles.homelogostyle),
+                             SizedBox(height: 15),
+                             CustomRow(text: 'Bathroom Deep Cleaning'),
+
+                             SizedBox(height: 10),
+                             CustomRow(text: 'Kitchen Deep Cleaning With Chimney'),
+                             SizedBox(height: 10),
+                             CustomRow(text: 'Appliances Not Included'),
+                             SizedBox(height: 10),
+                             CustomRow(text: 'Floor Wiping And Mopping Of Entire House'),
+
+                         ],))
+                      ),
                     ),
-                    SizedBox(height: 15),
+                    //SizedBox(height: 15),
                     Text('Service Photos', style: AppStyles.homelogostyle.copyWith(fontSize: 14.sp),),
                     SizedBox(height: 15),
                     Container(
@@ -144,7 +148,7 @@ class SubserviceDetails extends StatelessWidget {
                           }
                       ),
                     ),
-                    SizedBox(height: 30.h),
+                    SizedBox(height: 20.h),
                     CustomBottomButton(
                       text : 'BOOK SERVICE',
                       onPress: (){

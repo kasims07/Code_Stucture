@@ -15,7 +15,7 @@ class NotificationsScreen extends StatelessWidget {
         width: 390.w,
         color: AppStyles.black,
         child: Column(children: [
-          Padding(padding: EdgeInsets.only(top:49.sp, bottom:24.sp),
+          Padding(padding: EdgeInsets.only(top:29.sp, bottom:24.sp),
           child: Text('Notifications', style:AppStyles.profilestyle),),
           Expanded(
             child: Container(

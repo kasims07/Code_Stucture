@@ -3,7 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gfive/app_screens/app_screens.dart';
+import 'package:gfive/constants/app_constants.dart';
+import 'package:otp_text_field/otp_field.dart';
+import 'package:otp_text_field/otp_text_field.dart';
+import 'package:otp_text_field/style.dart';
 import 'package:pinput/pinput.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../constants/asset_path.dart';
 import '../../utils/alert_utils.dart';
@@ -12,7 +17,9 @@ import '../../utils/app_utils.dart';
 import '../../utils/stream_builder.dart';
 import '../../widgets/button_loader.dart';
 import '../../widgets/custom_otp_button.dart';
+import '../../widgets/loading_container.dart';
 import '../login_screens/bloc/login_otp_bloc.dart';
+import 'bloc/login_bloc.dart';
 import 'bloc/otp_verification_bloc.dart';
 
 class VerificationScreen extends StatefulWidget {
@@ -28,7 +35,9 @@ class VerificationScreen extends StatefulWidget {
         BlocProvider<OtpVerificationBloc>(
           create: (_) => OtpVerificationBloc(),
         ),
-
+        BlocProvider<LoginBloc>(
+          create: (_) => LoginBloc(),
+        ),
       ],
       child: VerificationScreen(
         mobileNum: mobileNum,
@@ -41,6 +50,8 @@ class VerificationScreen extends StatefulWidget {
 }
 
 class _VerificationScreenState extends State<VerificationScreen> {
+
+  OtpFieldController otpController = OtpFieldController();
 
   final pinController = TextEditingController();
   final focusNode = FocusNode();
@@ -92,7 +103,26 @@ class _VerificationScreenState extends State<VerificationScreen> {
 
     return SafeArea(
         child: Scaffold(
-            body: SingleChildScrollView(
+            body: BlocConsumer<LoginBloc, LoginState>(
+  listener: (context, state) async {
+    // TODO: implement listener
+    if(state.isCompleted){
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      //prefs.clear();
+      prefs.setString(AppConstants.TOKEN, state.model!.token!);
+      prefs.setBool(AppConstants.login, true);
+      if(state.model!.isExist == true){
+        Navigator.pushNamed(context, AppScreens.dashboardScreen);
+      }
+      else{
+        Navigator.pushNamed(context, AppScreens.profileScreen);
+      }
+
+    }
+
+  },
+  builder: (context, state) {
+    return state.isLoading ? LoadingContainer() : SingleChildScrollView(
       child: Stack(children: [
         SizedBox(
             //height: MediaQuery.of(context).size.height,
@@ -153,100 +183,32 @@ class _VerificationScreenState extends State<VerificationScreen> {
                                             .center,
                                         children: [
                                           Padding(
-                                            padding: EdgeInsets.symmetric(horizontal: 20.h),
-                                            child: Directionality(
-                                              // Specify direction if desired
-                                              textDirection:
-                                              TextDirection.ltr,
-                                              child: Pinput(
+                                            padding: const EdgeInsets.only(
+                                                left: 20.0, right: 20.0),
+                                            child: OTPTextField(
+                                                otpFieldStyle: OtpFieldStyle(
+                                                    enabledBorderColor: AppStyles.black,
+                                                    borderColor: AppStyles.grey,
+                                                    focusBorderColor: AppStyles.black),
+                                                controller: otpController,
                                                 length: 6,
-                                                controller:
-                                                pinController,
-                                                focusNode:
-                                                focusNode,
-                                                androidSmsAutofillMethod:
-                                                AndroidSmsAutofillMethod
-                                                    .smsUserConsentApi,
-                                                listenForMultipleSmsOnAndroid:
-                                                true,
-                                                defaultPinTheme:
-                                                defaultPinTheme,
-                                                validator: (value) {
-                                                  return null;
+                                                width: MediaQuery.of(context).size.width,
+                                                textFieldAlignment:
+                                                MainAxisAlignment.spaceAround,
+                                                fieldWidth: 45,
+                                                fieldStyle: FieldStyle.box,
+                                                outlineBorderRadius: 9,
+                                                style: AppStyles.verifystyle.copyWith(
+                                                    color: AppStyles.black,
+                                                    fontSize: 15.sp),
+                                                onChanged: (pin) {
+                                                  print("Changed: " + pin);
                                                 },
-                                                hapticFeedbackType:
-                                                HapticFeedbackType
-                                                    .lightImpact,
                                                 onCompleted: (pin) {
-                                                  debugPrint(
-                                                      'onCompleted: $pin');
-                                                },
-                                                onChanged: (value) {
-                                                  otpPhone = value;
-                                                  debugPrint(
-                                                      'onChanged: $value');
-
-                                                },
-                                                cursor: Column(
-                                                  mainAxisAlignment:
-                                                  MainAxisAlignment
-                                                      .end,
-                                                  children: [
-                                                    Container(
-                                                      margin: const EdgeInsets
-                                                          .only(
-                                                          bottom:
-                                                          9),
-                                                      width: 22,
-                                                      height: 1,
-                                                      color:
-                                                      focusedBorderColor,
-                                                    ),
-                                                  ],
-                                                ),
-                                                focusedPinTheme:
-                                                defaultPinTheme
-                                                    .copyWith(
-                                                  decoration:
-                                                  defaultPinTheme
-                                                      .decoration!
-                                                      .copyWith(
-                                                    borderRadius:
-                                                    BorderRadius
-                                                        .circular(
-                                                        8),
-                                                    border: Border.all(
-                                                        color:
-                                                        focusedBorderColor),
-                                                  ),
-                                                ),
-                                                submittedPinTheme:
-                                                defaultPinTheme
-                                                    .copyWith(
-                                                  decoration:
-                                                  defaultPinTheme
-                                                      .decoration!
-                                                      .copyWith(
-                                                    color:
-                                                    fillColor,
-                                                    borderRadius:
-                                                    BorderRadius
-                                                        .circular(
-                                                        19),
-                                                    border: Border.all(
-                                                        color:
-                                                        focusedBorderColor),
-                                                  ),
-                                                ),
-                                                errorPinTheme:
-                                                defaultPinTheme
-                                                    .copyBorderWith(
-                                                  border: Border.all(
-                                                      color: Colors
-                                                          .redAccent),
-                                                ),
-                                              ),
-                                            ),
+                                                  setState(() {
+                                                    otpPhone = pin;
+                                                  });
+                                                }),
                                           ),
                                           SizedBox(
                                             height: 1.5.h,
@@ -311,7 +273,9 @@ class _VerificationScreenState extends State<VerificationScreen> {
           ]),
         )
       ]),
-    )));
+    );
+  },
+)));
   }
 
 
@@ -339,7 +303,8 @@ class _VerificationScreenState extends State<VerificationScreen> {
           isLoading = false;
           isPhoneVerify = true;
         });
-        Navigator.pushNamed(context, AppScreens.profileScreen);
+        checkUser();
+
 
         //verifyEmailOTP();
 
@@ -357,6 +322,17 @@ class _VerificationScreenState extends State<VerificationScreen> {
           'Oops!');
     }
 
+  }
+
+  void checkUser() async {
+    bool isInternet = await AppUtils.checkInternet();
+    if (isInternet) {
+      BlocProvider.of<LoginBloc>(context).add(
+        PerformLoginEvent(),
+      );
+    } else {
+      AlertUtils.showNotInternetDialogue(context);
+    }
   }
 
 

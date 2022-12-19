@@ -26,7 +26,7 @@ class _CustomSmallContainerState extends State<CustomSmallContainer> {
       child: Container(height:44.h ,
         width:88.h,
         decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(10),
+            borderRadius: BorderRadius.circular(5),
             color: widget.selectedbool ? AppStyles.red : AppStyles.white
         ),
         child: Center(child: Text(widget.text, style: widget.selectedbool ? AppStyles.buttonstyle.copyWith(fontWeight: FontWeight.w500) : AppStyles.termstyle  )),

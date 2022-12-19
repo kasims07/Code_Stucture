@@ -72,7 +72,7 @@ class ContactUs extends StatelessWidget {
                              children: [
                              SvgPicture.asset(ImageAssetPath.phoneIcon, height: 22.75.h, width: 22.75.w),
                              SizedBox(width: 6.62.w),
-                             Text('+91-99998 59885'),
+                             Text('+91-99998 59885', style : AppStyles.verifystyle.copyWith(fontWeight: FontWeight.w800)),
                            ],),
                            SizedBox(height: 4),
                            Text('Call for support',style: AppStyles.detailsstyle.copyWith(color: AppStyles.bottomnavigationcolor), )
@@ -90,7 +90,7 @@ class ContactUs extends StatelessWidget {
           ),
       Positioned(
         //top: 50,
-        right:38,
+        right:35,
         bottom: 120,
         child: Container(
           //height:430.h ,

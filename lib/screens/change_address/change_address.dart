@@ -9,6 +9,7 @@ import '../../utils/app_styles.dart';
 import '../../widgets/custom_account_backbutton.dart';
 import '../../widgets/custom_address_container.dart';
 
+import '../../widgets/custom_bottom_button.dart';
 import '../../widgets/custom_change_address_container.dart';
 import 'bloc/change_address_bloc.dart';
 
@@ -56,7 +57,7 @@ class ChangeAddress extends StatelessWidget {
                   ),
                   Container(
                     padding: EdgeInsets.all(20),
-                    height: 728.h,
+                    height: 700.h,
                     width: 390.w,
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.only(
@@ -76,9 +77,16 @@ class ChangeAddress extends StatelessWidget {
                           text: 'Work',
                           tickimage: '${ImageAssetPath.greyTick}',
                         ),
-                      ],
-                    ),
-                  )
+
+
+
+                  SizedBox(height: 320.h),
+                  CustomBottomButton(
+                    onPress: (){},
+                    text: 'ADD',),
+        ]
+        )
+        )
                 ],)
             )
         )

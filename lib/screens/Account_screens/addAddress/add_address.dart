@@ -104,7 +104,7 @@ class AddAddress extends StatelessWidget {
                   SizedBox(height: 15.h),
                   Container(
                     height:123.h ,
-                  width: 350.h,
+                  //width: 350.h,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(5),
                       color: AppStyles.backgroundcolor

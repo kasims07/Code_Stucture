@@ -31,7 +31,10 @@ class CustomNoteContainer extends StatelessWidget {
           ],
             )
     ),
-          Divider(color:AppStyles.divider),
+          Padding(
+            padding: const EdgeInsets.only(right: 20, left: 22),
+            child: Divider(color:AppStyles.divider, thickness: 1),
+          ),
         ],
       );
 

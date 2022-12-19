@@ -23,7 +23,7 @@ class CustomAddressTextfield extends StatelessWidget {
       width: 350.w,
       decoration: BoxDecoration(
           color: Colors.transparent,
-          borderRadius: BorderRadius.circular(10),
+          borderRadius: BorderRadius.circular(5),
           border: Border.all(
               color: AppStyles.grey.withOpacity(0.2)
           )

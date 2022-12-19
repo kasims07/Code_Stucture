@@ -2,7 +2,9 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:gfive/constants/app_constants.dart';
 import 'package:meta/meta.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../utils/stream_builder.dart';
 
@@ -39,7 +41,10 @@ class LoginOtpBloc extends Bloc<LoginOtpEvent, LoginOtpState> {
         final user = await FirebaseAuth.instance.currentUser;
         final idToken = await user!.getIdToken();
         final token = idToken.toString();
-        print('TOKEN IS ====> ${token}');
+        print('   TOKEN IS ====> ${token}');
+        SharedPreferences prefs = await SharedPreferences.getInstance();
+        prefs.setString(AppConstants.TOKEN, token);
+
       },);
 
 

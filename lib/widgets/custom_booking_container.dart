@@ -24,7 +24,7 @@ class CustomBookingContainer extends StatelessWidget {
           borderRadius: BorderRadius.circular(5),
           color:AppStyles.grey.withOpacity(0.05),
         ),
-        child: Padding(padding: EdgeInsets.only(top: 18, right: 13, left: 13, bottom: 8),
+        child: Padding(padding: EdgeInsets.only(top: 15, right: 13, left: 13, bottom: 15),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -46,7 +46,7 @@ class CustomBookingContainer extends StatelessWidget {
                   borderRadius: BorderRadius.circular(5),
                   color: AppStyles.white
                 ),
-                child:Padding(padding: EdgeInsets.only(top: 10, right: 15, left: 12, bottom: 6),
+                child:Padding(padding: EdgeInsets.only(top: 8, right: 15, left: 12, bottom: 4),
                 child:Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -55,6 +55,7 @@ class CustomBookingContainer extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                     Text(btype, style: AppStyles.verifystyle.copyWith(fontSize: 14.sp)),
+                    SizedBox(height: 3.h),
                     Text(apttype, style: AppStyles.termstyle.copyWith(fontSize: 12),),
                   ],),
                   Text('₹ $aptprice', style:AppStyles.opensansstyle ),
