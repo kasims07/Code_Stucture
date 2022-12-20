@@ -19,7 +19,7 @@ class CustomContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     return Expanded(
         child: Container(
-          height:163.h,
+          height:190.h,
           width: 107.w,
           decoration: BoxDecoration(
             gradient: LinearGradient(

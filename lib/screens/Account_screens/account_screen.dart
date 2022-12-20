@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:gfive/screens/login_screens/login_screen.dart';
 import 'package:gfive/utils/app_styles.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../app_screens/app_screens.dart';
 import '../../constants/asset_path.dart';
 import '../../widgets/custom_account_row.dart';
+import '../../widgets/custom_bottom_button.dart';
 
 class AccountScreen extends StatelessWidget {
   const AccountScreen({Key? key}) : super(key: key);
@@ -151,20 +154,22 @@ class AccountScreen extends StatelessWidget {
                      ),
                      SizedBox(height: 28),
                    Padding(padding: EdgeInsets.only(right:20.65 , left: 20.sp),
-                       child: Row(
-                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                         children: [
-                           Row(
+                       child:
+                           InkWell(
+                             onTap: ()
+                             {
+                               logoutpopup(context: context);
+                             },
+                             child: Row(
 
-                             children: [
-                               SvgPicture.asset(ImageAssetPath.login, height: 20.h, width:20.w),
-                               SizedBox(width:11.66.w),
-                               Text('Logout', style:AppStyles.logoutfontstyle),
-                             ],
+                               children: [
+                                 SvgPicture.asset(ImageAssetPath.login, height: 20.h, width:20.w),
+                                 SizedBox(width:11.66.w),
+                                 Text('Logout', style:AppStyles.logoutfontstyle),
+                               ],
+                             ),
                            ),
-                           SvgPicture.asset(ImageAssetPath.accountback, height: 10.71.h, width: 5.35.w),
-                         ],
-                       )
+
                    ),
                    ],),
                  )
@@ -185,4 +190,80 @@ class AccountScreen extends StatelessWidget {
       ),
     ));
   }
+
+  static void logoutpopup({
+    BuildContext? context,
+    Function? pressLogout,
+    Function? pressCancle,
+    String? title,
+    String? message,
+    String? btn1,
+    String? btn2,
+  }) {
+    showGeneralDialog(
+      barrierLabel: "Label2",
+      barrierDismissible: false,
+      barrierColor: Colors.black45.withOpacity(0.5),
+      transitionDuration: const Duration(milliseconds: 500),
+      context: context!,
+      pageBuilder: (context, anim1, anim2) {
+        return Align(
+          alignment: Alignment.bottomCenter,
+          child: SizedBox(
+            height: 265.h,
+            child: SizedBox.expand(
+              child: ClipRRect(
+                borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(10.sp),
+                    topRight: Radius.circular(10.sp)),
+                child: Scaffold(
+                  body:Container(
+                    height: 265.h ,
+                    width: 390.w,
+                    decoration: BoxDecoration(borderRadius: BorderRadius.circular(10),
+                    color: AppStyles.white),
+                    child: Padding(padding: EdgeInsets.only(top: 20, right: 20, left: 20, bottom: 15),
+                        child: Column(
+                          children: [
+                            Text('Logout', style: AppStyles.homelogostyle.copyWith(fontSize: 20.sp),),
+                            SizedBox(height: 10.h),
+                            Text('Are you sure you want to logout?', style: AppStyles.termstyle.copyWith(fontSize: 15.sp),),
+                            SizedBox(height: 40.h),
+                            CustomBottomButton(
+                              onPress: () async {
+                                SharedPreferences prefs = await SharedPreferences.getInstance();
+                                prefs.clear();
+                                Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => LoginScreen()), (Route<dynamic> route) => false);
+                              },
+                              text: 'Yes'),
+
+                            SizedBox(width: 15),
+                            SizedBox(height: 12.h),
+                            TextButton(
+                                onPressed: (){
+                                  Navigator.pop(context);
+                                },
+                                child: Text('Cancel', style:AppStyles.verifystyle.copyWith(fontSize: 14.sp) ,)),
+                          ],
+                        )
+                    ),
+                  )
+
+
+                ),
+              ),
+            ),
+          ),
+        );
+      },
+      transitionBuilder: (context, anim1, anim2, child) {
+        return SlideTransition(
+          position: Tween(begin: const Offset(0, 1), end: const Offset(0, 0))
+              .animate(anim1),
+          child: child,
+        );
+      },
+    ).then((value) => {print('Dialogue dismissed')});
+  }
+
 }

@@ -6,8 +6,12 @@ import 'package:logger/logger.dart';
 
 import '../api_client/dio_client.dart';
 import '../app_preferences/preference_manager.dart';
+import '../screens/dashBoard/repository/dashboard_repository.dart';
+import '../screens/dashBoard/repository/dashboard_repository_impl.dart';
 import '../screens/otpScreen/repository/login_repository.dart';
 import '../screens/otpScreen/repository/login_repository_impl.dart';
+import '../screens/profileScreen/repository/profile_repository.dart';
+import '../screens/profileScreen/repository/profile_repository_impl.dart';
 
 final GetIt _getIt = GetIt.instance;
 
@@ -22,4 +26,11 @@ void setupDependencies(){
 
   //login user
   _getIt.registerSingleton<LoginRepository>(LoginImpl());
+
+  //update user
+  _getIt.registerSingleton<ProfileRepository>(ProfileImpl());
+
+  //dashboard
+  _getIt.registerSingleton<DashboardRepository>(DashboardImpl());
+
 }

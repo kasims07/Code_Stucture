@@ -35,6 +35,7 @@ class CustomTextformfield extends StatelessWidget {
                   keyboardType: type,
                   minLines: 1,
                   maxLines: 5,
+
                   textInputAction: TextInputAction.next,
 
                   inputFormatters: format == 'normal'? [FilteringTextInputFormatter.allow(RegExp(r"[a-zA-Z]+|\s"),)

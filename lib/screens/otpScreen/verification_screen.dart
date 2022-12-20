@@ -111,6 +111,7 @@ class _VerificationScreenState extends State<VerificationScreen> {
       //prefs.clear();
       prefs.setString(AppConstants.TOKEN, state.model!.token!);
       prefs.setBool(AppConstants.login, true);
+
       if(state.model!.isExist == true){
         Navigator.pushNamed(context, AppScreens.dashboardScreen);
       }
