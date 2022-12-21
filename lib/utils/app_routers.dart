@@ -74,14 +74,18 @@ class AppRouter {
           AboutUs.create(),
         );
       case AppScreens.serviceDetails:
+        final arguments = settings.arguments as Map<String, dynamic>;
         return _buildRoute(
           settings,
-          ServiceDetailsScreen.create(),
+          ServiceDetailsScreen.create(
+            arguments['categoryid']
+          ),
         );
       case AppScreens.subserviceDetails:
+        final arguments = settings.arguments as Map<String, dynamic>;
         return _buildRoute(
           settings,
-          SubserviceDetails.create(),
+          SubserviceDetails.create(arguments['subserviceid']),
         );
 
       case AppScreens.contactUs:

@@ -12,6 +12,10 @@ import '../screens/otpScreen/repository/login_repository.dart';
 import '../screens/otpScreen/repository/login_repository_impl.dart';
 import '../screens/profileScreen/repository/profile_repository.dart';
 import '../screens/profileScreen/repository/profile_repository_impl.dart';
+import '../screens/serviceDetailsScreens/serviceDetails/repository/category_repository.dart';
+import '../screens/serviceDetailsScreens/serviceDetails/repository/category_repository_impl.dart';
+import '../screens/serviceDetailsScreens/subserviceDetails/repository/subservice_repository.dart';
+import '../screens/serviceDetailsScreens/subserviceDetails/repository/subservice_repository_impl.dart';
 
 final GetIt _getIt = GetIt.instance;
 
@@ -32,5 +36,11 @@ void setupDependencies(){
 
   //dashboard
   _getIt.registerSingleton<DashboardRepository>(DashboardImpl());
+
+  //category
+  _getIt.registerSingleton<CategoryRepository>(CategoryImpl());
+
+  //subservice
+  _getIt.registerSingleton<SubserviceRepository>(SubserviceImpl());
 
 }

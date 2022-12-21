@@ -3,10 +3,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gfive/utils/app_styles.dart';
+import 'package:gfive/widgets/loading_container.dart';
 import 'package:rxdart/rxdart.dart';
 
 import '../../../app_screens/app_screens.dart';
 import '../../../constants/asset_path.dart';
+import '../../../utils/alert_utils.dart';
+import '../../../utils/app_utils.dart';
 import '../../../widgets/custom_account_backbutton.dart';
 import '../../../widgets/custom_backicon_button.dart';
 import '../../../widgets/custom_bottom_button.dart';
@@ -15,155 +18,209 @@ import '../../../widgets/custom_photo_cotainer.dart';
 import '../../../widgets/custom_price_container.dart';
 import '../../../widgets/custom_row.dart';
 import 'bloc/subservice_details_bloc.dart';
+import 'model/subservice_model.dart';
 
-class SubserviceDetails extends StatelessWidget {
+class SubserviceDetails extends StatefulWidget {
+String? subserviceid;
+   SubserviceDetails({Key? key, required this.subserviceid}) : super(key: key);
 
-   SubserviceDetails({Key? key}) : super(key: key);
 
-  List<String> pricelist = ['100', '200', '300','400','500'];
-  List<String> namelist = ['1BHK', '2BHK', '3BHK', '4BHK', '5BHK'];
-  List<String> sphotolist = ['${ImageAssetPath.sPhoto1}','${ImageAssetPath.sPhoto2}','${ImageAssetPath.sPhoto3}', '${ImageAssetPath.sPhoto4}' ];
-
-   static Widget create(){
+   static Widget create(String? subserviceid){
      return MultiBlocProvider(
        providers: [
          BlocProvider<SubserviceDetailsBloc>(
            create: (_) => SubserviceDetailsBloc(),
          ),
        ],
-       child: SubserviceDetails(),
+       child: SubserviceDetails(subserviceid: subserviceid,),
      );
    }
 
+  @override
+  State<SubserviceDetails> createState() => _SubserviceDetailsState();
+}
+
+class _SubserviceDetailsState extends State<SubserviceDetails> {
+  List<String> pricelist = ['100', '200', '300','400','500'];
+
+  List<String> namelist = ['1BHK', '2BHK', '3BHK', '4BHK', '5BHK'];
+
+  List<String> sphotolist = ['${ImageAssetPath.sPhoto1}','${ImageAssetPath.sPhoto2}','${ImageAssetPath.sPhoto3}', '${ImageAssetPath.sPhoto4}' ];
+
+  String? subserviceid;
+  SubserviceModel? subservicedata;
+  
+  @override
+  void initState() {
+    // TODO: implement initState
+    apicall(widget.subserviceid);
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: Scaffold(
-        body: Container(
-          height: 844.h,
-          width: 390.w,
-          color: AppStyles.black,
-          child:
-            SingleChildScrollView(
-              child: Padding(padding: EdgeInsets.only(top:10),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-
-                children: [
-                  CustomAccountBackbutton(),
-                 Row(children: [
-                   SizedBox(width: 65.w),
-                  Text('Unfurnished Appartment Classic\nCleaning', textAlign: TextAlign.center, style:AppStyles.profilestyle),
-                ]),
-                   SizedBox(height: 15),
-                Container(
-                  height: 890.h,
-                  width: 390.w,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(15),
-                      topRight: Radius.circular(15),
-                    ),
-                    color: AppStyles.white
-                  ),
-                  child:Padding(padding: EdgeInsets.only(top:19, right: 20, left: 20),
+      child: BlocConsumer<SubserviceDetailsBloc, SubserviceDetailsState>(
+  listener: (context, state) {
+    // TODO: implement listener
+    if(state.isCompleted){
+      subservicedata = state.model!;
+    }
+  },
+  builder: (context, state) {
+    return Scaffold(
+        body: Stack(
+          children :[
+            subservicedata ==null ? LoadingContainer() :
+          Container(
+              height: 844.h,
+              width: 390.w,
+              color: AppStyles.black,
+              child:
+              SingleChildScrollView(
+                child: Padding(padding: EdgeInsets.only(top:10),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
+
                     children: [
-                    Text(textAlign: TextAlign.left, 'Maecenas sed diam eget risus varius blandit sit\namet non magna. Integer posuere erat a ante\nvenenatis dapibus posuere velit aliquet.Maecenas\nsed diam eget risus varius blandit sit amet non' , style: AppStyles.detailsstyle,),
-                    Row(
-                      children: [
-                        Text(' Readmore', style: AppStyles.detfontstyle),
-                        SizedBox(width: 6.67.w),
-                        SvgPicture.asset(ImageAssetPath.downarrowIcon,height: 6.h,width:10.67.w ),
-                      ],
-                    ),
-                    SizedBox(height: 10),
-                    Divider(color:AppStyles.divider,thickness: 1),
-                    SizedBox(height: 10),
-                    Text(textAlign: TextAlign.left,'Service Price List', style:AppStyles.detfontstyle.copyWith(fontWeight: FontWeight.w600)),
-                     SizedBox(height: 15.h),
-                      Flexible(
-                        child: GridView.builder(
-                          shrinkWrap: true,
-                            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                              crossAxisCount: 3,
-                              crossAxisSpacing: 14.0,
-                              mainAxisSpacing: 14.0,
+                      CustomAccountBackbutton(),
+                      Row(children: [
+                        SizedBox(width: 65.w),
+                        Text('${subservicedata!.data![0].name}', textAlign: TextAlign.center, style:AppStyles.profilestyle),
+                      ]),
+                      SizedBox(height: 15),
+                      Container(
+                          height: 890.h,
+                          width: 390.w,
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.only(
+                                topLeft: Radius.circular(15),
+                                topRight: Radius.circular(15),
+                              ),
+                              color: AppStyles.white
+                          ),
+                          child:Padding(padding: EdgeInsets.only(top:19, right: 20, left: 20),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(textAlign: TextAlign.left, '${subservicedata!.data![0].description}', style: AppStyles.detailsstyle,),
+                                Row(
+                                  children: [
+                                    Text(' Readmore', style: AppStyles.detfontstyle),
+                                    SizedBox(width: 6.67.w),
+                                    SvgPicture.asset(ImageAssetPath.downarrowIcon,height: 6.h,width:10.67.w ),
+                                  ],
+                                ),
+                                SizedBox(height: 10),
+                                Divider(color:AppStyles.divider,thickness: 1),
+                                SizedBox(height: 10),
+                                Text(textAlign: TextAlign.left,'Service Price List', style:AppStyles.detfontstyle.copyWith(fontWeight: FontWeight.w600)),
+                                SizedBox(height: 15.h),
+                                Flexible(
+                                  child: GridView.builder(
+                                      shrinkWrap: true,
+                                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                                        crossAxisCount: 3,
+                                        crossAxisSpacing: 14.0,
+                                        mainAxisSpacing: 14.0,
 
-                            ),
-                            itemCount: pricelist.length,
-                            itemBuilder: (context, index){
-                              return CustomPriceContainer(
+                                      ),
+                                      itemCount: subservicedata!.data![0].prize!.length,
+                                      itemBuilder: (context, index){
+                                        return CustomPriceContainer(
 
-                                price: pricelist[index],
-                                name: namelist[index],
+                                          price: subservicedata!.data![0].prize![index].prize.toString(),
+                                          name: subservicedata!.data![0].prize![index].title!,
 
-                              );
-                            }
-                        ),
-                      ),
+                                        );
+                                      }
+                                  ),
+                                ),
 
 
-                    Padding(
-                      padding: const EdgeInsets.only(top: 15, bottom: 15),
-                      child: Container(
-                        height : 191.h,
-                          width: 350.w,
-                        decoration: BoxDecoration(
-                            color: AppStyles.yellow,
-                          borderRadius: BorderRadius.circular(5),
-                        ),
-                         child:Padding(padding: EdgeInsets.only(top:21 , right: 21, left: 18),
-                         child:Column(
-                           crossAxisAlignment: CrossAxisAlignment.start,
-                           children: [
-                           Text('Included', style: AppStyles.homelogostyle),
-                             SizedBox(height: 15),
-                             CustomRow(text: 'Bathroom Deep Cleaning'),
+                                Padding(
+                                  padding: const EdgeInsets.only(top: 15, bottom: 15),
+                                  child: Container(
+                                      height : 191.h,
+                                      width: 350.w,
+                                      padding: EdgeInsets.only(top:21 , right: 21, left: 18),
+                                      decoration: BoxDecoration(
+                                        color: AppStyles.yellow,
+                                        borderRadius: BorderRadius.circular(5),
+                                      ),
+                                      child:Column(
+                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        children: [
+                                          Text('Included', style: AppStyles.homelogostyle),
+                                          SizedBox(height: 15),
+                                          Container(
+                                            //height: 191.h,
 
-                             SizedBox(height: 10),
-                             CustomRow(text: 'Kitchen Deep Cleaning With Chimney'),
-                             SizedBox(height: 10),
-                             CustomRow(text: 'Appliances Not Included'),
-                             SizedBox(height: 10),
-                             CustomRow(text: 'Floor Wiping And Mopping Of Entire House'),
+                                            child: ListView.builder(
+                                              shrinkWrap: true,
+                                              itemCount: subservicedata!.data![0].includes!.length,
+                                                itemBuilder: (buildcontext, index){
+                                                return Column(
+                                                    children:[
+                                                    CustomRow(text: subservicedata!.data![0].includes![index].include!),
+                                                    SizedBox(height: 10)
+                                                    ]);
 
-                         ],))
-                      ),
-                    ),
-                    //SizedBox(height: 15),
-                    Text('Service Photos', style: AppStyles.homelogostyle.copyWith(fontSize: 14.sp),),
-                    SizedBox(height: 15),
-                    Container(
-                      height: 79,
-                      child: ListView.builder(
-                        shrinkWrap: true,
-                          itemCount: 4,
-                          scrollDirection: Axis.horizontal,
-                          itemBuilder:(BuildContext context, int index)
-                          {
-                            return CustomPhotoContainer(imagepath: sphotolist[index]);
-                          }
-                      ),
-                    ),
-                    SizedBox(height: 20.h),
-                    CustomBottomButton(
-                      text : 'BOOK SERVICE',
-                      onPress: (){
-                        Navigator.pushNamed(context, AppScreens.loginBookservice);
-                      },
-                    )
-                  ],),
-                  )
-                )
-                ],
-              ),
-              ),
-            )
+                                            }
+                                            ),
+                                          ),
+                                        ],)
+                                  ),
+                                ),
+                                //SizedBox(height: 15),
+                                Text('Service Photos', style: AppStyles.homelogostyle.copyWith(fontSize: 14.sp),),
+                                SizedBox(height: 15),
+                                Container(
+                                  height: 79,
+                                  child: ListView.builder(
+                                      shrinkWrap: true,
+                                      itemCount: 4,
+                                      scrollDirection: Axis.horizontal,
+                                      itemBuilder:(BuildContext context, int index)
+                                      {
+                                        return CustomPhotoContainer(imagepath: sphotolist[index]);
+                                      }
+                                  ),
+                                ),
+                                SizedBox(height: 20.h),
+                                CustomBottomButton(
+                                  text : 'BOOK SERVICE',
+                                  onPress: (){
+                                    Navigator.pushNamed(context, AppScreens.loginBookservice);
+                                  },
+                                )
+                              ],),
+                          )
+                      )
+                    ],
+                  ),
+                ),
+              )
+          ),
+          ]
+
         ),
-      ),
+      );
+  },
+),
     );
+  }
+
+  void apicall(String? id) async {
+    bool isInternet = await AppUtils.checkInternet();
+    if (isInternet) {
+
+      BlocProvider.of<SubserviceDetailsBloc>(context).add(
+          PerformSubserviceDetailsEvent(id: id!),
+      );
+          } else {
+      AlertUtils.showNotInternetDialogue(context);
+    }
+
   }
 }
