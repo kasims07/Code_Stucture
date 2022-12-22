@@ -10,6 +10,7 @@ import '../../../app_screens/app_screens.dart';
 import '../../../constants/asset_path.dart';
 import '../../../utils/alert_utils.dart';
 import '../../../utils/app_utils.dart';
+import '../../../utils/stream_builder.dart';
 import '../../../widgets/custom_account_backbutton.dart';
 import '../../../widgets/custom_backicon_button.dart';
 import '../../../widgets/custom_bottom_button.dart';
@@ -49,6 +50,7 @@ class _SubserviceDetailsState extends State<SubserviceDetails> {
 
   String? subserviceid;
   SubserviceModel? subservicedata;
+  bool isSelected = false;
   
   @override
   void initState() {
@@ -119,6 +121,7 @@ class _SubserviceDetailsState extends State<SubserviceDetails> {
                                 Flexible(
                                   child: GridView.builder(
                                       shrinkWrap: true,
+                                      physics: NeverScrollableScrollPhysics(),
                                       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                                         crossAxisCount: 3,
                                         crossAxisSpacing: 14.0,
@@ -127,11 +130,31 @@ class _SubserviceDetailsState extends State<SubserviceDetails> {
                                       ),
                                       itemCount: subservicedata!.data![0].prize!.length,
                                       itemBuilder: (context, index){
-                                        return CustomPriceContainer(
+                                        return InkWell(
+                                          onTap: (){
+                                            for(int i = 0; i<subservicedata!.data![0].prize!.length; i++ ){
+                                              if( i == index){
+                                                subservicedata!.data![0].prize![i].isSelect = true;
+                                                StreamUtil.prizeid.add(subservicedata!.data![0].prize![i].id!);
+                                                StreamUtil.prizetag.add(subservicedata!.data![0].prize![i].prize!);
+                                                StreamUtil.prizetitle.add(subservicedata!.data![0].prize![i].title!);
+                                              }else{
+                                                subservicedata!.data![0].prize![i].isSelect = false;
+                                              }
+                                            }
+                                            setState(() {
 
-                                          price: subservicedata!.data![0].prize![index].prize.toString(),
-                                          name: subservicedata!.data![0].prize![index].title!,
+                                             });
+                                            },
+                                          child: CustomPriceContainer(
+                                            isSelected: subservicedata!.data![0].prize![index].isSelect,
+                                            price: subservicedata!.data![0].prize![index].prize.toString(),
+                                            //pricestyle: isSelected == true ?  AppStyles.profilestyle.copyWith(fontSize: 14.sp) : AppStyles.termstyle.copyWith(fontWeight: FontWeight.w600),
 
+                                            name: subservicedata!.data![0].prize![index].title!,
+                                           // namestyle:isSelected == true ? AppStyles.buttonstyle.copyWith(fontSize: 18.sp) : AppStyles.verifystyle.copyWith(fontSize:18.sp) ,
+
+                                          ),
                                         );
                                       }
                                   ),
@@ -158,6 +181,7 @@ class _SubserviceDetailsState extends State<SubserviceDetails> {
 
                                             child: ListView.builder(
                                               shrinkWrap: true,
+                                              physics: NeverScrollableScrollPhysics(),
                                               itemCount: subservicedata!.data![0].includes!.length,
                                                 itemBuilder: (buildcontext, index){
                                                 return Column(

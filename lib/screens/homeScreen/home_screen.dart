@@ -10,6 +10,7 @@ import 'package:gfive/widgets/loading_container.dart';
 import '../../constants/asset_path.dart';
 import '../../utils/alert_utils.dart';
 import '../../utils/app_utils.dart';
+import '../../utils/stream_builder.dart';
 import '../../widgets/custom_container.dart';
 import '../../widgets/custom_textformfield.dart';
 import '../dashBoard/bloc/dashboard_bloc.dart';
@@ -41,6 +42,9 @@ class _HomeScreenState extends State<HomeScreen> {
   listener: (context, state) {
     if(state.isCompleted){
       homedata=state.model!;
+      StreamUtil.username.add( homedata!.user!.name!);
+      StreamUtil.mobilenumber.add(homedata!.user!.phoneNumber!);
+      StreamUtil.email.add(homedata!.user!.email!);
     }
 
     // TODO: implement listener
@@ -126,6 +130,8 @@ class _HomeScreenState extends State<HomeScreen> {
                     child: Column(children: [
                       InkWell(
                         onTap: (){
+                          StreamUtil.categoryname.add(homedata!.data!.first.category!);
+                          StreamUtil.categoryid.add(homedata!.data!.first.id!);
                           Navigator.pushNamed(context, AppScreens.serviceDetails, arguments:{'categoryid':homedata!.data!.first.id});
                         },
                         child: Container(
@@ -156,15 +162,17 @@ class _HomeScreenState extends State<HomeScreen> {
 
                         child: StaggeredGrid.count(
                           crossAxisCount: 3,
-                          mainAxisSpacing: 6,
-                          crossAxisSpacing: 6,
+                          mainAxisSpacing: 2,
+                          crossAxisSpacing: 2,
                           children: [
                               for(int i = 0; i< homedata!.data!.length; i++)
                               i == 0 ? Container() :  StaggeredGridTile.count(
-                                  crossAxisCellCount:3,
-                                  mainAxisCellCount: 3,
+                                  crossAxisCellCount:1,
+                                  mainAxisCellCount: 1,
                                   child: InkWell(
                                     onTap: (){
+                                      StreamUtil.categoryname.add(homedata!.data![i].category!);
+                                      StreamUtil.categoryid.add(homedata!.data![i].id!);
                                       Navigator.pushNamed(context, AppScreens.serviceDetails, arguments:{'categoryid':homedata!.data![i].id});
                                     },
                                     child: CustomContainer(

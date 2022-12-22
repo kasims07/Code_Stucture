@@ -110,6 +110,7 @@ class Include {
     this.v,
     this.title,
     this.prize,
+    this.isSelect,
   });
 
   String? id;
@@ -124,6 +125,7 @@ class Include {
   int? v;
   String? title;
   int? prize;
+  bool? isSelect;
 
   factory Include.fromJson(Map<String, dynamic> json) => Include(
     id: json["_id"],
@@ -138,6 +140,7 @@ class Include {
     v: json["__v"],
     title: json["title"] == null ? null : json["title"],
     prize: json["prize"] == null ? null : json["prize"],
+    isSelect: false
   );
 
   Map<String, dynamic> toJson() => {

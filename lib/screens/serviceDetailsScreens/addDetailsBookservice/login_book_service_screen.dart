@@ -1,3 +1,5 @@
+
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -7,6 +9,9 @@ import 'package:gfive/utils/app_styles.dart';
 
 import '../../../app_screens/app_screens.dart';
 import '../../../constants/asset_path.dart';
+import '../../../utils/alert_utils.dart';
+import '../../../utils/app_utils.dart';
+import '../../../utils/stream_builder.dart';
 import '../../../widgets/custom_account_backbutton.dart';
 import '../../../widgets/custom_bottom_button.dart';
 import '../../../widgets/custom_dialog_bottom_button.dart';
@@ -16,22 +21,11 @@ import '../../../widgets/custom_textformfield.dart';
 import '../../../widgets/custom_time_container.dart';
 import 'bloc/login_book_service_bloc.dart';
 
-class LoginBookServiceScreen extends StatelessWidget {
 
-  TextEditingController namecontroller = TextEditingController();
-  TextEditingController numbercontroller = TextEditingController();
 
-  LoginBookServiceScreen({Key? key}) : super(key: key);
 
-  List<dynamic> timelist = [
-    '08:00',
-    '10:00',
-    '11:00',
-    '12:00',
-    '01:00',
-    '02:00',
-    '03:00'
-  ];
+class LoginBookServiceScreen extends StatefulWidget {
+  const LoginBookServiceScreen({Key? key}) : super(key: key);
 
   static Widget create() {
     return MultiBlocProvider(
@@ -45,8 +39,43 @@ class LoginBookServiceScreen extends StatelessWidget {
   }
 
   @override
+  State<LoginBookServiceScreen> createState() => _LoginBookServiceScreenState();
+}
+
+class _LoginBookServiceScreenState extends State<LoginBookServiceScreen> {
+
+  TextEditingController namecontroller = TextEditingController();
+
+  TextEditingController numbercontroller = TextEditingController();
+
+  List<dynamic> timelist = [
+    '08:00',
+    '10:00',
+    '11:00',
+    '12:00',
+    '01:00',
+    '02:00',
+    '03:00'
+  ];
+
+
+ @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    namecontroller.text = StreamUtil.username.value;
+    numbercontroller.text = StreamUtil.mobilenumber.value;
+  }
+
+
+  @override
   Widget build(BuildContext context) {
-    return SafeArea(child: Scaffold(
+    return BlocConsumer<LoginBookServiceBloc, LoginBookServiceState>(
+  listener: (context, state) {
+    // TODO: implement listener
+  },
+  builder: (context, state) {
+    return Scaffold(
         body: SingleChildScrollView(
           child: Container(
             //height: 844.h,
@@ -56,17 +85,53 @@ class LoginBookServiceScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   SizedBox(height: 10),
-                  Row(children: [
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      CustomAccountBackbutton(),
+                      SizedBox(width: 50),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Text(StreamUtil.categoryname.value,
+                              style: AppStyles.profilestyle),
+                          Text(StreamUtil.subservicename.value,
+                              style: AppStyles.termstyle),
+                          Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(StreamUtil.prizetitle.value, style: AppStyles.redstyle),
+                                Padding(
+                                  padding: const EdgeInsets.all(6.0),
+                                  child: Container(
+                                    height: 8.h,
+                                    width: 8.w,
+                                    decoration: BoxDecoration(
+                                        shape: BoxShape.circle,
+                                        color: AppStyles.white
+                                    ),
+                                  ),
+                                ),
+                                Text(StreamUtil.prizetag.value.toString(), style: AppStyles.buttonstyle.copyWith(
+                                    fontSize: 16.sp),)
+                              ]),
+                        ],
+                      )
+                    ],
+                  ),
+
+                  /*Row(children: [
                     CustomAccountBackbutton(),
                     SizedBox(width: 49.62.w),
-                    Text('Full Home Deep Cleaning',
+                    Text(StreamUtil.categoryname.value,
                         style: AppStyles.profilestyle)
                   ],),
                   SizedBox(height: 2.h),
                   Text('Unfurnished Apartment classic',
                       style: AppStyles.termstyle),
-                  SizedBox(height: 6.h),
-                  Row(
+                  SizedBox(height: 6.h),*/
+                  /*Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text('1BHK', style: AppStyles.redstyle),
@@ -83,7 +148,7 @@ class LoginBookServiceScreen extends StatelessWidget {
                         ),
                         Text('₹ 2099', style: AppStyles.buttonstyle.copyWith(
                             fontSize: 16.sp),)
-                      ]),
+                      ]),*/
                   SizedBox(height: 15.h),
                   Container(
                       height: 691.h,
@@ -117,10 +182,10 @@ class LoginBookServiceScreen extends StatelessWidget {
                               ),
                               SizedBox(height: 10.h),
                               CustomNumberfield(
-                                controller: numbercontroller,
-                                type: TextInputType.number,
-                                hintText: 'Mobile Number',
-                                labelText: 'Mobile Number'
+                                  controller: numbercontroller,
+                                  type: TextInputType.number,
+                                  hintText: 'Mobile Number',
+                                  labelText: 'Mobile Number'
                               ),
                               SizedBox(height: 20.h),
                               Text('Your Address', style: AppStyles
@@ -176,14 +241,14 @@ class LoginBookServiceScreen extends StatelessWidget {
                                       Column(
                                         crossAxisAlignment: CrossAxisAlignment.start,
                                         children: [
-                                        Text('Date',
-                                          style: AppStyles.termstyle.copyWith(
-                                              fontSize: 12.sp),),
-                                        SizedBox(height: 2.h),
-                                        Text('25 Jun, 2022',
-                                            style: AppStyles.homelogostyle
-                                                .copyWith(fontSize: 14.sp)),
-                                      ],),
+                                          Text('Date',
+                                            style: AppStyles.termstyle.copyWith(
+                                                fontSize: 12.sp),),
+                                          SizedBox(height: 2.h),
+                                          Text('25 Jun, 2022',
+                                              style: AppStyles.homelogostyle
+                                                  .copyWith(fontSize: 14.sp)),
+                                        ],),
                                       SvgPicture.asset(
                                           ImageAssetPath.redbooking,
                                           height: 20.h, width: 18.w),
@@ -213,8 +278,25 @@ class LoginBookServiceScreen extends StatelessWidget {
                               ),
                               SizedBox(height: 62.h),
                               CustomBottomButton(
-                                onPress: () {
-                                  congratulatepopup(context: context);
+                                onPress: () async {
+                                  bool isInternet = await AppUtils.checkInternet();
+                                  if (isInternet) {
+                                    var data = {
+                                      "sub_service" : StreamUtil.subserviceid.value,
+                                      "category": StreamUtil.categoryid.value,
+                                      "prizes" : StreamUtil.prizeid.value,
+                                      "name" : namecontroller.text,
+                                      "mobileNumber" : numbercontroller.text,
+
+
+                                    };
+                                    BlocProvider.of<LoginBookServiceBloc>(context).add(
+                                      PerformLoginBookServiceEvent(data: data),
+                                    );
+                                  } else {
+                                    AlertUtils.showNotInternetDialogue(context);
+                                  }
+
                                 },
                                 text: 'REQUEST SEND',),
                             ],
@@ -226,82 +308,11 @@ class LoginBookServiceScreen extends StatelessWidget {
               )
           ),
         )
-    ));
+    );
+  },
+);
   }
-  static void congratulatepopup
-      ({
-    BuildContext? context,
-    Function? pressLogout,
-    Function? pressCancle,
-    String? title,
-    String? message,
-    String? btn1,
-    String? btn2,
-  }) {
-    showGeneralDialog(
-      barrierLabel: "Label2",
-      barrierDismissible: false,
-      barrierColor: Colors.black45.withOpacity(0.5),
-      transitionDuration: const Duration(milliseconds: 500),
-      context: context!,
-      pageBuilder: (context, anim1, anim2) {
-        return Align(
-          alignment: Alignment.center,
-          child: SizedBox(
-            height: 370.h,
-            width: 350.w,
-            child: SizedBox.expand(
-              child: ClipRRect(
-                borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(10.sp),
-                    topRight: Radius.circular(10.sp),
-                    bottomLeft: Radius.circular(10.sp),
-                    bottomRight: Radius.circular(10.sp)
-                ),
-                child: Scaffold(
-                  body: Padding(
-                      padding: EdgeInsets.only(top: 32.sp, right: 16.sp, left: 16.sp, bottom: 18.sp),
-                      child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                               Image.asset(ImageAssetPath.congoImage, height: 153.h, width: 220.02.w),
-                               SizedBox(height: 18.h),
-                               Text('Congratulation', style: AppStyles.verifystyle.copyWith(fontSize: 18.42)) ,
-                              SizedBox(height: 10.h),
-                              Text('You have successfully booked your\nservice', textAlign:TextAlign.center, style: AppStyles.termstyle),
-                               SizedBox(height: 20.h),
-                            CustomDialogBottomButton(
-                              title:'GO TO HOME',
-                              onPress: (){
-                                Navigator.pushNamed(context, AppScreens.dashboardScreen);
-                              },
-                            )
-
-                          ]
-                      )
-                  ),
-                ),
-              ),
-            ),
-          ),
-        );
-      },
-      transitionBuilder: (context, anim1, anim2, child) {
-        return SlideTransition(
-          position: Tween(begin: const Offset(0, 1), end: const Offset(0, 0))
-              .animate(anim1),
-          child: child,
-        );
-      },
-    ).then((value) => {print('Dialogue dismissed')});
-  }
-
-
-
-
 }
-
 
 
 

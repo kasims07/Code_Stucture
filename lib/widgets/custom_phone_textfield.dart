@@ -13,12 +13,21 @@ class CustomPhoneField extends StatelessWidget {
   TextInputType type;
   String hintText;
   String labelText;
-
+  bool readonly;
 
   final String? format;
   final List<TextInputFormatter>? inputFormatters;
 
-  CustomPhoneField({Key? key, required this.controller,required this.type, required this.hintText, required this.labelText, this.format, this.inputFormatters}) : super(key: key);
+  CustomPhoneField(
+      {Key? key,
+      this.readonly = false,
+      required this.controller,
+      required this.type,
+      required this.hintText,
+      required this.labelText,
+      this.format,
+      this.inputFormatters})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -28,32 +37,31 @@ class CustomPhoneField extends StatelessWidget {
       decoration: BoxDecoration(
           color: Colors.transparent,
           borderRadius: BorderRadius.circular(10),
-          border: Border.all(
-              color: AppStyles.grey.withOpacity(0.2)
-          )
-        // border: Border.all(color: )
-      ),
-      child: Padding(padding: EdgeInsets.symmetric(horizontal: 1.h).copyWith(top: 0.5.h, bottom: 0.5.h),
-          child:Row(
+          border: Border.all(color: AppStyles.grey.withOpacity(0.2))
+          // border: Border.all(color: )
+          ),
+      child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 1.h)
+              .copyWith(top: 0.5.h, bottom: 0.5.h),
+          child: Row(
             children: [
               GestureDetector(
-                onTap: (){
+                onTap: () {
                   showCountryPicker(
                       context: context,
                       //countryFilter: <String>['IN', 'IT'],
                       favorite: <String>['IN'],
                       showPhoneCode: true,
                       onSelect: (Country country) {
-                        String countryCode =
-                            ' (+${country.phoneCode})';
+                        String countryCode = ' (+${country.phoneCode})';
                         StreamUtil.countrycode.add(country.phoneCode);
-
                       },
                       // Optional. Sets the theme for the country list picker.
                       countryListTheme: CountryListThemeData(
                         flagSize: 30.0,
-                        bottomSheetHeight:550,
-                        textStyle: AppStyles.verifystyle.copyWith(fontSize: 15.sp),
+                        bottomSheetHeight: 550,
+                        textStyle:
+                            AppStyles.verifystyle.copyWith(fontSize: 15.sp),
                         borderRadius: BorderRadius.only(
                           topLeft: Radius.circular(25.0),
                           topRight: Radius.circular(25.0),
@@ -68,12 +76,9 @@ class CustomPhoneField extends StatelessWidget {
                               borderSide: BorderSide(
                                 color: const Color(0xFF8C98A8).withOpacity(0.2),
                               ),
-                              borderRadius: BorderRadius.circular(25.0)
-                          ),
+                              borderRadius: BorderRadius.circular(25.0)),
                         ),
-                      )
-                  );
-
+                      ));
                 },
                 child: Padding(
                   padding: const EdgeInsets.all(12.0),
@@ -86,9 +91,12 @@ class CustomPhoneField extends StatelessWidget {
                       StreamBuilder<String>(
                           stream: StreamUtil.countrycode,
                           builder: (context, snapshot) {
-                            return Text('+${snapshot.data!} | ',style: AppStyles.verifystyle.copyWith(fontSize: 15.sp),);
-                          }
-                      )
+                            return Text(
+                              '+${snapshot.data!} | ',
+                              style: AppStyles.verifystyle
+                                  .copyWith(fontSize: 15.sp),
+                            );
+                          })
                     ],
                   ),
                 ),
@@ -100,32 +108,34 @@ class CustomPhoneField extends StatelessWidget {
                   keyboardType: type,
                   maxLength: 10,
                   textInputAction: TextInputAction.next,
-
-                  inputFormatters: format == 'normal'? [FilteringTextInputFormatter.allow(RegExp(r"[a-zA-Z]+|\s"),)
-                  ] : inputFormatters, style: AppStyles.verifystyle.copyWith(fontSize: 14.sp, fontWeight: FontWeight.w400),
+                  readOnly: readonly,
+                  inputFormatters: format == 'normal'
+                      ? [
+                          FilteringTextInputFormatter.allow(
+                            RegExp(r"[a-zA-Z]+|\s"),
+                          )
+                        ]
+                      : inputFormatters,
+                  style: AppStyles.verifystyle
+                      .copyWith(fontSize: 14.sp, fontWeight: FontWeight.w400),
                   decoration: InputDecoration(
                     counterText: '',
-
                     isDense: true,
                     hintText: hintText,
                     hintStyle: AppStyles.termstyle,
                     labelText: labelText,
                     labelStyle: AppStyles.termstyle,
-
                     focusedBorder: InputBorder.none,
                     errorBorder: InputBorder.none,
                     enabledBorder: InputBorder.none,
                     disabledBorder: InputBorder.none,
                     focusedErrorBorder: InputBorder.none,
                     border: InputBorder.none,
-
                   ),
-
                 ),
               ),
             ],
-          )
-      ),
+          )),
     );
   }
 }

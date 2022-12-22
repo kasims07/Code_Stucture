@@ -3,7 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
+import '../app_screens/app_screens.dart';
 import '../constants/asset_path.dart';
+import '../widgets/custom_dialog_bottom_button.dart';
+import 'app_styles.dart';
 
 
 
@@ -347,7 +350,74 @@ class AlertUtils {
   }
 
 
+  static void congratulatepopup
+      ({
+    BuildContext? context,
+    Function? pressLogout,
+    Function? pressCancle,
+    String? title,
+    String? message,
+    String? btn1,
+    String? btn2,
+  }) {
+    showGeneralDialog(
+      barrierLabel: "Label2",
+      barrierDismissible: false,
+      barrierColor: Colors.black45.withOpacity(0.5),
+      transitionDuration: const Duration(milliseconds: 500),
+      context: context!,
+      pageBuilder: (context, anim1, anim2) {
+        return Align(
+          alignment: Alignment.center,
+          child: SizedBox(
+            height: 370.h,
+            width: 350.w,
+            child: SizedBox.expand(
+              child: ClipRRect(
+                borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(10.sp),
+                    topRight: Radius.circular(10.sp),
+                    bottomLeft: Radius.circular(10.sp),
+                    bottomRight: Radius.circular(10.sp)
+                ),
+                child: Scaffold(
+                  body: Padding(
+                      padding: EdgeInsets.only(top: 32.sp, right: 16.sp, left: 16.sp, bottom: 18.sp),
+                      child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Image.asset(ImageAssetPath.congoImage, height: 153.h, width: 220.02.w),
+                            SizedBox(height: 18.h),
+                            Text('Congratulation', style: AppStyles.verifystyle.copyWith(fontSize: 18.42)) ,
+                            SizedBox(height: 10.h),
+                            Text('You have successfully booked your\nservice', textAlign:TextAlign.center, style: AppStyles.termstyle),
+                            SizedBox(height: 20.h),
+                            CustomDialogBottomButton(
+                              title:'GO TO HOME',
+                              onPress: (){
+                                Navigator.pushNamed(context, AppScreens.dashboardScreen);
+                              },
+                            )
 
+                          ]
+                      )
+                  ),
+                ),
+              ),
+            ),
+          ),
+        );
+      },
+      transitionBuilder: (context, anim1, anim2, child) {
+        return SlideTransition(
+          position: Tween(begin: const Offset(0, 1), end: const Offset(0, 0))
+              .animate(anim1),
+          child: child,
+        );
+      },
+    ).then((value) => {print('Dialogue dismissed')});
+  }
 
 
 }

@@ -6,12 +6,16 @@ import 'package:logger/logger.dart';
 
 import '../api_client/dio_client.dart';
 import '../app_preferences/preference_manager.dart';
+import '../screens/Account_screens/editProfile/repository/editprofile_repository.dart';
+import '../screens/Account_screens/editProfile/repository/editprofile_repository_impl.dart';
 import '../screens/dashBoard/repository/dashboard_repository.dart';
 import '../screens/dashBoard/repository/dashboard_repository_impl.dart';
 import '../screens/otpScreen/repository/login_repository.dart';
 import '../screens/otpScreen/repository/login_repository_impl.dart';
 import '../screens/profileScreen/repository/profile_repository.dart';
 import '../screens/profileScreen/repository/profile_repository_impl.dart';
+import '../screens/serviceDetailsScreens/addDetailsBookservice/repository/lbservice_repository.dart';
+import '../screens/serviceDetailsScreens/addDetailsBookservice/repository/lbservice_repository_impl.dart';
 import '../screens/serviceDetailsScreens/serviceDetails/repository/category_repository.dart';
 import '../screens/serviceDetailsScreens/serviceDetails/repository/category_repository_impl.dart';
 import '../screens/serviceDetailsScreens/subserviceDetails/repository/subservice_repository.dart';
@@ -42,5 +46,11 @@ void setupDependencies(){
 
   //subservice
   _getIt.registerSingleton<SubserviceRepository>(SubserviceImpl());
+
+  //loginbookservice
+  _getIt.registerSingleton<LbserviceRepository>(LbserviceImpl());
+
+  //editprofile update
+  _getIt.registerSingleton<EditProfileRepository>(EditProfileImpl());
 
 }

@@ -7,6 +7,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../app_screens/app_screens.dart';
 import '../../constants/asset_path.dart';
+import '../../utils/stream_builder.dart';
 import '../../widgets/custom_account_row.dart';
 import '../../widgets/custom_bottom_button.dart';
 
@@ -43,7 +44,12 @@ class AccountScreen extends StatelessWidget {
                    child : Column(
                      children:[
                        SizedBox(height: 83.h),
-                       Text('Jeson Roy', style: AppStyles.verifystyle),
+                       StreamBuilder<String>(
+                         stream: StreamUtil.username,
+                         builder: (context, snapshot) {
+                           return Text('${snapshot.data}', style: AppStyles.verifystyle);
+                         }
+                       ),
                        SizedBox(height: 42),
 
                        InkWell(

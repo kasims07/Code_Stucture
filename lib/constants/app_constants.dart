@@ -7,6 +7,7 @@ class AppConstants {
 static const TOKEN = 'token';
 static const login = 'login';
 
+
 }
 class CommonMessage {
   static const errorGenericMessage = 'something went wrong';

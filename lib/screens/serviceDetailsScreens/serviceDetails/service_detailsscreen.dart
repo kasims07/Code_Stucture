@@ -9,6 +9,7 @@ import '../../../app_screens/app_screens.dart';
 import '../../../constants/asset_path.dart';
 import '../../../utils/alert_utils.dart';
 import '../../../utils/app_utils.dart';
+import '../../../utils/stream_builder.dart';
 import '../../../widgets/custom_account_backbutton.dart';
 import '../../../widgets/custom_backicon_button.dart';
 import '../../../widgets/custom_photo_cotainer.dart';
@@ -132,6 +133,8 @@ class _ServiceDetailsScreenState extends State<ServiceDetailsScreen> {
                                                       itemBuilder: (buildcontext, index){
                                                         return InkWell(
                                                             onTap: (){
+                                                              StreamUtil.subserviceid.add(categorydata!.data!.subServices![index].id!);
+                                                              StreamUtil.subservicename.add(categorydata!.data!.subServices![index].name!);
                                                               Navigator.pushNamed(context, AppScreens.subserviceDetails, arguments:{'subserviceid':categorydata!.data!.subServices![index].id!} );
                                                             },
                                                             child: CustomServiceContainer(text: categorydata!.data!.subServices![index].name!,));
