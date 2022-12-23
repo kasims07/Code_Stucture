@@ -6,8 +6,14 @@ import 'package:logger/logger.dart';
 
 import '../api_client/dio_client.dart';
 import '../app_preferences/preference_manager.dart';
+import '../screens/Account_screens/addAddress/repository/add_address_repository.dart';
+import '../screens/Account_screens/addAddress/repository/add_address_repository_impl.dart';
 import '../screens/Account_screens/editProfile/repository/editprofile_repository.dart';
 import '../screens/Account_screens/editProfile/repository/editprofile_repository_impl.dart';
+import '../screens/change_address/repository/change_address_repository.dart';
+import '../screens/change_address/repository/change_address_repository_impl.dart';
+import '../screens/change_address/repository/delete_address_reository.dart';
+import '../screens/change_address/repository/delete_address_repository_impl.dart';
 import '../screens/dashBoard/repository/dashboard_repository.dart';
 import '../screens/dashBoard/repository/dashboard_repository_impl.dart';
 import '../screens/otpScreen/repository/login_repository.dart';
@@ -53,4 +59,12 @@ void setupDependencies(){
   //editprofile update
   _getIt.registerSingleton<EditProfileRepository>(EditProfileImpl());
 
+  //addaddress
+  _getIt.registerSingleton<AddAddressRepository>(AddAddressImpl());
+
+  //addresslist
+  _getIt.registerSingleton<ChangeAddressRepository>(ChangeAddressImpl());
+
+  //deleteaddress
+  _getIt.registerSingleton<DeleteAddressRepository>(DeleteAddressImpl());
 }

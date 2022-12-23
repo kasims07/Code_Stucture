@@ -164,7 +164,7 @@ class _SubserviceDetailsState extends State<SubserviceDetails> {
                                 Padding(
                                   padding: const EdgeInsets.only(top: 15, bottom: 15),
                                   child: Container(
-                                      height : 191.h,
+                                     // height : 191.h,
                                       width: 350.w,
                                       padding: EdgeInsets.only(top:21 , right: 21, left: 18),
                                       decoration: BoxDecoration(

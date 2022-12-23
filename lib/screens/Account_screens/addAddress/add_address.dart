@@ -4,22 +4,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../../utils/alert_utils.dart';
 import '../../../utils/app_styles.dart';
+import '../../../utils/app_utils.dart';
 import '../../../widgets/custom_account_backbutton.dart';
 import '../../../widgets/custom_address_textfield.dart';
 import '../../../widgets/custom_bottom_button.dart';
 import '../../../widgets/custom_small_containers.dart';
 import 'bloc/add_address_bloc.dart';
 
-class AddAddress extends StatelessWidget {
-  TextEditingController addresscontroller = TextEditingController();
-  TextEditingController housenocontroller = TextEditingController();
-  TextEditingController statecontroller = TextEditingController();
-  TextEditingController citycontroller = TextEditingController();
-  TextEditingController zipcodecontroller = TextEditingController();
-  bool isHomeSelected = false;
-  bool isWorkSelected = false;
-  bool isOtherSelected = false;
+class AddAddress extends StatefulWidget {
+
   AddAddress({Key? key}) : super(key: key);
 
   static Widget create(){
@@ -34,9 +29,42 @@ class AddAddress extends StatelessWidget {
   }
 
   @override
+  State<AddAddress> createState() => _AddAddressState();
+}
+
+class _AddAddressState extends State<AddAddress> {
+  TextEditingController addresscontroller = TextEditingController();
+
+  TextEditingController housenocontroller = TextEditingController();
+
+  TextEditingController statecontroller = TextEditingController();
+
+  TextEditingController citycontroller = TextEditingController();
+
+  TextEditingController zipcodecontroller = TextEditingController();
+
+  bool isHomeSelected = true;
+
+  bool isWorkSelected = false;
+
+  bool isOtherSelected = false;
+
+  String addresstype = 'Home';
+
+  @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: Scaffold(
+      child: BlocConsumer<AddAddressBloc, AddAddressState>(
+  listener: (context, state) {
+    // TODO: implement listener
+    if(state.isCompleted){
+      print('========is working ===========');
+      AlertUtils.showToast('Address added successfully');
+      Navigator.pop(context);
+    }
+  },
+  builder: (context, state) {
+    return Scaffold(
         body: SingleChildScrollView(
           child: Container(
       //height: 809.8.h,
@@ -114,24 +142,75 @@ class AddAddress extends StatelessWidget {
                       Text('Address Type',style: AppStyles.homelogostyle.copyWith(fontWeight: FontWeight.w500),),
                       SizedBox(height: 15.h),
                       Row(mainAxisAlignment:MainAxisAlignment.spaceAround,children: [
-                        CustomSmallContainer(
-                          selectedbool: isHomeSelected,
-                          text: 'Home',
-                        ),
-                        CustomSmallContainer(
-                          selectedbool: isWorkSelected,
-                          text: 'Work',
-                        ),
-                        CustomSmallContainer(
-                          selectedbool: isOtherSelected,
-                          text: 'Other',
+                        InkWell(
+                          onTap: (){
+                          setState(() {
+                            isHomeSelected = true;
+                            isWorkSelected = false;
+                            isOtherSelected = false;
+                            addresstype = 'Home';
+                          });
+                  },
+                          child: CustomSmallContainer(
+
+                            isSelected: isHomeSelected,
+                            text: 'Home',
                           ),
+                        ),
+                        InkWell(
+                          onTap: (){
+                            setState(() {
+                              isHomeSelected = false;
+                              isWorkSelected = true;
+                              isOtherSelected = false;
+                              addresstype = 'Work';
+                            });
+                          },
+                          child: CustomSmallContainer(
+                            isSelected: isWorkSelected,
+                            text: 'Work',
+                          ),
+                        ),
+                        InkWell(
+                          onTap: (){
+                            setState(() {
+                              isHomeSelected = false;
+                              isWorkSelected = false;
+                              isOtherSelected = true;
+                              addresstype = 'Other';
+                            });
+                          },
+                          child: CustomSmallContainer(
+                            isSelected: isOtherSelected,
+                            text: 'Other',
+                            ),
+                        ),
                               ],)
                     ],),
                   ),
                   SizedBox(height: 82.h),
                   CustomBottomButton(
-                    onPress: null,
+                    onPress: () async {
+                      bool isInternet = await AppUtils.checkInternet();
+                      if (isInternet) {
+                        var data = {
+                          "address": addresscontroller.text,
+                          "houseno" : housenocontroller.text,
+                          "state" : statecontroller.text,
+                          "city"  : citycontroller.text,
+                          "Zipcode" : zipcodecontroller.text,
+                          "addresstype" : addresstype,
+                        };
+
+                        BlocProvider.of<AddAddressBloc>(context).add(
+                          PerformAddAddressEvent(data: data),
+                        );
+
+                      } else {
+                        AlertUtils.showNotInternetDialogue(context);
+                      }
+
+                    },
                     text:'ADD' ,
                   ),
                 ],
@@ -140,6 +219,8 @@ class AddAddress extends StatelessWidget {
     ]
       ),
     ),
-        )));
+        ));
+  },
+));
   }
 }

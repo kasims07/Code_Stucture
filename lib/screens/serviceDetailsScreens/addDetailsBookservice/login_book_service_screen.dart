@@ -84,7 +84,7 @@ class _LoginBookServiceScreenState extends State<LoginBookServiceScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  SizedBox(height: 10),
+                  SizedBox(height: 50),
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.start,
@@ -96,6 +96,7 @@ class _LoginBookServiceScreenState extends State<LoginBookServiceScreen> {
                         children: [
                           Text(StreamUtil.categoryname.value,
                               style: AppStyles.profilestyle),
+                          SizedBox(height: 15),
                           Text(StreamUtil.subservicename.value,
                               style: AppStyles.termstyle),
                           Row(
@@ -120,8 +121,7 @@ class _LoginBookServiceScreenState extends State<LoginBookServiceScreen> {
                       )
                     ],
                   ),
-
-                  /*Row(children: [
+/*Row(children: [
                     CustomAccountBackbutton(),
                     SizedBox(width: 49.62.w),
                     Text(StreamUtil.categoryname.value,
@@ -149,9 +149,10 @@ class _LoginBookServiceScreenState extends State<LoginBookServiceScreen> {
                         Text('₹ 2099', style: AppStyles.buttonstyle.copyWith(
                             fontSize: 16.sp),)
                       ]),*/
+
                   SizedBox(height: 15.h),
                   Container(
-                      height: 691.h,
+                      //height: 691.h,
                       width: 390.w,
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.only(

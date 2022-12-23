@@ -9,8 +9,10 @@ class CustomChangeAddressContainer extends StatelessWidget {
 
   String text;
   String tickimage;
+  String address;
+  Function onDelete;
 
-  CustomChangeAddressContainer({Key? key, required this.text, required this.tickimage}) : super(key: key);
+  CustomChangeAddressContainer({Key? key,required this.address, required this.onDelete, required this.text, required this.tickimage}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -45,10 +47,20 @@ class CustomChangeAddressContainer extends StatelessWidget {
                       children: [
                         SvgPicture.asset(ImageAssetPath.bookLocation, height: 43.h, width: 43.w),
                         SizedBox(width: 8.w),
-                        Text('1270 D Street Southfield\nMI 48235 ', style: AppStyles.sfstyle),
+                        Text(address, style: AppStyles.sfstyle),
                       ],
                     ),
-                    SvgPicture.asset(tickimage, height: 16.67.h,width: 16.67.h),
+                    Row(
+                      children: [
+                        SvgPicture.asset(tickimage, height: 16.67.h,width: 16.67.h),
+                        SizedBox(width: 15.w),
+                        InkWell(
+                            onTap: (){
+                              onDelete!();
+                            },
+                            child: SvgPicture.asset(ImageAssetPath.trashIcon, height: 20.h, width: 20.h)),
+                      ],
+                    ),
 
                   ],
                 ),
