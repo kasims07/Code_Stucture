@@ -67,7 +67,8 @@ class AccountScreen extends StatelessWidget {
                        SizedBox(height: 31),
                        InkWell(
                          onTap: (){
-                           Navigator.pushNamed(context, AppScreens.manageAddress);
+                           StreamUtil.addressbuttoncondition.add(1);
+                           Navigator.pushNamed(context, AppScreens.changeAddress);
                          },
                          child: CustomAccountRow(
                            text :'Manage Address',

@@ -11,6 +11,7 @@ import '../../../app_screens/app_screens.dart';
 import '../../../constants/asset_path.dart';
 import '../../../utils/alert_utils.dart';
 import '../../../utils/app_utils.dart';
+import '../../../utils/date_time_utils.dart';
 import '../../../utils/stream_builder.dart';
 import '../../../widgets/custom_account_backbutton.dart';
 import '../../../widgets/custom_bottom_button.dart';
@@ -48,6 +49,11 @@ class _LoginBookServiceScreenState extends State<LoginBookServiceScreen> {
 
   TextEditingController numbercontroller = TextEditingController();
 
+
+
+  String? updateDate;
+  String? dateForShown;
+
   List<dynamic> timelist = [
     '08:00',
     '10:00',
@@ -57,6 +63,9 @@ class _LoginBookServiceScreenState extends State<LoginBookServiceScreen> {
     '02:00',
     '03:00'
   ];
+
+  int selectIndex = 0;
+  String selectTime =  '08:00';
 
 
  @override
@@ -194,6 +203,7 @@ class _LoginBookServiceScreenState extends State<LoginBookServiceScreen> {
                               SizedBox(height: 10.h),
                               InkWell(
                                 onTap: () {
+                                  StreamUtil.addressbuttoncondition.add(0);
                                   Navigator.pushNamed(
                                       context, AppScreens.changeAddress);
                                 },
@@ -224,36 +234,72 @@ class _LoginBookServiceScreenState extends State<LoginBookServiceScreen> {
                               Text('Select Date & Time Slot', style: AppStyles
                                   .homelogostyle.copyWith(fontSize: 15.sp),),
                               SizedBox(height: 16.h),
-                              Container(
-                                height: 55.h,
-                                width: 350.w,
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(5),
-                                    border: Border.all(
-                                        color: AppStyles.grey.withOpacity(0.20))
-                                ),
-                                child: Padding(padding: EdgeInsets.symmetric(
-                                    horizontal: 18.sp, vertical: 5),
-                                  child:
+                              InkWell(
+                                onTap: ()async {
+                                  DateTime? newDate = await showDatePicker(
+                                    context: context,
+                                    firstDate: DateTime.now(),
+                                    lastDate:DateTime(2322),
+                                    initialDate: DateTime.now(),
+                                    builder: (context, child) {
+                                      return Theme(
+                                        data: Theme.of(context).copyWith(
+                                          colorScheme:  ColorScheme.light(
+                                            primary: AppStyles.red,
+                                            onPrimary: AppStyles.white,
+                                            onSurface: AppStyles.black,
+                                          ),
+                                          textButtonTheme: TextButtonThemeData(
+                                            style: TextButton.styleFrom(
+                                              primary: AppStyles
+                                                  .red, // button text color
+                                            ),
+                                          ),
+                                        ),
+                                        child: child!,
+                                      );
+                                    },
+                                  );
+                                  setState(() {
+                                    updateDate =
+                                        DateTimeUtils.formatBirthDate(newDate);
+                                    dateForShown =
+                                        DateTimeUtils.formatBirthDateForShown(
+                                            newDate);
+                                  });
+                                  print(updateDate);
+                                },
+                                child: Container(
+                                  height: 55.h,
+                                  width: 350.w,
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(5),
+                                      border: Border.all(
+                                          color: AppStyles.grey.withOpacity(0.20))
+                                  ),
+                                  child: Padding(padding: EdgeInsets.symmetric(
+                                      horizontal: 18.sp, vertical: 5),
+                                    child:
 
-                                  Row(mainAxisAlignment: MainAxisAlignment
-                                      .spaceBetween,
-                                    children: [
-                                      Column(
-                                        crossAxisAlignment: CrossAxisAlignment.start,
-                                        children: [
-                                          Text('Date',
-                                            style: AppStyles.termstyle.copyWith(
-                                                fontSize: 12.sp),),
-                                          SizedBox(height: 2.h),
-                                          Text('25 Jun, 2022',
-                                              style: AppStyles.homelogostyle
-                                                  .copyWith(fontSize: 14.sp)),
-                                        ],),
-                                      SvgPicture.asset(
-                                          ImageAssetPath.redbooking,
-                                          height: 20.h, width: 18.w),
-                                    ],
+                                    Row(mainAxisAlignment: MainAxisAlignment
+                                        .spaceBetween,
+                                      children: [
+                                        Column(
+                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          children: [
+                                            Text('Date',
+                                              style: AppStyles.termstyle.copyWith(
+                                                  fontSize: 12.sp),),
+                                            SizedBox(height: 2.h),
+                                            Text(dateForShown ?? 'Select Date',
+                                                style: AppStyles.homelogostyle
+                                                    .copyWith(fontSize: 14.sp)),
+                                          ],),
+                                        SvgPicture.asset(
+                                            ImageAssetPath.redbooking,
+                                            height: 20.h, width: 18.w),
+                                      ],
+                                    ),
                                   ),
                                 ),
                               ),
@@ -270,9 +316,17 @@ class _LoginBookServiceScreenState extends State<LoginBookServiceScreen> {
                                   itemBuilder: (context, index) {
                                     return Padding(
                                       padding: const EdgeInsets.all(3),
-                                      child: CustomTimeContainer(
-
-                                        time: timelist[index],
+                                      child: InkWell(
+                                        onTap: (){
+                                          setState(() {
+                                            selectIndex = index;
+                                            selectTime = timelist[index];
+                                          });
+                                        },
+                                        child: CustomTimeContainer(
+                                          time: timelist[index],
+                                            isSelected: selectIndex==index ? true: false
+                                        ),
                                       ),
                                     );
                                   }

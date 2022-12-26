@@ -55,7 +55,7 @@ class LoggingInterceptor extends InterceptorsWrapper {
 
   @override
   void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
-    //_logger.d(options.path);
+    _logger.d(options.path);
     _logger.d(options.queryParameters.toString());
     _logger.d(options.headers.toString());
     _logger.d(options.data);

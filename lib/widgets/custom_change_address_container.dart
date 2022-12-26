@@ -4,6 +4,7 @@ import 'package:flutter_svg/svg.dart';
 
 import '../constants/asset_path.dart';
 import '../utils/app_styles.dart';
+import '../utils/stream_builder.dart';
 
 class CustomChangeAddressContainer extends StatelessWidget {
 
@@ -29,8 +30,23 @@ class CustomChangeAddressContainer extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(text, style: AppStyles.redstyle.copyWith(fontSize: 14.sp),),
-
+              Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                Text(text, style: AppStyles.redstyle.copyWith(fontSize: 14.sp),),
+                Visibility(
+                  visible: StreamUtil.addressbuttoncondition.value == 1 ,
+                  child: Row(
+                    children: [
+                      SvgPicture.asset(ImageAssetPath.editIcon, height: 15.01.h, width: 15.02.h),
+                      SizedBox(width: 13.18),
+                      InkWell(
+                          onTap: (){
+                            onDelete!();
+                          },
+                          child: SvgPicture.asset(ImageAssetPath.trashIcon, height: 20.h, width: 20.h)),
+                  ],),
+                )
+              ],),
               SizedBox(height: 9.h),
               Container(
                 padding: EdgeInsets.only(top: 13.sp, bottom: 14.sp, right: 17.67.sp, left: 12.sp),
@@ -50,17 +66,9 @@ class CustomChangeAddressContainer extends StatelessWidget {
                         Text(address, style: AppStyles.sfstyle),
                       ],
                     ),
-                    Row(
-                      children: [
-                        SvgPicture.asset(tickimage, height: 16.67.h,width: 16.67.h),
-                        SizedBox(width: 15.w),
-                        InkWell(
-                            onTap: (){
-                              onDelete!();
-                            },
-                            child: SvgPicture.asset(ImageAssetPath.trashIcon, height: 20.h, width: 20.h)),
-                      ],
-                    ),
+                    Visibility(
+                        visible: StreamUtil.addressbuttoncondition.value == 0,
+                        child: SvgPicture.asset(tickimage, height: 16.67.h,width: 16.67.h)),
 
                   ],
                 ),

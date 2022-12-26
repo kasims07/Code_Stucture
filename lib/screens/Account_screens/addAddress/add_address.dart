@@ -7,24 +7,31 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../utils/alert_utils.dart';
 import '../../../utils/app_styles.dart';
 import '../../../utils/app_utils.dart';
+import '../../../utils/stream_builder.dart';
 import '../../../widgets/custom_account_backbutton.dart';
 import '../../../widgets/custom_address_textfield.dart';
 import '../../../widgets/custom_bottom_button.dart';
 import '../../../widgets/custom_small_containers.dart';
+import '../../change_address/model/address_list_model.dart';
 import 'bloc/add_address_bloc.dart';
+import 'bloc/edit_address_bloc.dart';
 
 class AddAddress extends StatefulWidget {
+  Datum? addressdata;
 
-  AddAddress({Key? key}) : super(key: key);
+  AddAddress({Key? key,this.addressdata}) : super(key: key);
 
-  static Widget create(){
+  static Widget create( Datum? addressdata){
     return MultiBlocProvider(
       providers: [
         BlocProvider<AddAddressBloc>(
           create: (_) => AddAddressBloc(),
         ),
+        BlocProvider<EditAddressBloc>(
+          create: (_) => EditAddressBloc(),
+        ),
       ],
-      child: AddAddress(),
+      child: AddAddress(addressdata: addressdata,),
     );
   }
 
@@ -52,14 +59,30 @@ class _AddAddressState extends State<AddAddress> {
   String addresstype = 'Home';
 
   @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    setdata();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: BlocConsumer<AddAddressBloc, AddAddressState>(
+      child: BlocConsumer<EditAddressBloc, EditAddressState>(
   listener: (context, state) {
     // TODO: implement listener
     if(state.isCompleted){
-      print('========is working ===========');
-      AlertUtils.showToast('Address added successfully');
+      AlertUtils.showToast('Address has been updated successfully');
+      Navigator.pop(context);
+    }
+  },
+  builder: (context, state) {
+    return BlocConsumer<AddAddressBloc, AddAddressState>(
+  listener: (context, state) {
+    // TODO: implement listener
+    if(state.isCompleted){
+
+      AlertUtils.showToast('Address has been added successfully');
       Navigator.pop(context);
     }
   },
@@ -92,12 +115,13 @@ class _AddAddressState extends State<AddAddress> {
                    ),
                   color: AppStyles.white,
               ),
+
               child: Column(
                 children: [
                   CustomAddressTextfield(
                     controller:addresscontroller ,
                     type: TextInputType.streetAddress,
-                    hintText: 'Address',
+                    hintText: 'Street name',
                     labelText: 'Address',
                   ),
                   SizedBox(height: 15),
@@ -191,26 +215,8 @@ class _AddAddressState extends State<AddAddress> {
                   SizedBox(height: 82.h),
                   CustomBottomButton(
                     onPress: () async {
-                      bool isInternet = await AppUtils.checkInternet();
-                      if (isInternet) {
-                        var data = {
-                          "address": addresscontroller.text,
-                          "houseno" : housenocontroller.text,
-                          "state" : statecontroller.text,
-                          "city"  : citycontroller.text,
-                          "Zipcode" : zipcodecontroller.text,
-                          "addresstype" : addresstype,
-                        };
-
-                        BlocProvider.of<AddAddressBloc>(context).add(
-                          PerformAddAddressEvent(data: data),
-                        );
-
-                      } else {
-                        AlertUtils.showNotInternetDialogue(context);
-                      }
-
-                    },
+                      validation();
+                      },
                     text:'ADD' ,
                   ),
                 ],
@@ -221,6 +227,98 @@ class _AddAddressState extends State<AddAddress> {
     ),
         ));
   },
+);
+  },
 ));
   }
+
+  void validation() async {
+    if (addresscontroller.text.isEmpty) {
+      AlertUtils.showToast('Please enter Street name ');
+    }
+    else if (housenocontroller.text.isEmpty) {
+      AlertUtils.showToast('Please enter house number');
+    }
+    else if (statecontroller.text.isEmpty) {
+      AlertUtils.showToast('Please enter state name');
+    }
+    else if (citycontroller.text.isEmpty) {
+      AlertUtils.showToast('PLease enter state name');
+    }
+    else if (zipcodecontroller.text.isEmpty) {
+      AlertUtils.showToast('PLease enter state zipcode');
+    }
+    else if (addresstype.isEmpty) {
+      AlertUtils.showToast('PLease enter address type');
+    }
+    else{
+      if(StreamUtil.addresscondition.value == 0){
+        bool isInternet = await AppUtils.checkInternet();
+        if (isInternet) {
+          var data = {
+            "address": addresscontroller.text,
+            "houseno": housenocontroller.text,
+            "state": statecontroller.text,
+            "city": citycontroller.text,
+            "Zipcode": zipcodecontroller.text,
+            "addresstype": addresstype,
+          };
+
+          BlocProvider.of<AddAddressBloc>(context).add(
+            PerformAddAddressEvent(data: data),
+          );
+        }  else {
+          AlertUtils.showNotInternetDialogue(context);
+        }
+      }
+      else{
+        bool isInternet = await AppUtils.checkInternet();
+        if (isInternet) {
+          var data = {
+            "address": addresscontroller.text,
+            "houseno": housenocontroller.text,
+            "state": statecontroller.text,
+            "city": citycontroller.text,
+            "Zipcode": zipcodecontroller.text,
+            "addresstype": addresstype,
+          };
+
+          BlocProvider.of<EditAddressBloc>(context).add(
+            PerformEditAddressEvent(data: data),
+          );
+        } else {
+          AlertUtils.showNotInternetDialogue(context);
+        }
+      }
+
+    }
+  }
+
+
+  void setdata() {
+    if(StreamUtil.addresscondition.value == 1){
+      addresscontroller.text = widget.addressdata!.address!;
+      housenocontroller.text = widget.addressdata!.houseno!.toString();
+      statecontroller.text = widget.addressdata!.state!;
+      citycontroller.text = widget.addressdata!.city!;
+      zipcodecontroller.text = widget.addressdata!.zipcode!.toString();
+      if(widget.addressdata!.addresstype == 'Home'){
+        isHomeSelected = true;
+        isWorkSelected = false;
+        isOtherSelected = false;
+      }
+      else  if(widget.addressdata!.addresstype == 'Work'){
+        isWorkSelected = true;
+        isHomeSelected = false;
+        isOtherSelected = false;
+      }
+      else  {
+        isOtherSelected = true;
+        isWorkSelected = false;
+        isHomeSelected = false;
+      }
+
+    }
+  }
+
 }

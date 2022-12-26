@@ -8,6 +8,8 @@ import '../api_client/dio_client.dart';
 import '../app_preferences/preference_manager.dart';
 import '../screens/Account_screens/addAddress/repository/add_address_repository.dart';
 import '../screens/Account_screens/addAddress/repository/add_address_repository_impl.dart';
+import '../screens/Account_screens/addAddress/repository/edit_address_repository.dart';
+import '../screens/Account_screens/addAddress/repository/edit_address_repository_impl.dart';
 import '../screens/Account_screens/editProfile/repository/editprofile_repository.dart';
 import '../screens/Account_screens/editProfile/repository/editprofile_repository_impl.dart';
 import '../screens/change_address/repository/change_address_repository.dart';
@@ -67,4 +69,7 @@ void setupDependencies(){
 
   //deleteaddress
   _getIt.registerSingleton<DeleteAddressRepository>(DeleteAddressImpl());
+
+  //editaddress
+  _getIt.registerSingleton<EditAddressRepository>(EditAddressImpl());
 }

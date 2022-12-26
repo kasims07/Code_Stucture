@@ -15,21 +15,14 @@ class CustomTimeContainer extends StatefulWidget {
 class _CustomTimeContainerState extends State<CustomTimeContainer> {
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: (){
-        setState(() {
-          widget.isSelected ==true ? widget.isSelected = false : widget.isSelected = true;
-        });
-      },
-      child: Container(
-      height: 22.h,
-          width: 77.w,
-        decoration: BoxDecoration(borderRadius: BorderRadius.circular(5),
-        color: widget.isSelected == true ? AppStyles.black : AppStyles.white,
-        border: Border.all(color: widget.isSelected == true ? AppStyles.black : AppStyles.grey.withOpacity(0.20))),
-        child: Center(
-          child: Text(widget.time!,style: widget.isSelected == true ? AppStyles.buttonstyle.copyWith(fontWeight: FontWeight.w500) : AppStyles.termstyle),
-        ),
+    return Container(
+    height: 22.h,
+        width: 77.w,
+      decoration: BoxDecoration(borderRadius: BorderRadius.circular(5),
+      color: widget.isSelected == true ? AppStyles.black : AppStyles.white,
+      border: Border.all(color: widget.isSelected == true ? AppStyles.black : AppStyles.grey.withOpacity(0.20))),
+      child: Center(
+        child: Text(widget.time!,style: widget.isSelected == true ? AppStyles.buttonstyle.copyWith(fontWeight: FontWeight.w500) : AppStyles.termstyle),
       ),
     );
   }

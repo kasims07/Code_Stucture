@@ -10,11 +10,13 @@ import '../../constants/asset_path.dart';
 import '../../utils/alert_utils.dart';
 import '../../utils/app_styles.dart';
 import '../../utils/app_utils.dart';
+import '../../utils/stream_builder.dart';
 import '../../widgets/custom_account_backbutton.dart';
 import '../../widgets/custom_address_container.dart';
 
 import '../../widgets/custom_bottom_button.dart';
 import '../../widgets/custom_change_address_container.dart';
+import '../Account_screens/addAddress/bloc/edit_address_bloc.dart';
 import 'bloc/change_address_bloc.dart';
 import 'bloc/delete_address_bloc.dart';
 import 'model/address_list_model.dart';
@@ -31,6 +33,7 @@ class ChangeAddress extends StatefulWidget {
         BlocProvider<DeleteAddressBloc>(
           create: (_) => DeleteAddressBloc(),
         ),
+
       ],
       child: ChangeAddress(),
     );
@@ -88,8 +91,9 @@ class _ChangeAddressState extends State<ChangeAddress> {
                                     style: AppStyles.profilestyle,),
                                   InkWell(
                                     onTap: () {
+                                      StreamUtil.addresscondition.add(0);
                                       Navigator.pushNamed(
-                                          context, AppScreens.addAddress);
+                                          context, AppScreens.addAddress, arguments:{'addressdata':null});
                                     },
                                     child: Row(children: [
                                       SvgPicture.asset(
@@ -119,36 +123,44 @@ class _ChangeAddressState extends State<ChangeAddress> {
                                   children: [
                                     for(int i = 0; i<addressdata!.data!.length; i++)
                                     Padding(padding: EdgeInsets.only(bottom: 10),
-                                      child: CustomChangeAddressContainer(
-                                        address: '${addressdata!.data![i].houseno}, ${addressdata!.data![i].address}, ${addressdata!.data![i].city}\n ${addressdata!.data![i].zipcode}',
-                                        text: ' ${addressdata!.data![i].addresstype}',
-                                        tickimage: '${ImageAssetPath.tickIcon}',
-                                        onDelete: () async {
-
-
-                                            deleteaddresspopup(context: context,  pressLogout: ()async{
-                                              bool isInternet = await AppUtils.checkInternet();
-                                              if(isInternet){
-                                                BlocProvider.of<DeleteAddressBloc>(context).add(
-                                                PerformDeleteAddressEvent(id: addressdata!.data![i].id!),
-                                              );
-                                              Navigator.pop(context);
-                                              } else {
-                                                AlertUtils.showNotInternetDialogue(context);
-                                              }
-
-                                            });
-
-                                            /*BlocProvider.of<DeleteAddressBloc>(context).add(
-                                              PerformDeleteAddressEvent(id: addressdata!.data![i].id!),
-                                            );*/
-
-
-
-
-
+                                      child: InkWell(
+                                        onTap: (){
+                                          StreamUtil.addresscondition.add(1);
+                                          StreamUtil.addressid.add(addressdata!.data![i].id!.toString());
+                                          Navigator.pushNamed(
+                                              context, AppScreens.addAddress, arguments:{'addressdata':addressdata!.data![i]});
                                         },
+                                        child: CustomChangeAddressContainer(
+                                          address: '${addressdata!.data![i].houseno}, ${addressdata!.data![i].address}, ${addressdata!.data![i].city}\n ${addressdata!.data![i].zipcode}',
+                                          text: ' ${addressdata!.data![i].addresstype}',
+                                          tickimage: '${ImageAssetPath.tickIcon}',
+                                          onDelete: () async {
 
+
+                                              deleteaddresspopup(context: context,  pressLogout: ()async{
+                                                bool isInternet = await AppUtils.checkInternet();
+                                                if(isInternet){
+                                                  BlocProvider.of<DeleteAddressBloc>(context).add(
+                                                  PerformDeleteAddressEvent(id: addressdata!.data![i].id!),
+                                                );
+                                                Navigator.pop(context);
+                                                } else {
+                                                  AlertUtils.showNotInternetDialogue(context);
+                                                }
+
+                                              });
+
+                                              /*BlocProvider.of<DeleteAddressBloc>(context).add(
+                                                PerformDeleteAddressEvent(id: addressdata!.data![i].id!),
+                                              );*/
+
+
+
+
+
+                                          },
+
+                                        ),
                                       ),),
 
 
@@ -224,53 +236,30 @@ class _ChangeAddressState extends State<ChangeAddress> {
                               SizedBox(height: 10.h),
                               Text('Are you sure you want to delete this address?', style: AppStyles.termstyle.copyWith(fontSize: 15.sp),),
                               SizedBox(height: 40.h),
-                              Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                children: [
-                                  InkWell(
-                                  onTap: (){
+                              CustomBottomButton(
+                                  onPress: (){
+                                    pressLogout!();
+                                  },
+                                  text: 'Yes'),
 
-                                  pressLogout!();
-                          },
-                          child:Container(
-                              height : 55.h,
-                              width:150.w,
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(10),
-                                  color: AppStyles.red
-                              ),
-                              child:Center(
-                                child: Text('Yes', style: AppStyles.buttonstyle ),
-                              )
-                          )
-                      ),
-                      InkWell(
-                          onTap: (){
-                            Navigator.pop(context);
-                          },
-                          child:Container(
-                              height : 55.h,
-                              width:150.w,
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(10),
-                                  color: AppStyles.red
-                              ),
-                              child:Center(
-                                child: Text('No', style: AppStyles.buttonstyle ),
-                              )
-                          )
-                      ),
-                                ],
-                              )
-
-                            ],
-                          )
-                      ),
+                              SizedBox(height: 20),
+                              TextButton(
+                                  onPressed: (){
+                                    Navigator.pop(context);
+                                  },
+                                  child: Text('Cancel', style:AppStyles.verifystyle.copyWith(fontSize: 14.sp) ,)),
+                              ]),
+                      )
                     )
-                ),
-              ),
-            ),
-          ),
-        );
+                      )
+
+                              )
+
+
+                          )
+                      ),
+                    );
+
       },
       transitionBuilder: (context, anim1, anim2, child) {
         return SlideTransition(

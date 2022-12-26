@@ -1,5 +1,5 @@
 class APIConstants {
-  static const baseUrl = 'https://91a8-2409-4041-2d17-a757-a940-e422-1fa-1458.in.ngrok.io/api/';
+  static const baseUrl = 'https://09b3-2409-4041-2e8a-ee34-f486-a09f-7ed9-fd6.in.ngrok.io/api/';
 
   //login user
 static const login = 'login/user/v1';

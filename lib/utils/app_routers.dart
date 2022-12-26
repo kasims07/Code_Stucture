@@ -107,9 +107,10 @@ class AppRouter {
         );
 
       case AppScreens.addAddress:
+        final arguments = settings.arguments as Map<String, dynamic>;
         return _buildRoute(
           settings,
-          AddAddress.create(),
+          AddAddress.create(arguments['addressdata']),
         );
          default:
         return _buildRoute(settings, Container());
