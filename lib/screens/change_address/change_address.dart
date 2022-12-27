@@ -119,38 +119,61 @@ class _ChangeAddressState extends State<ChangeAddress> {
                                   border: Border.all(color: AppStyles.white),
                                   color: AppStyles.white
                               ),
-                              child: Column(
-                                  children: [
-                                    for(int i = 0; i<addressdata!.data!.length; i++)
-                                    Padding(padding: EdgeInsets.only(bottom: 10),
-                                      child: InkWell(
-                                        onTap: (){
+                              child:   ListView.builder(
+                                shrinkWrap: true,
+                                  physics: NeverScrollableScrollPhysics(),
+                                  itemCount: addressdata!.data!.length,
+                                  itemBuilder: (context, index){
+                                return  Padding(padding: EdgeInsets.only(bottom: 10),
+                                  child: InkWell(
+                                    onTap: (){
+                                      if(StreamUtil.addressbuttoncondition.value == 1){
+                                      }
+                                      else {
+                                        for(int j = 0; j<addressdata!.data!.length; j++){
+                                          if(j == index){
+                                            setState(() {
+                                              addressdata!.data![j].select = true;
+                                              StreamUtil.selectedAddress.add(addressdata!.data![j]);
+                                            });
+                                          }else{
+                                            setState(() {
+                                              addressdata!.data![j].select = false;
+                                            });
+                                          }
+                                        }
+                                      }
+                                    },
+                                    child: CustomChangeAddressContainer(
+                                      address: '${addressdata!.data![index].houseno}, ${addressdata!.data![index].address}, ${addressdata!.data![index].city}\n ${addressdata!.data![index].zipcode}',
+                                      text: ' ${addressdata!.data![index].addresstype}',
+                                      tickimage: '${ImageAssetPath.tickIcon}',
+                                      isSelected: addressdata!.data![index].select!,
+                                      onEdit: (){
+                                        if(StreamUtil.addressbuttoncondition.value == 1){
                                           StreamUtil.addresscondition.add(1);
-                                          StreamUtil.addressid.add(addressdata!.data![i].id!.toString());
+                                          StreamUtil.addressid.add(addressdata!.data![index].id!.toString());
                                           Navigator.pushNamed(
-                                              context, AppScreens.addAddress, arguments:{'addressdata':addressdata!.data![i]});
-                                        },
-                                        child: CustomChangeAddressContainer(
-                                          address: '${addressdata!.data![i].houseno}, ${addressdata!.data![i].address}, ${addressdata!.data![i].city}\n ${addressdata!.data![i].zipcode}',
-                                          text: ' ${addressdata!.data![i].addresstype}',
-                                          tickimage: '${ImageAssetPath.tickIcon}',
-                                          onDelete: () async {
+                                              context, AppScreens.addAddress, arguments:{'addressdata':addressdata!.data![index]});
+                                        }
+                                      },
+                                      onDelete: () async {
 
 
-                                              deleteaddresspopup(context: context,  pressLogout: ()async{
-                                                bool isInternet = await AppUtils.checkInternet();
-                                                if(isInternet){
-                                                  BlocProvider.of<DeleteAddressBloc>(context).add(
-                                                  PerformDeleteAddressEvent(id: addressdata!.data![i].id!),
-                                                );
-                                                Navigator.pop(context);
-                                                } else {
-                                                  AlertUtils.showNotInternetDialogue(context);
-                                                }
+                                        deleteaddresspopup(context: context,  pressLogout: ()async{
+                                          bool isInternet = await AppUtils.checkInternet();
+                                          if(isInternet){
+                                            BlocProvider.of<DeleteAddressBloc>(context).add(
+                                              PerformDeleteAddressEvent(id: addressdata!.data![index].id!),
+                                            );
+                                            Navigator.pop(context);
+                                          } else {
+                                            AlertUtils.showNotInternetDialogue(context);
+                                          }
 
-                                              });
+                                        });
 
-                                              /*BlocProvider.of<DeleteAddressBloc>(context).add(
+                                        /*BlocProvider.of<DeleteAddressBloc>(context).add(
                                                 PerformDeleteAddressEvent(id: addressdata!.data![i].id!),
                                               );*/
 
@@ -158,17 +181,11 @@ class _ChangeAddressState extends State<ChangeAddress> {
 
 
 
-                                          },
+                                      },
 
-                                        ),
-                                      ),),
-
-
-
-
-
-                                  ]
-                              )
+                                    ),
+                                  ),);
+                              }),
                           )
                         ],)
                     )
@@ -176,9 +193,16 @@ class _ChangeAddressState extends State<ChangeAddress> {
               ],
 
             ),
-          bottomNavigationBar: CustomBottomButton(
-            onPress: () {},
-            text: 'ADD'),
+          bottomNavigationBar:
+
+          Padding(
+            padding: const EdgeInsets.all(20),
+            child: CustomBottomButton(
+              onPress: () {
+                Navigator.pop(context);
+              },
+              text: 'ADD'),
+          ),
         );
       },
     );

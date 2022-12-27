@@ -215,7 +215,8 @@ class _SubserviceDetailsState extends State<SubserviceDetails> {
                                 CustomBottomButton(
                                   text : 'BOOK SERVICE',
                                   onPress: (){
-                                    Navigator.pushNamed(context, AppScreens.loginBookservice);
+                                    validation();
+
                                   },
                                 )
                               ],),
@@ -244,6 +245,16 @@ class _SubserviceDetailsState extends State<SubserviceDetails> {
       );
           } else {
       AlertUtils.showNotInternetDialogue(context);
+    }
+
+  }
+
+  void validation() {
+    if(  StreamUtil.prizeid.value == ''){
+      AlertUtils.showToast('Please select your preferrred service price from the list');
+          }
+    else{
+    Navigator.pushNamed(context, AppScreens.loginBookservice);
     }
 
   }

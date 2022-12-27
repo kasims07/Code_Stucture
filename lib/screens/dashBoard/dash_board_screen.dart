@@ -6,6 +6,7 @@ import 'package:gfive/utils/stream_builder.dart';
 
 import '../../widgets/custom_bottombar.dart';
 import '../Account_screens/account_screen.dart';
+import '../myBookingScreens/bloc/booking_history_bloc.dart';
 import '../myBookingScreens/book_main_screen.dart';
 import '../notifications_Screen/notifications_screen.dart';
 import 'bloc/dashboard_bloc.dart';
@@ -19,6 +20,9 @@ class DashBoardScreen extends StatefulWidget {
       providers: [
         BlocProvider<DashboardBloc>(
           create: (_) => DashboardBloc(),
+        ),
+        BlocProvider<BookingHistoryBloc>(
+          create: (_) => BookingHistoryBloc(),
         ),
       ],
       child: const DashBoardScreen(),

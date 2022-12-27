@@ -46,6 +46,7 @@ class Datum {
     this.user,
     this.deleted,
     this.v,
+    this.select,
   });
 
   String? id;
@@ -59,6 +60,7 @@ class Datum {
   String? addresstype;
   String? user;
   bool? deleted;
+  bool? select;
   int? v;
 
   factory Datum.fromJson(Map<String, dynamic> json) => Datum(
@@ -74,6 +76,7 @@ class Datum {
     user: json["user"],
     deleted: json["deleted"],
     v: json["__v"],
+    select: false
   );
 
   Map<String, dynamic> toJson() => {

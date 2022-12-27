@@ -6,6 +6,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gfive/utils/app_routers.dart';
 import 'package:gfive/utils/app_styles.dart';
+import 'package:rxdart/rxdart.dart';
 
 import '../../../app_screens/app_screens.dart';
 import '../../../constants/asset_path.dart';
@@ -20,6 +21,7 @@ import '../../../widgets/custom_numberfield.dart';
 import '../../../widgets/custom_phone_textfield.dart';
 import '../../../widgets/custom_textformfield.dart';
 import '../../../widgets/custom_time_container.dart';
+import '../../change_address/model/address_list_model.dart';
 import 'bloc/login_book_service_bloc.dart';
 
 
@@ -55,17 +57,17 @@ class _LoginBookServiceScreenState extends State<LoginBookServiceScreen> {
   String? dateForShown;
 
   List<dynamic> timelist = [
-    '08:00',
-    '10:00',
-    '11:00',
-    '12:00',
-    '01:00',
-    '02:00',
-    '03:00'
+    '08:00 AM',
+    '10:00 AM',
+    '11:00 AM',
+    '12:00 PM',
+    '01:00 PM',
+    '02:00 PM',
+    '03:00 PM'
   ];
 
-  int selectIndex = 0;
-  String selectTime =  '08:00';
+  int? selectIndex;
+  String? selectTime;
 
 
  @override
@@ -74,6 +76,7 @@ class _LoginBookServiceScreenState extends State<LoginBookServiceScreen> {
     super.initState();
     namecontroller.text = StreamUtil.username.value;
     numbercontroller.text = StreamUtil.mobilenumber.value;
+
   }
 
 
@@ -82,6 +85,19 @@ class _LoginBookServiceScreenState extends State<LoginBookServiceScreen> {
     return BlocConsumer<LoginBookServiceBloc, LoginBookServiceState>(
   listener: (context, state) {
     // TODO: implement listener
+    if(state.isCompleted){
+
+      AlertUtils.congratulatepopup(context: context, pressLogout: (){
+        //StreamUtil.selectedAddress.value.
+            StreamUtil.addressid = BehaviorSubject<String>();
+            StreamUtil.time = BehaviorSubject<String>();
+            StreamUtil.subserviceid = BehaviorSubject<String>();
+            StreamUtil.categoryid = BehaviorSubject<String>();
+            StreamUtil.selectedAddress=  BehaviorSubject<Datum>();
+            StreamUtil.prizeid  = BehaviorSubject<String>();
+        Navigator.pushNamed(context, AppScreens.dashboardScreen);
+      });
+    }
   },
   builder: (context, state) {
     return Scaffold(
@@ -201,34 +217,74 @@ class _LoginBookServiceScreenState extends State<LoginBookServiceScreen> {
                               Text('Your Address', style: AppStyles
                                   .homelogostyle.copyWith(fontSize: 15.sp),),
                               SizedBox(height: 10.h),
-                              InkWell(
-                                onTap: () {
-                                  StreamUtil.addressbuttoncondition.add(0);
-                                  Navigator.pushNamed(
-                                      context, AppScreens.changeAddress);
-                                },
-                                child: Container(
-                                  height: 60.h,
-                                  width: 350.w,
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(5),
-                                      color: AppStyles.backgroundcolor
-                                  ),
-                                  child: Center(
-                                    child: Row(
-                                      mainAxisAlignment: MainAxisAlignment
-                                          .center,
-                                      children: [
-                                        SvgPicture.asset(ImageAssetPath.addIcon,
-                                            height: 16.67.h, width: 16.67.w),
-                                        SizedBox(width: 6.67.w),
-                                        Text('Add Service Location',
-                                            style: AppStyles.termstyle),
 
-                                      ],
+                              StreamBuilder<Datum>(
+                                stream: StreamUtil.selectedAddress,
+                                builder: (context, snapshot) {
+                                  return snapshot.data != null ? Container(
+                                    padding: EdgeInsets.all(17.sp),
+                                    height:77.h ,
+                                    width : 350.w,
+                                    decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(5),
+                                        color:AppStyles.backgroundcolor
                                     ),
-                                  ),
-                                ),
+                                    child: Row(
+                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Row(
+                                              children: [
+                                                SvgPicture.asset(ImageAssetPath.bookLocation, height: 43.h, width: 43.w),
+                                                SizedBox(width: 10.w),
+                                                Column(crossAxisAlignment: CrossAxisAlignment.start,
+                                                    children :[
+                                                      Text('${snapshot.data!.addresstype!}', style: AppStyles.redstyle.copyWith(fontSize: 14.sp),),
+                                                      SizedBox(height: 5.h),
+                                                      Text('${snapshot.data!.houseno}  ${snapshot.data!.address}, ${snapshot.data!.city}  ${snapshot.data!.zipcode}', style: AppStyles.sfstyle.copyWith(fontSize: 13.sp, color:AppStyles.fontblack ),)
+                                                    ]
+                                                ),
+                                              ]
+                                          ),
+                                          InkWell(
+                                              onTap: () {
+                                                StreamUtil.addressbuttoncondition.add(0);
+                                                Navigator.pushNamed(
+                                                    context, AppScreens.changeAddress);
+                                              },
+                                              child: SvgPicture.asset(ImageAssetPath.editIcon, height: 18.01.h,width: 18.02.h)),
+
+                                        ]
+                                    ),
+                                  ) : InkWell(
+                                    onTap: () {
+                                      StreamUtil.addressbuttoncondition.add(0);
+                                      Navigator.pushNamed(
+                                          context, AppScreens.changeAddress);
+                                    },
+                                    child: Container(
+                                      height: 60.h,
+                                      width: 350.w,
+                                      decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.circular(5),
+                                          color: AppStyles.backgroundcolor
+                                      ),
+                                      child: Center(
+                                        child: Row(
+                                          mainAxisAlignment: MainAxisAlignment
+                                              .center,
+                                          children: [
+                                            SvgPicture.asset(ImageAssetPath.addIcon,
+                                                height: 16.67.h, width: 16.67.w),
+                                            SizedBox(width: 6.67.w),
+                                            Text('Add Service Location',
+                                                style: AppStyles.termstyle),
+
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                  );
+                                }
                               ),
                               SizedBox(height: 20),
                               Text('Select Date & Time Slot', style: AppStyles
@@ -321,6 +377,7 @@ class _LoginBookServiceScreenState extends State<LoginBookServiceScreen> {
                                           setState(() {
                                             selectIndex = index;
                                             selectTime = timelist[index];
+                                            StreamUtil.time.add(selectTime!);
                                           });
                                         },
                                         child: CustomTimeContainer(
@@ -334,23 +391,8 @@ class _LoginBookServiceScreenState extends State<LoginBookServiceScreen> {
                               SizedBox(height: 62.h),
                               CustomBottomButton(
                                 onPress: () async {
-                                  bool isInternet = await AppUtils.checkInternet();
-                                  if (isInternet) {
-                                    var data = {
-                                      "sub_service" : StreamUtil.subserviceid.value,
-                                      "category": StreamUtil.categoryid.value,
-                                      "prizes" : StreamUtil.prizeid.value,
-                                      "name" : namecontroller.text,
-                                      "mobileNumber" : numbercontroller.text,
+                                  validation();
 
-
-                                    };
-                                    BlocProvider.of<LoginBookServiceBloc>(context).add(
-                                      PerformLoginBookServiceEvent(data: data),
-                                    );
-                                  } else {
-                                    AlertUtils.showNotInternetDialogue(context);
-                                  }
 
                                 },
                                 text: 'REQUEST SEND',),
@@ -366,6 +408,46 @@ class _LoginBookServiceScreenState extends State<LoginBookServiceScreen> {
     );
   },
 );
+  }
+
+  void validation() async {
+   if(namecontroller.text.isEmpty){
+     AlertUtils.showToast('Please enter full name');
+   }
+   else if(numbercontroller.text.isEmpty){
+     AlertUtils.showToast('Please enter mobile number');
+   }
+   else if(StreamUtil.selectedAddress.value == null){
+     AlertUtils.showToast('Please enter address where you wish to perform service');
+   }
+   else if(updateDate!.isEmpty){
+     AlertUtils.showToast('Please select date for service');
+   }
+   else if(StreamUtil.time.value == null){
+     AlertUtils.showToast('Please select date for service');
+   }
+   else {
+   bool isInternet = await AppUtils.checkInternet();
+   if (isInternet) {
+     var data = {
+       "sub_service" : StreamUtil.subserviceid.value,
+       "category": StreamUtil.categoryid.value,
+       "prizes" : StreamUtil.prizeid.value,
+       "name" : namecontroller.text,
+       "mobileNumber" : numbercontroller.text,
+       "address" : StreamUtil.selectedAddress.value.id,
+       "BookingDate"  : updateDate,
+       "Bookingtime" : StreamUtil.time.value
+
+     };
+     BlocProvider.of<LoginBookServiceBloc>(context).add(
+       PerformLoginBookServiceEvent(data: data),
+     );
+   } else {
+     AlertUtils.showNotInternetDialogue(context);
+   }
+
+   }
   }
 }
 

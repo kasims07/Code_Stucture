@@ -367,41 +367,47 @@ class AlertUtils {
       transitionDuration: const Duration(milliseconds: 500),
       context: context!,
       pageBuilder: (context, anim1, anim2) {
-        return Align(
-          alignment: Alignment.center,
-          child: SizedBox(
-            height: 370.h,
-            width: 350.w,
-            child: SizedBox.expand(
-              child: ClipRRect(
-                borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(10.sp),
-                    topRight: Radius.circular(10.sp),
-                    bottomLeft: Radius.circular(10.sp),
-                    bottomRight: Radius.circular(10.sp)
-                ),
-                child: Scaffold(
-                  body: Padding(
-                      padding: EdgeInsets.only(top: 32.sp, right: 16.sp, left: 16.sp, bottom: 18.sp),
-                      child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Image.asset(ImageAssetPath.congoImage, height: 153.h, width: 220.02.w),
-                            SizedBox(height: 18.h),
-                            Text('Congratulation', style: AppStyles.verifystyle.copyWith(fontSize: 18.42)) ,
-                            SizedBox(height: 10.h),
-                            Text('You have successfully booked your\nservice', textAlign:TextAlign.center, style: AppStyles.termstyle),
-                            SizedBox(height: 20.h),
-                            CustomDialogBottomButton(
-                              title:'GO TO HOME',
-                              onPress: (){
-                                Navigator.pushNamed(context, AppScreens.dashboardScreen);
-                              },
-                            )
+        return WillPopScope(
+          onWillPop: ()async{
+            Navigator.pushNamed(context, AppScreens.dashboardScreen);
+            return true;
+          },
+          child: Align(
+            alignment: Alignment.center,
+            child: SizedBox(
+              height: 370.h,
+              width: 350.w,
+              child: SizedBox.expand(
+                child: ClipRRect(
+                  borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(10.sp),
+                      topRight: Radius.circular(10.sp),
+                      bottomLeft: Radius.circular(10.sp),
+                      bottomRight: Radius.circular(10.sp)
+                  ),
+                  child: Scaffold(
+                    body: Padding(
+                        padding: EdgeInsets.only(top: 32.sp, right: 16.sp, left: 16.sp, bottom: 18.sp),
+                        child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Image.asset(ImageAssetPath.congoImage, height: 153.h, width: 220.02.w),
+                              SizedBox(height: 18.h),
+                              Text('Congratulation', style: AppStyles.verifystyle.copyWith(fontSize: 18.42)) ,
+                              SizedBox(height: 10.h),
+                              Text('You have successfully booked your\nservice', textAlign:TextAlign.center, style: AppStyles.termstyle),
+                              SizedBox(height: 20.h),
+                              CustomDialogBottomButton(
+                                title:'GO TO HOME',
+                                onPress: (){
+                                 pressLogout!();
+                                },
+                              )
 
-                          ]
-                      )
+                            ]
+                        )
+                    ),
                   ),
                 ),
               ),

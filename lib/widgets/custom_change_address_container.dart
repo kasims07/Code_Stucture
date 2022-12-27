@@ -12,8 +12,10 @@ class CustomChangeAddressContainer extends StatelessWidget {
   String tickimage;
   String address;
   Function onDelete;
+  bool isSelected ;
+  Function? onEdit;
 
-  CustomChangeAddressContainer({Key? key,required this.address, required this.onDelete, required this.text, required this.tickimage}) : super(key: key);
+  CustomChangeAddressContainer({Key? key,required this.address, this.onEdit, this.isSelected = false,  required this.onDelete, required this.text, required this.tickimage}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -37,11 +39,15 @@ class CustomChangeAddressContainer extends StatelessWidget {
                   visible: StreamUtil.addressbuttoncondition.value == 1 ,
                   child: Row(
                     children: [
-                      SvgPicture.asset(ImageAssetPath.editIcon, height: 15.01.h, width: 15.02.h),
+                      InkWell(
+                          onTap: (){
+                            onEdit!();
+                           },
+                          child: SvgPicture.asset(ImageAssetPath.editIcon, height: 15.01.h, width: 15.02.h)),
                       SizedBox(width: 13.18),
                       InkWell(
                           onTap: (){
-                            onDelete!();
+                            onDelete();
                           },
                           child: SvgPicture.asset(ImageAssetPath.trashIcon, height: 20.h, width: 20.h)),
                   ],),
@@ -67,7 +73,7 @@ class CustomChangeAddressContainer extends StatelessWidget {
                       ],
                     ),
                     Visibility(
-                        visible: StreamUtil.addressbuttoncondition.value == 0,
+                        visible: isSelected,
                         child: SvgPicture.asset(tickimage, height: 16.67.h,width: 16.67.h)),
 
                   ],

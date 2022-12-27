@@ -18,6 +18,8 @@ import '../screens/change_address/repository/delete_address_reository.dart';
 import '../screens/change_address/repository/delete_address_repository_impl.dart';
 import '../screens/dashBoard/repository/dashboard_repository.dart';
 import '../screens/dashBoard/repository/dashboard_repository_impl.dart';
+import '../screens/myBookingScreens/repository/booking_history_repository.dart';
+import '../screens/myBookingScreens/repository/booking_history_repository_impl.dart';
 import '../screens/otpScreen/repository/login_repository.dart';
 import '../screens/otpScreen/repository/login_repository_impl.dart';
 import '../screens/profileScreen/repository/profile_repository.dart';
@@ -72,4 +74,7 @@ void setupDependencies(){
 
   //editaddress
   _getIt.registerSingleton<EditAddressRepository>(EditAddressImpl());
+
+  //bookinghistory
+  _getIt.registerSingleton<BookingHistoryRepository>(BookingHistoryImpl());
 }
