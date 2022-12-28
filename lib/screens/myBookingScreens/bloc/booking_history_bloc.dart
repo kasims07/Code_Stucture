@@ -6,7 +6,7 @@ import 'package:meta/meta.dart';
 
 import '../../../api_models/api_error.dart';
 import '../../../api_models/api_status.dart';
-import '../model/BookingHistoryResponsModel.dart';
+import '../model/booking_history_model.dart';
 import '../repository/booking_history_repository.dart';
 
 part 'booking_history_event.dart';

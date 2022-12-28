@@ -45,6 +45,7 @@ class _HomeScreenState extends State<HomeScreen> {
       StreamUtil.username.add( homedata!.user!.name!);
       StreamUtil.mobilenumber.add(homedata!.user!.phoneNumber!);
       StreamUtil.email.add(homedata!.user!.email!);
+      StreamUtil.profileurl.add(homedata!.user!.userimage!);
     }
 
     // TODO: implement listener

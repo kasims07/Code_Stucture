@@ -1,19 +1,16 @@
-part of 'booking_history_bloc.dart';
-
-
-
+part of 'upload_image_bloc.dart';
 
 @immutable
-class BookingHistoryState {
+class UploadImageState {
   final bool isLoading;
   final bool isCompleted;
   final bool isFailed;
   final ApiError? error;
   final String? responseMsg;
-  final BookingHistoryModel? model;
+  final UploadImageModel? model;
 
 
-  BookingHistoryState({
+  UploadImageState({
     this.isLoading = false,
     this.error,
     this.responseMsg,

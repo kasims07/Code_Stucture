@@ -25,6 +25,7 @@ class AppStyles{
   static const bottomnavigationcolor = Color(0xff71859E);
 
   static const servicecontainercolor = Color(0xffFAFAFA);
+  static const statusfonts = Color(0xff25A331);
 
   //Textstyles
   static TextStyle loginfont =  TextStyle(fontSize: 18.42.sp, fontWeight: FontWeight.w600, fontFamily: 'Vietnam');

@@ -18,6 +18,8 @@ class StreamUtil{
   static BehaviorSubject<String> username = BehaviorSubject<String>();
   static BehaviorSubject<String> mobilenumber = BehaviorSubject<String>();
   static BehaviorSubject<String> email = BehaviorSubject<String>();
+  static BehaviorSubject<String> profileurl = BehaviorSubject<String>.seeded('');
+
   static BehaviorSubject<int> addresscondition = BehaviorSubject<int>.seeded(0);
   static BehaviorSubject<String> addressid = BehaviorSubject<String>.seeded('');
   static BehaviorSubject<int> addressbuttoncondition = BehaviorSubject<int>.seeded(0);

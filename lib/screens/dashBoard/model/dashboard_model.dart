@@ -99,6 +99,7 @@ class User {
     this.v,
     this.email,
     this.name,
+    this.userimage,
   });
 
   String? id;
@@ -110,6 +111,7 @@ class User {
   int? v;
   String? email;
   String? name;
+  String? userimage;
 
   factory User.fromJson(Map<String, dynamic> json) => User(
     id: json["_id"],
@@ -121,6 +123,7 @@ class User {
     v: json["__v"],
     email: json["email"],
     name: json["name"],
+    userimage: json["userimage"],
   );
 
   Map<String, dynamic> toJson() => {
@@ -133,5 +136,6 @@ class User {
     "__v": v,
     "email": email,
     "name": name,
+    "userimage"  : userimage
   };
 }

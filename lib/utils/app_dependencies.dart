@@ -12,6 +12,8 @@ import '../screens/Account_screens/addAddress/repository/edit_address_repository
 import '../screens/Account_screens/addAddress/repository/edit_address_repository_impl.dart';
 import '../screens/Account_screens/editProfile/repository/editprofile_repository.dart';
 import '../screens/Account_screens/editProfile/repository/editprofile_repository_impl.dart';
+import '../screens/Account_screens/editProfile/repository/upload_image_impl.dart';
+import '../screens/Account_screens/editProfile/repository/upload_image_repository.dart';
 import '../screens/change_address/repository/change_address_repository.dart';
 import '../screens/change_address/repository/change_address_repository_impl.dart';
 import '../screens/change_address/repository/delete_address_reository.dart';
@@ -77,4 +79,7 @@ void setupDependencies(){
 
   //bookinghistory
   _getIt.registerSingleton<BookingHistoryRepository>(BookingHistoryImpl());
+
+  //uploadimage
+  _getIt.registerSingleton<UploadImageRepository>(UploadImageImpl());
 }

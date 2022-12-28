@@ -6,12 +6,13 @@ class CustomBookingContainer extends StatelessWidget {
   String bookingid;
   String bdate;
   String btime;
-  String btype;
-  String apttype;
+  String subservice;
+  String prizetitle;
   String bstatus;
-  String aptprice;
+  String prize;
+  TextStyle statusfontstyle;
 
-   CustomBookingContainer({Key? key, required this.bookingid, required this.bdate, required this.btime, required this.btype, required this.apttype, required this.bstatus, required this.aptprice }) : super(key: key);
+   CustomBookingContainer({Key? key, required this.bookingid, required this.bdate, required this.btime, required this.subservice, required this.prizetitle, required this.bstatus, required this.prize, required this.statusfontstyle }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +35,9 @@ class CustomBookingContainer extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text('$bdate | $btime' , style: AppStyles.bookingstyle),
-              Text(bstatus, style:AppStyles.bookingstyle.copyWith(color: AppStyles.bfontcolor))
+              Text(bstatus, style:statusfontstyle
+              //AppStyles.bookingstyle.copyWith(color: AppStyles.bfontcolor)
+              )
             ],
           ),
            SizedBox(height: 16),
@@ -54,11 +57,11 @@ class CustomBookingContainer extends StatelessWidget {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                    Text(btype, style: AppStyles.verifystyle.copyWith(fontSize: 14.sp)),
+                    Text(subservice, style: AppStyles.verifystyle.copyWith(fontSize: 14.sp)),
                     SizedBox(height: 3.h),
-                    Text(apttype, style: AppStyles.termstyle.copyWith(fontSize: 12),),
+                    Text(prizetitle, style: AppStyles.termstyle.copyWith(fontSize: 12),),
                   ],),
-                  Text('₹ $aptprice', style:AppStyles.opensansstyle ),
+                  Text('₹ $prize', style:AppStyles.opensansstyle ),
 
                 ],)
                   ,)

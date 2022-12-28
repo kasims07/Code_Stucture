@@ -10,7 +10,8 @@ import '../../utils/app_utils.dart';
 import '../../widgets/custom_booking_container.dart';
 import '../../widgets/loading_container.dart';
 import 'bloc/booking_history_bloc.dart';
-import 'model/BookingHistoryResponsModel.dart';
+import 'model/booking_history_model.dart';
+
 
 class BookMainScreen extends StatefulWidget {
   const BookMainScreen({Key? key}) : super(key: key);
@@ -21,7 +22,7 @@ class BookMainScreen extends StatefulWidget {
 
 class _BookMainScreenState extends State<BookMainScreen> {
 
-  BookingHistoryResponsModel? bookingdata;
+  BookingHistoryModel? bookingdata;
 
   @override
   void initState()  {
@@ -66,7 +67,7 @@ class _BookMainScreenState extends State<BookMainScreen> {
                           color: AppStyles.white
                       ),
                       child: ListView.builder(
-                          itemCount: 10,
+                          itemCount: bookingdata!.data!.length,
                           itemBuilder: (BuildContext context, int index) {
                             return GestureDetector(
                               onTap: () {
@@ -76,12 +77,17 @@ class _BookMainScreenState extends State<BookMainScreen> {
                               },
                               child: CustomBookingContainer(
                                 bookingid: bookingdata!.data![index].id!,
-                                bdate: bookingdata!.data![index].bookingDate!,
+                                bdate: bookingdata!.data![index].bookingDate!.toString(),
                                 btime: bookingdata!.data![index].bookingtime!,
-                                btype: bookingdata!.data![index].subService!,
-                                apttype: bookingdata!.data![index].prizes!,
-                                bstatus: bookingdata!.data![index].status!,
-                                aptprice: bookingdata!.data![index].prizes!
+                                subservice: bookingdata!.data![index].subService![0].name!.toString(),
+                                prizetitle: bookingdata!.data![index].prizes![0].title.toString(),
+                                bstatus: bookingdata!.data![index].status! == 'P' ? 'Upcoming'
+                                         : bookingdata!.data![index].status! == 'Done' ? 'Completed'
+                                         : 'Cancelled',
+                                  statusfontstyle: bookingdata!.data![index].status! == 'P' ? AppStyles.bookingstyle.copyWith(color: AppStyles.bfontcolor)
+                                                   : bookingdata!.data![index].status! == 'Done' ? AppStyles.bookingstyle.copyWith(color: AppStyles.statusfonts)
+                                                   : AppStyles.bookingstyle.copyWith(color: AppStyles.grey),
+                                prize: bookingdata!.data![index].prizes![0].prize.toString(),
                               ),
                             );
                           }

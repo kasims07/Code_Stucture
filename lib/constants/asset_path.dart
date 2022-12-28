@@ -22,6 +22,7 @@ class ImageAssetPath {
   static const String icIndia = 'assets/icons/ic_india.png';
   static const String icCross = 'assets/icons/ic_cross.png';
   static const String dotted = 'assets/images/dotted_background.png';
+  static const String assetProfile = 'assets/images/img.png';
 
 
 
