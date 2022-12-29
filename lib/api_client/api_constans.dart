@@ -1,5 +1,5 @@
 class APIConstants {
-  static const baseUrl = 'http://192.168.1.14:3050/api/';
+  static const baseUrl = 'http://52.66.209.70:3050/api/';
   static const imageUrl = 'https://voting-images.s3.ap-south-1.amazonaws.com/';
 
   //login user

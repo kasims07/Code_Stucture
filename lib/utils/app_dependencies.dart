@@ -14,6 +14,8 @@ import '../screens/Account_screens/editProfile/repository/editprofile_repository
 import '../screens/Account_screens/editProfile/repository/editprofile_repository_impl.dart';
 import '../screens/Account_screens/editProfile/repository/upload_image_impl.dart';
 import '../screens/Account_screens/editProfile/repository/upload_image_repository.dart';
+import '../screens/bookingServiceDetails/repository/reschedule_repository.dart';
+import '../screens/bookingServiceDetails/repository/reschedule_repository_impl.dart';
 import '../screens/change_address/repository/change_address_repository.dart';
 import '../screens/change_address/repository/change_address_repository_impl.dart';
 import '../screens/change_address/repository/delete_address_reository.dart';
@@ -82,4 +84,7 @@ void setupDependencies(){
 
   //uploadimage
   _getIt.registerSingleton<UploadImageRepository>(UploadImageImpl());
+
+  //reschedulebooking
+  _getIt.registerSingleton<RescheduleBookingRepository>(RescheduleBookingImpl());
 }

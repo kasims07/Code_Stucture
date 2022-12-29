@@ -73,7 +73,7 @@ class _BookMainScreenState extends State<BookMainScreen> {
                               onTap: () {
                                 print('Hellow');
                                 Navigator.pushNamed(
-                                    context, AppScreens.bookingDetail);
+                                    context, AppScreens.bookingDetail, arguments:{'bookingdata':bookingdata!.data![index]} );
                               },
                               child: CustomBookingContainer(
                                 bookingid: bookingdata!.data![index].id!,
@@ -82,10 +82,10 @@ class _BookMainScreenState extends State<BookMainScreen> {
                                 subservice: bookingdata!.data![index].subService![0].name!.toString(),
                                 prizetitle: bookingdata!.data![index].prizes![0].title.toString(),
                                 bstatus: bookingdata!.data![index].status! == 'P' ? 'Upcoming'
-                                         : bookingdata!.data![index].status! == 'Done' ? 'Completed'
+                                         : bookingdata!.data![index].status! == 'D' ? 'Completed'
                                          : 'Cancelled',
                                   statusfontstyle: bookingdata!.data![index].status! == 'P' ? AppStyles.bookingstyle.copyWith(color: AppStyles.bfontcolor)
-                                                   : bookingdata!.data![index].status! == 'Done' ? AppStyles.bookingstyle.copyWith(color: AppStyles.statusfonts)
+                                                   : bookingdata!.data![index].status! == 'D' ? AppStyles.bookingstyle.copyWith(color: AppStyles.statusfonts)
                                                    : AppStyles.bookingstyle.copyWith(color: AppStyles.grey),
                                 prize: bookingdata!.data![index].prizes![0].prize.toString(),
                               ),

@@ -15,26 +15,19 @@ class CustomCancelServiceContainer extends StatefulWidget {
 class _CustomCancelServiceContainerState extends State<CustomCancelServiceContainer> {
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: (){
-        setState(() {
-          widget.isCancelselected == true ? widget.isCancelselected = false : widget.isCancelselected = true;
-        });
-      },
-      child: Container(
-        height: 50.h,
-        width:318.w,
-        decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(5),
-          color: widget.isCancelselected == true ? AppStyles.black : AppStyles.servicecontainercolor,
+    return Container(
+      height: 50.h,
+      width:318.w,
+      decoration: BoxDecoration(
+      borderRadius: BorderRadius.circular(5),
+        color: widget.isCancelselected == true ? AppStyles.black : AppStyles.servicecontainercolor,
+      ),
+      child: Padding(
+        padding: const EdgeInsets.all(12),
+        child: Text(
+          widget.text, style: widget.isCancelselected == true ?  AppStyles.buttonstyle : AppStyles.termstyle),
         ),
-        child: Padding(
-          padding: const EdgeInsets.all(12),
-          child: Text(
-            widget.text, style: widget.isCancelselected == true ?  AppStyles.buttonstyle : AppStyles.termstyle),
-          ),
-        ),
-    );
+      );
 
   }
 }

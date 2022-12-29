@@ -17,23 +17,23 @@ class SubserviceModel {
 
   int? status;
   bool? success;
-  List<Datum>? data;
+  Data? data;
 
   factory SubserviceModel.fromJson(Map<String, dynamic> json) => SubserviceModel(
     status: json["status"],
     success: json["success"],
-    data: List<Datum>.from(json["data"].map((x) => Datum.fromJson(x))),
+    data: Data.fromJson(json["data"]),
   );
 
   Map<String, dynamic> toJson() => {
     "status": status,
     "success": success,
-    "data": List<dynamic>.from(data!.map((x) => x.toJson())),
+    "data": data!.toJson(),
   };
 }
 
-class Datum {
-  Datum({
+class Data {
+  Data({
     this.id,
     this.category,
     this.createdBy,
@@ -42,6 +42,7 @@ class Datum {
     this.description,
     this.deleted,
     this.images,
+    this.sort,
     this.createdAt,
     this.updatedAt,
     this.v,
@@ -57,13 +58,14 @@ class Datum {
   String? description;
   bool? deleted;
   List<String>? images;
+  int? sort;
   DateTime? createdAt;
   DateTime? updatedAt;
   int? v;
   List<Include>? includes;
   List<Include>? prize;
 
-  factory Datum.fromJson(Map<String, dynamic> json) => Datum(
+  factory Data.fromJson(Map<String, dynamic> json) => Data(
     id: json["_id"],
     category: json["category"],
     createdBy: json["createdBy"],
@@ -72,6 +74,7 @@ class Datum {
     description: json["description"],
     deleted: json["deleted"],
     images: List<String>.from(json["images"].map((x) => x)),
+    sort: json["sort"],
     createdAt: DateTime.parse(json["createdAt"]),
     updatedAt: DateTime.parse(json["updatedAt"]),
     v: json["__v"],
@@ -88,6 +91,7 @@ class Datum {
     "description": description,
     "deleted": deleted,
     "images": List<dynamic>.from(images!.map((x) => x)),
+    "sort": sort,
     "createdAt": createdAt!.toIso8601String(),
     "updatedAt": updatedAt!.toIso8601String(),
     "__v": v,
@@ -110,7 +114,7 @@ class Include {
     this.v,
     this.title,
     this.prize,
-    this.isSelect,
+    this.isSelected
   });
 
   String? id;
@@ -125,7 +129,7 @@ class Include {
   int? v;
   String? title;
   int? prize;
-  bool? isSelect;
+  bool? isSelected;
 
   factory Include.fromJson(Map<String, dynamic> json) => Include(
     id: json["_id"],
@@ -140,7 +144,7 @@ class Include {
     v: json["__v"],
     title: json["title"] == null ? null : json["title"],
     prize: json["prize"] == null ? null : json["prize"],
-    isSelect: false
+    isSelected: false
   );
 
   Map<String, dynamic> toJson() => {
@@ -156,5 +160,6 @@ class Include {
     "__v": v,
     "title": title == null ? null : title,
     "prize": prize == null ? null : prize,
+    "isSelected": false
   };
 }

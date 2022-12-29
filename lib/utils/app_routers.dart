@@ -44,9 +44,12 @@ class AppRouter {
           DashBoardScreen.create(),
         );
       case AppScreens.bookingDetail:
+        final arguments = settings.arguments as Map<String, dynamic>;
         return _buildRoute(
           settings,
-          BookServiceScreen.create(),
+          BookServiceScreen.create(
+            arguments['bookingdata'],
+          ),
         );
       case AppScreens.editProfile:
         return _buildRoute(

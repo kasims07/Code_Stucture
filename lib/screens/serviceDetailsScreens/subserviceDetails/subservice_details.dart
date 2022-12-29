@@ -42,9 +42,9 @@ String? subserviceid;
 }
 
 class _SubserviceDetailsState extends State<SubserviceDetails> {
-  List<String> pricelist = ['100', '200', '300','400','500'];
+  //List<String> pricelist = ['100', '200', '300','400','500'];
 
-  List<String> namelist = ['1BHK', '2BHK', '3BHK', '4BHK', '5BHK'];
+  //List<String> namelist = ['1BHK', '2BHK', '3BHK', '4BHK', '5BHK'];
 
   List<String> sphotolist = ['${ImageAssetPath.sPhoto1}','${ImageAssetPath.sPhoto2}','${ImageAssetPath.sPhoto3}', '${ImageAssetPath.sPhoto4}' ];
 
@@ -88,7 +88,7 @@ class _SubserviceDetailsState extends State<SubserviceDetails> {
                       CustomAccountBackbutton(),
                       Row(children: [
                         SizedBox(width: 65.w),
-                        Text('${subservicedata!.data![0].name}', textAlign: TextAlign.center, style:AppStyles.profilestyle),
+                        Text('${subservicedata!.data!.name}', textAlign: TextAlign.center, style:AppStyles.profilestyle),
                       ]),
                       SizedBox(height: 15),
                       Container(
@@ -105,7 +105,7 @@ class _SubserviceDetailsState extends State<SubserviceDetails> {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text(textAlign: TextAlign.left, '${subservicedata!.data![0].description}', style: AppStyles.detailsstyle,),
+                                Text(textAlign: TextAlign.left, '${subservicedata!.data!.description}', style: AppStyles.detailsstyle,),
                                 Row(
                                   children: [
                                     Text(' Readmore', style: AppStyles.detfontstyle),
@@ -128,18 +128,18 @@ class _SubserviceDetailsState extends State<SubserviceDetails> {
                                         mainAxisSpacing: 14.0,
 
                                       ),
-                                      itemCount: subservicedata!.data![0].prize!.length,
+                                      itemCount: subservicedata!.data!.prize!.length,
                                       itemBuilder: (context, index){
                                         return InkWell(
                                           onTap: (){
-                                            for(int i = 0; i<subservicedata!.data![0].prize!.length; i++ ){
+                                            for(int i = 0; i<subservicedata!.data!.prize!.length; i++ ){
                                               if( i == index){
-                                                subservicedata!.data![0].prize![i].isSelect = true;
-                                                StreamUtil.prizeid.add(subservicedata!.data![0].prize![i].id!);
-                                                StreamUtil.prizetag.add(subservicedata!.data![0].prize![i].prize!);
-                                                StreamUtil.prizetitle.add(subservicedata!.data![0].prize![i].title!);
+                                                subservicedata!.data!.prize![i].isSelected = true;
+                                                StreamUtil.prizeid.add(subservicedata!.data!.prize![i].id!);
+                                                StreamUtil.prizetag.add(subservicedata!.data!.prize![i].prize!);
+                                                StreamUtil.prizetitle.add(subservicedata!.data!.prize![i].title!);
                                               }else{
-                                                subservicedata!.data![0].prize![i].isSelect = false;
+                                                subservicedata!.data!.prize![i].isSelected = false;
                                               }
                                             }
                                             setState(() {
@@ -147,11 +147,11 @@ class _SubserviceDetailsState extends State<SubserviceDetails> {
                                              });
                                             },
                                           child: CustomPriceContainer(
-                                            isSelected: subservicedata!.data![0].prize![index].isSelect,
-                                            price: subservicedata!.data![0].prize![index].prize.toString(),
+                                            isSelected: subservicedata!.data!.prize![index].isSelected,
+                                            price: subservicedata!.data!.prize![index].prize.toString(),
                                             //pricestyle: isSelected == true ?  AppStyles.profilestyle.copyWith(fontSize: 14.sp) : AppStyles.termstyle.copyWith(fontWeight: FontWeight.w600),
 
-                                            name: subservicedata!.data![0].prize![index].title!,
+                                            name: subservicedata!.data!.prize![index].title!,
                                            // namestyle:isSelected == true ? AppStyles.buttonstyle.copyWith(fontSize: 18.sp) : AppStyles.verifystyle.copyWith(fontSize:18.sp) ,
 
                                           ),
@@ -182,11 +182,11 @@ class _SubserviceDetailsState extends State<SubserviceDetails> {
                                             child: ListView.builder(
                                               shrinkWrap: true,
                                               physics: NeverScrollableScrollPhysics(),
-                                              itemCount: subservicedata!.data![0].includes!.length,
+                                              itemCount: subservicedata!.data!.includes!.length,
                                                 itemBuilder: (buildcontext, index){
                                                 return Column(
                                                     children:[
-                                                    CustomRow(text: subservicedata!.data![0].includes![index].include!),
+                                                    CustomRow(text: subservicedata!.data!.includes![index].include!),
                                                     SizedBox(height: 10)
                                                     ]);
 
@@ -250,7 +250,7 @@ class _SubserviceDetailsState extends State<SubserviceDetails> {
   }
 
   void validation() {
-    if(  StreamUtil.prizeid.value == ''){
+    if(!StreamUtil.prizeid.hasValue){
       AlertUtils.showToast('Please select your preferrred service price from the list');
           }
     else{

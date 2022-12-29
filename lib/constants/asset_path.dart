@@ -66,4 +66,5 @@ class ImageAssetPath {
   static const String gfiveIcon = 'assets/icons/icGfiveicon.svg';
   static const String phoneIcon = 'assets/icons/icPhone.svg';
   static const String serviceIcon = 'assets/icons/icServiceicon.svg';
+  static const String feedbackIcon = 'assets/icons/icFeedbackIcon.svg';
 }

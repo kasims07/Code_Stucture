@@ -27,6 +27,8 @@ class AppStyles{
   static const servicecontainercolor = Color(0xffFAFAFA);
   static const statusfonts = Color(0xff25A331);
 
+
+
   //Textstyles
   static TextStyle loginfont =  TextStyle(fontSize: 18.42.sp, fontWeight: FontWeight.w600, fontFamily: 'Vietnam');
   static TextStyle hintstyle = TextStyle(fontSize: 20.sp, fontFamily: 'Vietnam',color: AppStyles.grey.withOpacity(0.3));
