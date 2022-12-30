@@ -168,7 +168,8 @@ class ApiBaseHelper {
     }
   }
 
-  Future<dynamic> fileUploadPUT(String url, {required File file}) async {
+  Future<int> fileUploadPUT(String url, {required File file}) async {
+    int statusCode = 0;
     var responseJson;
     final baseOptions = await createDioObject();
     Dio dio = new Dio();
@@ -195,9 +196,12 @@ class ApiBaseHelper {
           options: options
       );
 
+      print('ImageResponse Code${response.statusCode}');
+
+      statusCode = response.statusCode!;
       responseJson = _returnResponse(response);
-      print(responseJson);
-      return response;
+      print('ImageResponse $responseJson');
+      return statusCode;
 
     } catch (e) {
       if (e is DioError) {
@@ -205,6 +209,7 @@ class ApiBaseHelper {
         print('Error ${e.message}');
       }
     }
+    return statusCode;
   }
 
 

@@ -6,11 +6,14 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get_connect/http/src/response/response.dart';
 import 'package:gfive/screens/Account_screens/editProfile/bloc/upload_image_bloc.dart';
 import 'package:gfive/utils/app_styles.dart';
 import 'package:rxdart/rxdart.dart';
 
+import '../../../api_client/api_constans.dart';
 import '../../../constants/asset_path.dart';
+import '../../../helper/api_base_helper.dart';
 import '../../../utils/alert_utils.dart';
 import '../../../utils/app_helper.dart';
 import '../../../utils/app_utils.dart';
@@ -61,7 +64,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
     namecontroller.text = StreamUtil.username.value;
     numbercontroller.text = StreamUtil.mobilenumber.value;
     emailcontroller.text = StreamUtil.email.value;
-
+    uploadpath.add(StreamUtil.profileurl.value);
     super.initState();
   }
 
@@ -76,19 +79,9 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
           uploadpath.add(state.model!.data!.sPath!);
           print('PATH_Upload ===> ${state.model!.data!.sPath!}');
           print(uploadpath.value);
-          bool isInternet = await AppUtils.checkInternet();
-          if (isInternet) {
-            var data = {
-              "name": namecontroller.text,
-              "email": emailcontroller.text,
-              "userimage": uploadpath.value,
-            };
-            BlocProvider.of<EditProfileBloc>(context).add(
-              PerformEditProfileEvent(data: data),
-            );
-          } else {
-            AlertUtils.showNotInternetDialogue(context);
-          }
+          StreamUtil.profileurl.add(uploadpath.value);
+          uploadFileFromDio(uploadUrl.value, profileImage!);
+
         }
       },
       builder: (context, state) {
@@ -150,11 +143,19 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                                 child: Container(
                                                   decoration: BoxDecoration(
                                                       shape: BoxShape.circle),
-                                                  child: Image.asset(
+                                                  child: Image.network(
                                                     height: 100,
                                                     width: 100,
                                                     fit: BoxFit.fill,
-                                                    ImageAssetPath.assetProfile,
+                                                    '${APIConstants.imageUrl}${StreamUtil.profileurl.value}',
+                                                    errorBuilder: (contex, error, stackTrace){
+                                                      return Image.asset(
+                                                          height: 100,
+                                                          width: 100,
+                                                          fit: BoxFit.fill,
+                                                          ImageAssetPath
+                                                              .assetProfile);
+                                                    },
                                                   ),
                                                 ))
                                             : ClipRRect(
@@ -172,8 +173,11 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                                           exception,
                                                           stackTrace) {
                                                     return Image.asset(
+                                                        height: 100,
+                                                        width: 100,
+                                                        fit: BoxFit.fill,
                                                         ImageAssetPath
-                                                            .accountImage);
+                                                            .assetProfile);
                                                   }),
                                                 ))),
                                     Positioned(
@@ -243,8 +247,11 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                     bool isInternet =
                                         await AppUtils.checkInternet();
                                     if (isInternet) {
-                                      uploadImage(profileImage!);
-
+                                      if(profileImage == null){
+                                        updatedata();
+                                      }else{
+                                        uploadImage(profileImage!);
+                                      }
                                     } else {
                                       AlertUtils.showNotInternetDialogue(
                                           context);
@@ -264,6 +271,30 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
         );
       },
     ));
+  }
+
+  Future uploadFileFromDio(String uploadUrl, File file) async {
+    ApiBaseHelper? _helper = ApiBaseHelper();
+    int response = await _helper.fileUploadPUT(uploadUrl, file: file);
+
+    if(response == 200){
+      updatedata();
+    }else {
+      AlertUtils.showToast("Please try again");
+    }
+
+    print('UploadFileSuccessfulllly');
+  }
+
+  void updatedata()async{
+    var data = {
+      "name": namecontroller.text,
+      "email": emailcontroller.text,
+      "userimage": uploadpath.value,
+    };
+    BlocProvider.of<EditProfileBloc>(context).add(
+      PerformEditProfileEvent(data: data),
+    );
   }
 
   void uploadImage(File pickedImage) {

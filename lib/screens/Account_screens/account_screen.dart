@@ -300,10 +300,27 @@ class _AccountScreenState extends State<AccountScreen> {
                     child: StreamBuilder<String>(
                       stream: StreamUtil.profileurl,
                       builder: (context, snapshot) {
-                        return snapshot.data == null || snapshot.data!.isEmpty ? Image.asset(
-                            ImageAssetPath.accountImage, height: 129.h,
-                            width: 129.w) : Image.network(APIConstants.imageUrl+snapshot.data!,height: 129.h,
-                            width: 129.w);
+                        return ClipRRect(
+                            borderRadius:
+                            BorderRadius.circular(80),
+                            child: Container(
+                              decoration: BoxDecoration(
+                                  shape: BoxShape.circle),
+                              child: Image.network(
+                                height: 120,
+                                width: 120,
+                                fit: BoxFit.fill,
+                                '${APIConstants.imageUrl}${StreamUtil.profileurl.value}',
+                                errorBuilder: (contex, error, stackTrace){
+                                  return Image.asset(
+                                      height: 120,
+                                      width: 120,
+                                      fit: BoxFit.contain,
+                                      ImageAssetPath
+                                          .assetProfile);
+                                },
+                              ),
+                            ));
                       }
 
                     )

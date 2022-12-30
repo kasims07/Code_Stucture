@@ -14,6 +14,10 @@ import '../screens/Account_screens/editProfile/repository/editprofile_repository
 import '../screens/Account_screens/editProfile/repository/editprofile_repository_impl.dart';
 import '../screens/Account_screens/editProfile/repository/upload_image_impl.dart';
 import '../screens/Account_screens/editProfile/repository/upload_image_repository.dart';
+import '../screens/bookingServiceDetails/repository/cancel_booking_repository.dart';
+import '../screens/bookingServiceDetails/repository/cancel_booking_repository_impl.dart';
+import '../screens/bookingServiceDetails/repository/feedback_repository.dart';
+import '../screens/bookingServiceDetails/repository/feedback_repository_impl.dart';
 import '../screens/bookingServiceDetails/repository/reschedule_repository.dart';
 import '../screens/bookingServiceDetails/repository/reschedule_repository_impl.dart';
 import '../screens/change_address/repository/change_address_repository.dart';
@@ -87,4 +91,10 @@ void setupDependencies(){
 
   //reschedulebooking
   _getIt.registerSingleton<RescheduleBookingRepository>(RescheduleBookingImpl());
+
+  //CancleBooking
+  _getIt.registerSingleton<CancelBookingRepository>(CancelBookingImpl());
+
+  //feedback
+  _getIt.registerSingleton<FeedbackRepository>(FeedbackImpl());
 }

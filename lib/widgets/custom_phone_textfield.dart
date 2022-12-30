@@ -92,7 +92,7 @@ class CustomPhoneField extends StatelessWidget {
                           stream: StreamUtil.countrycode,
                           builder: (context, snapshot) {
                             return Text(
-                              '+${snapshot.data!} | ',
+                              '+${snapshot.data} | ',
                               style: AppStyles.verifystyle
                                   .copyWith(fontSize: 15.sp),
                             );

@@ -7,6 +7,7 @@ import 'package:gfive/app_screens/app_screens.dart';
 import 'package:gfive/utils/app_styles.dart';
 import 'package:gfive/widgets/loading_container.dart';
 
+import '../../api_client/api_constans.dart';
 import '../../constants/asset_path.dart';
 import '../../utils/alert_utils.dart';
 import '../../utils/app_utils.dart';
@@ -178,8 +179,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                     },
                                     child: CustomContainer(
                         text: homedata!.data![i].category!,
-                        imagePath: ImageAssetPath.kitchenLogo,
-                        imageHeight: 74,
+                        imagePath: '${APIConstants.imageUrl}${homedata!.data![i].image}',
+                        imageHeight: 74.h,
                         imageWidth: 82.w,
                         topPadding: 2.h,
                         botPadding: 3.h,
