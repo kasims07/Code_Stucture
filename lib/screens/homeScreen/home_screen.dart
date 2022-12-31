@@ -31,6 +31,9 @@ class _HomeScreenState extends State<HomeScreen> {
 
   AllCategoriesModel? homedata;
 
+  Datum? firstData;
+  List<Datum> catagorys = [];
+
   void initState() {
     apicall();
     // TODO: implement initState
@@ -47,6 +50,18 @@ class _HomeScreenState extends State<HomeScreen> {
       StreamUtil.mobilenumber.add(homedata!.user!.phoneNumber!);
       StreamUtil.email.add(homedata!.user!.email!);
       StreamUtil.profileurl.add(homedata!.user!.userimage!);
+      for(int i = 0; i<homedata!.data!.length; i++){
+        if(i == 0){
+          firstData = homedata!.data![i];
+        }else{
+          catagorys.add(homedata!.data![i]);
+        }
+      }
+      print('FIRST DATA NAME = ${firstData!.category}');
+      for(int i = 0; i<catagorys.length; i++){
+        print('Catagory name ${i} = ${catagorys[i].category}');
+      }
+
     }
 
     // TODO: implement listener
@@ -132,9 +147,9 @@ class _HomeScreenState extends State<HomeScreen> {
                     child: Column(children: [
                       InkWell(
                         onTap: (){
-                          StreamUtil.categoryname.add(homedata!.data!.first.category!);
-                          StreamUtil.categoryid.add(homedata!.data!.first.id!);
-                          Navigator.pushNamed(context, AppScreens.serviceDetails, arguments:{'categoryid':homedata!.data!.first.id});
+                          StreamUtil.categoryname.add(firstData!.category!);
+                          StreamUtil.categoryid.add(firstData!.id!);
+                          Navigator.pushNamed(context, AppScreens.serviceDetails, arguments:{'categoryid':firstData!.id});
                         },
                         child: Container(
                           height: 163.h,
@@ -149,141 +164,43 @@ class _HomeScreenState extends State<HomeScreen> {
                               Positioned(
                                   top:18,
                                   left:-10,
-                                  child: Image.asset(ImageAssetPath.homeLogo, height: 145.h, width: 372.w)),
+                                  child: Image.network('${APIConstants.imageUrl}${firstData!.image}', height: 145.h, width: 372.w)),
                               Positioned(
                                   top: 15,
                                   right:30,
-
-                                  child: Text('${homedata!.data!.first.category}',style: AppStyles.homelogostyle ,))
+                                  child: Text('${firstData!.category}',style: AppStyles.homelogostyle ,))
                             ],
                           ),
                         ),
                       ),
                       SizedBox(height: 15),
                       Container(
-
-                        child: StaggeredGrid.count(
-                          crossAxisCount: 3,
-                          mainAxisSpacing: 2,
-                          crossAxisSpacing: 2,
-                          children: [
-                              for(int i = 0; i< homedata!.data!.length; i++)
-                              i == 0 ? Container() :  StaggeredGridTile.count(
-                                  crossAxisCellCount:1,
-                                  mainAxisCellCount: 1,
-                                  child: InkWell(
-                                    onTap: (){
-                                      StreamUtil.categoryname.add(homedata!.data![i].category!);
-                                      StreamUtil.categoryid.add(homedata!.data![i].id!);
-                                      Navigator.pushNamed(context, AppScreens.serviceDetails, arguments:{'categoryid':homedata!.data![i].id});
-                                    },
-                                    child: CustomContainer(
-                        text: homedata!.data![i].category!,
-                        imagePath: '${APIConstants.imageUrl}${homedata!.data![i].image}',
-                        imageHeight: 74.h,
-                        imageWidth: 82.w,
-                        topPadding: 2.h,
-                        botPadding: 3.h,
-
-                        ),
-                                  ),
-                        )
-
-                          ],
-                        ),
-                      ),
-                     /*   Container(height: 365,
-                        child: Expanded(
-                          child: GridView.builder(
-                            shrinkWrap: true,
-                              physics: NeverScrollableScrollPhysics(),
-                              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        child: GridView.builder(
+                          shrinkWrap: true,
+                            itemCount: catagorys.length,
+                            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                                 crossAxisCount: 3,
-                                crossAxisSpacing: 14,
-                                mainAxisSpacing: 13,
-                              ),
-                              itemCount:homedata!.data!.length,
-                              itemBuilder: (context, index){
-                                return
-                                   index! ==0 ? null :
-                                   CustomContainer(
-                                    text: homedata!.data![index].category!,
-                                    imagePath: ImageAssetPath.kitchenLogo,
-                                    imageHeight: 74,
-                                    imageWidth: 82.w,
-                                    topPadding: 2.h,
-                                    botPadding: 3.h,
+                              crossAxisSpacing: 10
+                            ),
+                            itemBuilder: (context, indext){
+                          return InkWell(
+                            onTap: (){
+                              StreamUtil.categoryname.add(catagorys[indext].category!);
+                              StreamUtil.categoryid.add(catagorys[indext].id!);
+                              Navigator.pushNamed(context, AppScreens.serviceDetails, arguments:{'categoryid':catagorys[indext].id});
+                            },
+                            child: CustomContainer(
+                              text: catagorys[indext].category!,
+                              imagePath: '${APIConstants.imageUrl}${catagorys[indext].image}',
+                              imageHeight: 74.h,
+                              imageWidth: 82.w,
+                              topPadding: 2.h,
+                              botPadding: 3.h,
 
-                                ) ;
-                              }),
-                        ),
-                      ),*/
-
-                      /*Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          CustomContainer
-                          (
-                            text: 'Kitchen\nCleaning',
-                            imagePath: ImageAssetPath.kitchenLogo,
-                            imageHeight: 74.75.h,
-                            imageWidth: 88.1.w,
-                            topPadding: 16.20.h,
-                            botPadding: 16.h,
-                          ),
-                          SizedBox(width:15.w),
-                          CustomContainer(
-                            text: 'Bathroom\nCleaning',
-                            imagePath: ImageAssetPath.bathroomLogo,
-                            imageHeight: 76.h,
-                            imageWidth: 79.8.w,
-                            topPadding: 18.h,
-                            botPadding: 16.h,
-                          ),
-                          SizedBox(width:15.w),
-                          CustomContainer(
-                            text: 'Sofa\nShampooing',
-                            imagePath: ImageAssetPath.sofaLogo,
-                            imageHeight: 78.96.h,
-                            imageWidth: 91.05.w,
-                            topPadding: 20.99.h,
-                            botPadding: 16.h,
-                          ),
-
-                        ],),
-                      SizedBox(height: 15.h),*/
-                      /*Row(children: [
-
-
-                        CustomContainer(
-                          text: 'Carpet\nShampooing',
-                          imagePath: ImageAssetPath.carpet,
-                          imageHeight:73.63.h,
-                          imageWidth:94.95.w,
-                          topPadding: 21.56.h,
-                          botPadding: 16.h,
-                        ),
-                        SizedBox(width:15.w),
-                        CustomContainer(
-                          text: 'Metress\nShampooing',
-                          imagePath: ImageAssetPath.metress,
-                          imageHeight: 64.05.h,
-                          imageWidth: 90.w,
-                          topPadding: 28.98.h,
-                          botPadding: 16.h,
-                        ),
-                        SizedBox(width:15.w),
-                        CustomContainer(
-                          text: 'Marble\nPolish',
-                          imagePath: ImageAssetPath.marblepolish,
-                          imageHeight: 86.4.h,
-                          imageWidth: 92.w,
-                          topPadding: 24.h,
-                          botPadding: 16.h,
-                        ),
-                        SizedBox(height: 15.w),
-                      ],)*/
-
+                            ),
+                          );
+                        }, )
+                      ),
                     ],),
                   )
                 ],

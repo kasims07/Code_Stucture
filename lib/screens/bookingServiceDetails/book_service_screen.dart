@@ -286,6 +286,7 @@ class _BookServiceScreenState extends State<BookServiceScreen> {
                                 child: Text('Service Info',
                                     style: AppStyles.fontblackstyle),
                               ),
+                              widget.bookingdata!.category!.isNotEmpty ?
                               Container(
                                   //height: 132.h,
                                   width: 350.w,
@@ -311,7 +312,7 @@ class _BookServiceScreenState extends State<BookServiceScreen> {
                                           '${widget.bookingdata!.prizes![0].title}',
                                           style: AppStyles.redstyle),
                                     ],
-                                  )),
+                                  )) : Container(),
                               SizedBox(height: 15.h),
                               widget.bookingdata!.status == 'P'
                                   ? Column(children: [
