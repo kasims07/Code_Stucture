@@ -9,6 +9,7 @@ import '../../utils/alert_utils.dart';
 import '../../utils/app_utils.dart';
 import '../../widgets/custom_booking_container.dart';
 import '../../widgets/loading_container.dart';
+import '../../widgets/no_data_widget.dart';
 import 'bloc/booking_history_bloc.dart';
 import 'model/booking_history_model.dart';
 
@@ -66,7 +67,7 @@ class _BookMainScreenState extends State<BookMainScreen> {
                           ),
                           color: AppStyles.white
                       ),
-                      child: ListView.builder(
+                      child: bookingdata!.data!.isEmpty ? NoDataWidget() : ListView.builder(
                           itemCount: bookingdata!.data!.length,
                           itemBuilder: (BuildContext context, int index) {
                             return GestureDetector(

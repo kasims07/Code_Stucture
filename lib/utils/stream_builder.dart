@@ -25,6 +25,7 @@ class StreamUtil{
   static BehaviorSubject<int> addressbuttoncondition = BehaviorSubject<int>.seeded(0);
   static BehaviorSubject<Datum> selectedAddress = BehaviorSubject<Datum>();
   static BehaviorSubject<String> time = BehaviorSubject<String>();
+  static BehaviorSubject<String> otpcode = BehaviorSubject<String>();
 
 
 }

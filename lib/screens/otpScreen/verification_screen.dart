@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -61,12 +63,29 @@ class _VerificationScreenState extends State<VerificationScreen> {
   bool isPhoneVerify = false;
 
   String otpPhone = '';
+  bool ischeck = false;
+
+  List<String> codes = [];
+
+  Timer? _timer;
+  int _start = 25;
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     sendOTP();
+    startTimer();
+    StreamUtil.otpcode.add('');
+    StreamUtil.otpcode.listen((value) {
+      if(StreamUtil.otpcode.value != ''){
+        print('Code in UI ===> ${StreamUtil.otpcode.value} ');
+        codes = StreamUtil.otpcode.value.split('');
+        print('code list ===> ${codes.toString()}');
+        otpController.set(codes);
+        ischeck = true;
+      }
+    });
   }
 
   void sendOTP() async {
@@ -80,25 +99,37 @@ class _VerificationScreenState extends State<VerificationScreen> {
     }
   }
 
+
+  void startTimer() {
+    const oneSec = Duration(seconds: 1);
+    _timer = Timer.periodic(
+      oneSec,
+          (Timer timer) {
+        if (_start == 0) {
+          setState(() {
+            timer.cancel();
+          });
+        } else {
+          setState(() {
+            _start--;
+          });
+        }
+      },
+    );
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    _timer?.cancel();
+    otpController.clear();
+  }
+
   @override
   Widget build(BuildContext context) {
 
-    const focusedBorderColor = AppStyles.black;
-    const fillColor = AppStyles.black;
-    const borderColor = AppStyles.grey;
 
-    final defaultPinTheme = PinTheme(
-      width: 56,
-      height: 56,
-      textStyle: const TextStyle(
-        fontSize: 22,
-        color: Colors.white,
-      ),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(19),
-        border: Border.all(color: borderColor),
-      ),
-    );
 
 
     return SafeArea(
@@ -111,7 +142,8 @@ class _VerificationScreenState extends State<VerificationScreen> {
       //prefs.clear();
       prefs.setString(AppConstants.TOKEN, state.model!.token!);
       prefs.setBool(AppConstants.login, true);
-
+      StreamUtil.bottombar.add(0);
+      StreamUtil.otpcode.add('');
       if(state.model!.isExist == true){
         Navigator.pushNamed(context, AppScreens.dashboardScreen);
       }
@@ -224,9 +256,21 @@ class _VerificationScreenState extends State<VerificationScreen> {
                                         Text('Didnot recieve code?',
                                             style: AppStyles.termstyle
                                                 .copyWith(fontSize: 15.sp)),
-                                        InkWell(
+                                        _start != 0
+                                            ? InkWell(
+                                          child: Text(
+                                            'Resend Code in ${_start}s',
+                                            textAlign: TextAlign.center,
+                                            style: AppStyles.verifystyle
+                                                .copyWith(fontSize: 15.sp),
+                                          ),
+                                        ) : InkWell(
                                           onTap: (){
                                             sendOTP();
+                                            setState(() {
+                                              _start = 25;
+                                              startTimer();
+                                            });
                                           },
                                           child: Text(' Resend',
                                             style: AppStyles.verifystyle
@@ -285,12 +329,12 @@ class _VerificationScreenState extends State<VerificationScreen> {
       isLoading = true;
     });
     FirebaseAuth auth = FirebaseAuth.instance;
-    /*print('TOKENSSS ${StreamUtil.verificationIDSubject.value}');
-    BlocProvider.of<VerifyOtpBloc>(context).add(
+    print('TOKENSSS ${StreamUtil.verificationIDSubject.value}');
+   /* BlocProvider.of<VerifyOtpBloc>(context).add(
       PerformVerifyOtpEvent(
           verificationId: StreamUtil.verificationIDSubject.value, otp: otp),
-    );*/
-
+    );
+*/
     try {
       PhoneAuthCredential credential = PhoneAuthProvider.credential(
           verificationId: StreamUtil.verificationIDSubject.value,
@@ -305,8 +349,6 @@ class _VerificationScreenState extends State<VerificationScreen> {
           isPhoneVerify = true;
         });
         checkUser();
-
-
         //verifyEmailOTP();
 
       });

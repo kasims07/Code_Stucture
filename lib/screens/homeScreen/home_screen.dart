@@ -46,7 +46,7 @@ class _HomeScreenState extends State<HomeScreen> {
   listener: (context, state) {
     if(state.isCompleted){
       homedata=state.model!;
-      StreamUtil.username.add( homedata!.user!.name!);
+      StreamUtil.username.add(homedata!.user!.name!);
       StreamUtil.mobilenumber.add(homedata!.user!.phoneNumber!);
       StreamUtil.email.add(homedata!.user!.email!);
       StreamUtil.profileurl.add(homedata!.user!.userimage!);
@@ -160,11 +160,12 @@ class _HomeScreenState extends State<HomeScreen> {
 
                           ),
                           child: Stack(
+                            fit: StackFit.expand,
                             children: [
                               Positioned(
-                                  top:18,
+                                  top:12,
                                   left:-10,
-                                  child: Image.network('${APIConstants.imageUrl}${firstData!.image}', height: 145.h, width: 372.w)),
+                                  child: Image.network('${APIConstants.imageUrl}${firstData!.image}', fit: BoxFit.fill, height: 145.h, width: 372.w)),
                               Positioned(
                                   top: 15,
                                   right:30,
@@ -178,9 +179,12 @@ class _HomeScreenState extends State<HomeScreen> {
                         child: GridView.builder(
                           shrinkWrap: true,
                             itemCount: catagorys.length,
+                            physics: NeverScrollableScrollPhysics(),
                             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                                crossAxisCount: 3,
-                              crossAxisSpacing: 10
+                              crossAxisCount: 3,
+                              mainAxisExtent: 150.h,
+                              mainAxisSpacing: 14.h,
+                              crossAxisSpacing: 13.h
                             ),
                             itemBuilder: (context, indext){
                           return InkWell(

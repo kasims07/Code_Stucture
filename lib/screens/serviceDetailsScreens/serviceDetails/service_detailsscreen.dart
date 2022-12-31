@@ -60,11 +60,8 @@ class _ServiceDetailsScreenState extends State<ServiceDetailsScreen> {
   @override
   void initState() {
     // TODO: implement initState
-
     print('categoryid===>${widget.categoryid}');
     apicall();
-
-
     super.initState();
   }
 

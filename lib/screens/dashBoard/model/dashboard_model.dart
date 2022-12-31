@@ -121,9 +121,9 @@ class User {
     createdAt: DateTime.parse(json["createdAt"]),
     updatedAt: DateTime.parse(json["updatedAt"]),
     v: json["__v"],
-    email: json["email"],
-    name: json["name"],
-    userimage: json["userimage"],
+    email: json["email"] == null ? '' : json["email"],
+    name: json["name"] == null ? '' : json["name"],
+    userimage: json["userimage"] == null ? '' : json["userimage"],
   );
 
   Map<String, dynamic> toJson() => {

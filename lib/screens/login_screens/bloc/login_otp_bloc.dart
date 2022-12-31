@@ -6,6 +6,7 @@ import 'package:gfive/constants/app_constants.dart';
 import 'package:meta/meta.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../../utils/alert_utils.dart';
 import '../../../utils/stream_builder.dart';
 
 part 'login_otp_event.dart';
@@ -18,6 +19,7 @@ class LoginOtpBloc extends Bloc<LoginOtpEvent, LoginOtpState> {
   Future _performOtp(PerformLoginOtpEvent event, Emitter<LoginOtpState> emit) async {
     print('C_CODE');
     String verificationId='';
+    String code = '';
     emit(LoginOtpState(isLoading: true));
 
 
@@ -27,13 +29,18 @@ class LoginOtpBloc extends Bloc<LoginOtpEvent, LoginOtpState> {
       //phoneNumber: '+91 ${event.phone}',
       phoneNumber: '+91 ${event.phone}',
       timeout: const Duration(seconds: 60),
-      verificationCompleted: (AuthCredential authCredential) {
+      verificationCompleted: (PhoneAuthCredential authCredential) {
+        code = authCredential.smsCode.toString();
+        StreamUtil.otpcode.add(code);
+        print('code is ====> ${authCredential.smsCode.toString()}');
         print('Your account is successfully verified');
       },
-
       codeAutoRetrievalTimeout: (String verId) {
+        verificationId = verId;
       },
       verificationFailed: (FirebaseAuthException error) {
+        print('OTP_Error ${error.message}');
+        AlertUtils.showToast('${error.message}');
       },
       codeSent: await (String verificationId, int? forceResendingToken) async{
         StreamUtil.verificationIDSubject.add(verificationId);

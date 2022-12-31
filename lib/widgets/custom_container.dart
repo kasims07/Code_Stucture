@@ -17,30 +17,29 @@ class CustomContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-        child: Container(
-          height:190.h,
-          width: 107.w,
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-                begin:Alignment.bottomCenter ,
-                end: const Alignment(0.5,0),
-                colors: [
-                   AppStyles.darkgradient,
-                   AppStyles.white
-                ]),
-              border: Border.all(color:AppStyles.grey.withOpacity(0.16) ),
-              borderRadius: BorderRadius.circular(15)
-          ),
-          child: Padding(
-            padding: EdgeInsets.only(top: topPadding, bottom: botPadding),
-            child: Column(mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Image.asset(imagePath, height: imageHeight, width:imageWidth),
-                //SizedBox(height: height),
-                Text(text, style: AppStyles.categorystyle, textAlign: TextAlign.center,),
-              ],),
-          ),
-        ));
+    return Container(
+      height:190.h,
+      width: 107.w,
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+            begin:Alignment.bottomCenter ,
+            end: const Alignment(0.5,0),
+            colors: [
+               AppStyles.darkgradient,
+               AppStyles.white
+            ]),
+          border: Border.all(color:AppStyles.grey.withOpacity(0.16) ),
+          borderRadius: BorderRadius.circular(15)
+      ),
+      child: Padding(
+        padding: EdgeInsets.only(top: topPadding, bottom: 13.h),
+        child: Column(mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Image.network(imagePath, height: imageHeight, width:imageWidth),
+            //SizedBox(height: height),
+            Text(text, style: AppStyles.categorystyle.copyWith(fontSize: 16), textAlign: TextAlign.center,),
+          ],),
+      ),
+    );
   }
 }
